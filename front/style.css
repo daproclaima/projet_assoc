@@ -310,11 +310,16 @@ img {
     color: #ffffff; }
 
 .logo{
+<<<<<<< HEAD
   width:60px ;
+=======
+  width:50px ;
+>>>>>>> master
 }
 .logo-f{
   width: 100px;
 }
+<<<<<<< HEAD
 .items-connexion{
   margin-left: 3rem;
 }
@@ -332,6 +337,8 @@ img {
 .pipe{
   color: #ffffff;
 }
+=======
+>>>>>>> master
 /* :: Header Area CSS */
 .header-area {
   position: fixed;
@@ -348,7 +355,11 @@ img {
     border-color: #ffffff;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
+<<<<<<< HEAD
     height: 70px; }
+=======
+    height: 55px; }
+>>>>>>> master
     .header-area .navbar .navbar-nav {
       margin-right: 50px; }
       .header-area .navbar .navbar-nav .nav-link {
@@ -367,12 +378,16 @@ img {
   .header-area.sticky {
     background-color: #000000;
     margin-top: 0;
+<<<<<<< HEAD
     height: 70px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   }
     .header-area.sticky .logo{
       width: 60px;
     }
+=======
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+>>>>>>> master
     .header-area.sticky .navbar {
       border-color: #000000; }
 
