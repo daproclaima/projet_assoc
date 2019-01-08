@@ -37,4 +37,12 @@ class FrontController extends AbstractController
     {
         return $this->render('front/categorie.html.twig');
     }
+
+    /**
+     * @Route("/article",name="front_article")
+     */
+    public function article()
+    {
+        return $this->render('front/article.html.twig');
+    }
 }
