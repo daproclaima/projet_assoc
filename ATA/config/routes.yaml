@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\FrontController::index
+
+apropos:
+    path: /apropos
+    controller: App\Controller\FrontController::apropos
