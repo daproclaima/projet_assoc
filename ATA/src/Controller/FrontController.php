@@ -8,7 +8,7 @@
 
 namespace App\Controller;
 
-
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,5 +44,23 @@ class FrontController extends AbstractController
     public function article()
     {
         return $this->render('front/article.html.twig');
+    }
+
+    /**
+     * @Route("/apropos", name="front_apropos")
+     * @return Response
+     */
+    public function apropos()
+    {
+        return $this->render('front/apropos.html.twig');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/evenement", name="front_evenement")
+     */
+    public function evenement()
+    {
+        return $this->render('front/evenement.html.twig');
     }
 }
