@@ -117,9 +117,6 @@
         easing: 'swing',
         effectType: 'roll'
     });
-
-    // MDB Lightbox Init
-    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
     
     // :: Magnific Popup Active Code
     if ($.fn.magnificPopup) {
@@ -191,5 +188,9 @@
     //         closeIcon.classList.remove('closing');
     //     }, 1000);
     // }
-
+    $('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: 160,
+        gutter: 20
+    });
 })(jQuery);
