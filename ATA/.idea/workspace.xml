@@ -2,17 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="772d6c4b-ad7d-4848-89fd-b5646b87f7d6" name="Default Changelist" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/googleMap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/front/contact.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ATA.iml" afterPath="$PROJECT_DIR$/.idea/ATA.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/packages/google_apiclient.yaml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/googleMap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Controller/ContactController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/component/_googleMap.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/component/_test.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/component/_test2.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/bundles.php" afterPath="$PROJECT_DIR$/config/bundles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/FrontController.php" afterPath="$PROJECT_DIR$/src/Controller/FrontController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/googleMap.js" afterPath="$PROJECT_DIR$/public/js/googleMap.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony.lock" afterPath="$PROJECT_DIR$/symfony.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html.twig" afterPath="$PROJECT_DIR$/templates/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/component/_nav.html.twig" afterPath="$PROJECT_DIR$/templates/component/_nav.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/front/contact.html.twig" afterPath="$PROJECT_DIR$/templates/front/contact.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/layout.html.twig" afterPath="$PROJECT_DIR$/templates/layout.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,41 +29,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="googleMap.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/googleMap.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/layout.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1739">
-              <caret line="47" column="100" lean-forward="false" selection-start-line="47" selection-start-column="100" selection-end-line="47" selection-end-column="100" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="contact.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/front/contact.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="28" column="45" lean-forward="false" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+            <state relative-caret-position="719">
+              <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_googleMap.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/component/_googleMap.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <file leaf-file-name="_test.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/component/_test.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="1185" column="22" lean-forward="false" selection-start-line="1185" selection-start-column="13" selection-end-line="1185" selection-end-column="22" />
+            <state relative-caret-position="0">
+              <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -73,6 +67,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -99,12 +94,19 @@
         <option value="$PROJECT_DIR$/templates/component/_sliderAccueil.html.twig" />
         <option value="$PROJECT_DIR$/templates/component/_footer.html.twig" />
         <option value="$PROJECT_DIR$/templates/component/_sidebar.html.twig" />
-        <option value="$PROJECT_DIR$/templates/component/_nav.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/FrontController.php" />
         <option value="$PROJECT_DIR$/var/cache/dev/twig/4f/4fcf8edf041235e35d5293ac247d8a725e03b1baa16adb9c71f42b19cc4cb88b.php" />
-        <option value="$PROJECT_DIR$/public/js/googleMap.js" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/templates/component/_nav.html.twig" />
         <option value="$PROJECT_DIR$/templates/layout.html.twig" />
+        <option value="$PROJECT_DIR$/templates/component/googleMap.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/ContactController.php" />
+        <option value="$PROJECT_DIR$/public/css/googleMap.css" />
+        <option value="$PROJECT_DIR$/public/js/googleMap.js" />
+        <option value="$PROJECT_DIR$/public/js/localisationGoogleMap.js" />
+        <option value="$PROJECT_DIR$/templates/component/_test2.html.twig" />
+        <option value="$PROJECT_DIR$/templates/component/_test.html.twig" />
+        <option value="$PROJECT_DIR$/templates/component/_googleMap.html.twig" />
         <option value="$PROJECT_DIR$/templates/front/contact.html.twig" />
       </list>
     </option>
@@ -206,6 +208,12 @@
             <path>
               <item name="ATA" type="b2602c69:ProjectViewProjectNode" />
               <item name="ATA" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ATA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATA" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -234,6 +242,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -265,10 +274,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10454000" />
+    <option name="totallyTimeSpent" value="20858000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
+    <frame x="-11" y="-11" width="1942" height="1064" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -339,23 +348,23 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1546899610946" expanded="true" signature="0:1600" ph="{&quot;type&quot;: &quot;project&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="70:456" ph="{&quot;php&quot;: &quot;^7.1.3&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="472:575" ph="{&quot;sort-packages&quot;: true...}" />
-            <marker date="1546899610946" expanded="true" signature="503:538" ph="{&quot;*&quot;: &quot;dist&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="593:657" ph="{...}" />
-            <marker date="1546899610946" expanded="true" signature="612:651" ph="{&quot;App\&quot;: &quot;src/&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="679:752" ph="{...}" />
-            <marker date="1546899610946" expanded="true" signature="698:746" ph="{&quot;App\Tests\&quot;: &quot;tests/&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="769:1012" ph="{&quot;paragonie/random_compat&quot;: &quot;2.*&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="1029:1308" ph="{...}" />
-            <marker date="1546899610946" expanded="true" signature="1055:1165" ph="{&quot;cache:clear&quot;: &quot;symfony-cmd&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="1195:1234" ph="[...]" />
-            <marker date="1546899610946" expanded="true" signature="1263:1302" ph="[...]" />
-            <marker date="1546899610946" expanded="true" signature="1326:1364" ph="{&quot;symfony/symfony&quot;: &quot;*&quot;...}" />
-            <marker date="1546899610946" expanded="true" signature="1379:1484" ph="{...}" />
-            <marker date="1546899610946" expanded="true" signature="1400:1478" ph="{&quot;allow-contrib&quot;: false...}" />
-            <marker date="1546899610946" expanded="true" signature="1505:1598" ph="{&quot;symfony/profiler-pack&quot;: &quot;^1.0&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="0:1635" ph="{&quot;type&quot;: &quot;project&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="70:492" ph="{&quot;php&quot;: &quot;^7.1.3&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="508:611" ph="{&quot;sort-packages&quot;: true...}" />
+            <marker date="1546939071716" expanded="true" signature="539:574" ph="{&quot;*&quot;: &quot;dist&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="629:693" ph="{...}" />
+            <marker date="1546939071716" expanded="true" signature="648:687" ph="{&quot;App\&quot;: &quot;src/&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="715:788" ph="{...}" />
+            <marker date="1546939071716" expanded="true" signature="734:782" ph="{&quot;App\Tests\&quot;: &quot;tests/&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="805:1048" ph="{&quot;paragonie/random_compat&quot;: &quot;2.*&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="1065:1344" ph="{...}" />
+            <marker date="1546939071716" expanded="true" signature="1091:1201" ph="{&quot;cache:clear&quot;: &quot;symfony-cmd&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="1231:1270" ph="[...]" />
+            <marker date="1546939071716" expanded="true" signature="1299:1338" ph="[...]" />
+            <marker date="1546939071716" expanded="true" signature="1362:1400" ph="{&quot;symfony/symfony&quot;: &quot;*&quot;...}" />
+            <marker date="1546939071716" expanded="true" signature="1415:1519" ph="{...}" />
+            <marker date="1546939071716" expanded="true" signature="1436:1513" ph="{&quot;allow-contrib&quot;: false...}" />
+            <marker date="1546939071716" expanded="true" signature="1540:1633" ph="{&quot;symfony/profiler-pack&quot;: &quot;^1.0&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -398,32 +407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FrontController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="e#117#182#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/front/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="18" column="48" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/component/_nav.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="4" column="32" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/component/_footer.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -439,14 +422,6 @@
           <folding>
             <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/plugins.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -466,14 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -482,35 +449,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layout.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/component/_nav.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1739">
-          <caret line="47" column="100" lean-forward="false" selection-start-line="47" selection-start-column="100" selection-end-line="47" selection-end-column="100" />
+        <state relative-caret-position="-185">
+          <caret line="1" column="28" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/googleMap.js">
+    <entry file="file://$PROJECT_DIR$/public/js/active.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="8" column="65" lean-forward="false" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+        <state relative-caret-position="-2220">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="1185" column="22" lean-forward="false" selection-start-line="1185" selection-start-column="13" selection-end-line="1185" selection-end-column="22" />
+        <state relative-caret-position="-16515">
+          <caret line="27" column="1" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FrontController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/front/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="5" column="54" lean-forward="false" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="3" column="54" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/localisationGoogleMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/plugins.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ContactController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/googleMap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/googleMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/component/_test2.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/component/_googleMap.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/component/_test.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/front/contact.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="28" column="45" lean-forward="false" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
-          <folding />
+        <state relative-caret-position="719">
+          <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

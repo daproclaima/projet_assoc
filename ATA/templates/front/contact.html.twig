@@ -3,14 +3,19 @@
     Accueil
 {% endblock %}
 {% block content %}
-    {% include 'component/_sliderAccueil.html.twig' %}
-    <div class="main-content-wrapper section-padding-25-0">
-        <div class="container">
-            <div class="row justify-content-center">
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
 
-                <!-- Contenu -->
-                <div class="col-12 col-lg-6 mt-5 mb-5 single-blog-post" id="contact">
-                    <div class=" mt-2 mb-2 ml-1">
+
+<div class="main-content-wrapper section-padding-25-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <section class="single-blog-content">
+                    <div class="post-meta mb-50">
+                        <h4>Nous contacter:</h4>
+                    </div>
+
+                    <div class="post-content">
                         <h5>Adresse</h5>
                         <p class ="col-12 col-lg-8 item-text" id="adresse">
                             2 Avenue de Eugène Pottier<br>
@@ -21,17 +26,15 @@
                             Tél: 01 55 48 50 95<br>
                             Email: administration@ata.fr
                         </p>
+                    {# l'include ci-desous implémente la map google.
+                     _test.html.twig est un copié collé de https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+                     _googleMap.html.twig est une version factorisée mais non oppérationelle#}
+                        {% include 'component/_test.html.twig' %}
                     </div>
-                </div>
-                <div class="col-12 col-lg-5 mt-5 mb-5 ml-lg-2 single-blog-post">
-                    <div class=" mt-2 mb-2 ml-1">
-                        <h5>Nous trouver:</h5>
-                        <div class ="map-area" id="googleMap"></div>
-
-
-                    </div>
-                </div>
+                </section>
             </div>
+            {% include 'component/_sidebar.html.twig' %}
         </div>
     </div>
+
 {% endblock %}
