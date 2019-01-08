@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Accueil
+{% endblock %}
+{% block content %}
+    {% include 'component/_sliderAccueil.html.twig' %}
+    <div class="main-content-wrapper section-padding-25-0">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <!-- Contenu -->
+                <div class="col-12 col-lg-6 mt-5 mb-5 single-blog-post" id="contact">
+                    <div class=" mt-2 mb-2 ml-1">
+                        <h5>Adresse</h5>
+                        <p class ="col-12 col-lg-8 item-text" id="adresse">
+                            2 Avenue de Eugène Pottier<br>
+                            Trappes, 78190 - FRANCE
+                        </p>
+                        <h5>Coordonnées</h5>
+                        <p class ="col-12 col-lg-8 item-text" id="coordonnees">
+                            Tél: 01 55 48 50 95<br>
+                            Email: administration@ata.fr
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 mt-5 mb-5 ml-lg-2 single-blog-post">
+                    <div class=" mt-2 mb-2 ml-1">
+                        <h5>Nous trouver:</h5>
+                        <div class ="map-area" id="googleMap"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
