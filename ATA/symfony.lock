@@ -71,6 +71,9 @@
     "doctrine/orm": {
         "version": "v2.6.3"
     },
+    "doctrine/lexer": {
+        "version": "v1.0.1"
+    },
     "doctrine/persistence": {
         "version": "v1.1.0"
     },
