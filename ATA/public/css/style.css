@@ -1449,3 +1449,52 @@ textarea:focus ~ .highlight {
         font-size: 14px;
         color: #959595; }
 
+/**
+Page Evénement
+ */
+
+.affiche-event{
+  position: relative;
+  width: 100%;
+}
+
+  .img-event{
+    padding: 0.8rem 0;
+    width: 100%;
+  }
+
+  .date-event{
+    position: absolute;
+    top: -10px;
+    left: 215px;
+    background: linear-gradient(-45deg, #0011FB 0%, #AADCFE 70%);
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+  }
+
+  .date-event h6{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+      color: #FFFFFF;
+      font-family: "Ubuntu", sans-serif;
+      font-size: 1.2rem;
+
+  }
+  .text-event{
+    position: absolute;
+    top: 20rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-right: 1rem;
+  }
+.text-event-p{
+  color: #FFFFFF;
+  padding: 0 0.3rem;
+}
+
+
+
+
+
