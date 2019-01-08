@@ -1511,7 +1511,7 @@ textarea:focus ~ .highlight {
   -ms-user-select: none;
   user-select: none;
 }
-img {
+#overlay img {
   margin: 0;
   width: 80%;
   height: auto;
