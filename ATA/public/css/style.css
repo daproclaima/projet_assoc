@@ -311,7 +311,7 @@ img {
     border-color: #0000ff;
     background-color: #0000ff;
     color: #ffffff; }
-
+/* ======  LOGO ======*/
 .logo{
   width:60px ;
 }
@@ -743,6 +743,12 @@ img {
       flex: 0 0 200px;
       min-width: 200px;
       margin-right: 20px; }
+.single-blog-post.post-style-4 .post-affiche{
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 125px;
+  flex: 0 0 125px;
+  min-width: 125px;
+  margin-right: 20px; }
       @media only screen and (max-width: 767px) {
         .single-blog-post.post-style-4 .post-thumbnail {
           -webkit-box-flex: 0;
@@ -847,7 +853,7 @@ img {
     border-bottom: 2px solid #f1f1f1;
     padding-left: 30px; }
   .sidebar-widget-area .widget-content {
-    padding: 30px 0 30px 30px; }
+    padding: 25px 0 25px 30px; }
     @media only screen and (max-width: 767px) {
       .sidebar-widget-area .widget-content {
         padding: 30px 0 30px 15px; } }
@@ -1456,18 +1462,20 @@ textarea:focus ~ .highlight {
 
 #gallery {
   padding: 40px 0;
+}
 @media screen and (min-width: 991px) {
   padding: 60px 30px 0 30px;
 }
-}
+
 
 .img-wrapper {
   position: relative;
   margin-top: 15px;
-img {
+}
+.img-wrapper img {
   width: 100%;
 }
-}
+
 .img-overlay {
   background: rgba(0,0,0,0.7);
   width: 100%;
@@ -1479,11 +1487,12 @@ img {
   justify-content: center;
   align-items: center;
   opacity: 0;
-i {
+}
+.img-overlay i {
   color: #fff;
   font-size: 3em;
 }
-}
+
 
 #overlay {
   background: rgba(0,0,0,0.7);
@@ -1501,44 +1510,47 @@ i {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
 img {
   margin: 0;
   width: 80%;
   height: auto;
   object-fit: contain;
   padding: 5%;
+}
 @media screen and (min-width:768px) {
   width: 60%;
 }
 @media screen and (min-width:1200px) {
   width: 50%;
 }
-}
-}
+
 
 #nextButton {
   color: #fff;
   font-size: 2em;
   transition: opacity 0.8s;
-&:hover {
+}
+#nextButton:hover {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
   font-size: 3em;
 }
-}
+
 
 #prevButton {
   color: #fff;
   font-size: 2em;
   transition: opacity 0.8s;
-&:hover {
+}
+#prevButton:hover {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
   font-size: 3em;
 }
-}
+
 
 #exitButton {
   color: #fff;
@@ -1547,10 +1559,18 @@ img {
   position: absolute;
   top: 15px;
   right: 15px;
-&:hover {
+}
+#exitButton:hover {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
   font-size: 3em;
 }
+
+.single-blog-post .post-content .post-meta .post-date-affiche{
+  font-size: 1.3rem;
+  color:#28a745;
+}
+.single-blog-post .post-content .post-meta .post-lieu{
+  font-size: 1.3rem;
 }
