@@ -51,6 +51,18 @@ class Evenement
      */
     private $prixEnfant;
 
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" ,
+     *     inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $categorie;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
