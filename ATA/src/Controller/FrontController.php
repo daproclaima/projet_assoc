@@ -57,7 +57,7 @@ class FrontController extends AbstractController
 
     /**
      * @Route("/apropos", name="front_apropos")
-     * @return Response
+     *
      */
     public function apropos()
     {
@@ -72,4 +72,16 @@ class FrontController extends AbstractController
     {
         return $this->render('front/evenement.html.twig');
     }
+
+
+    /**
+     * @Route("/event", name="evenement_afficheEvenement")
+     */
+    public function afficheEvenement()
+    {
+        return $this->render('evenement/afficheEvenement.html.twig');
+    }
+
 }
+
+

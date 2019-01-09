@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
@@ -18,50 +20,64 @@ class Evenement
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="veuillez saisir un titre")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="veuillez saisir un titre")
+     * @Assert\Length(min="8", minMessage="Votre contenu est trop court")
+     *
      */
     private $contenu;
 
     /**
      * @ORM\Column(type="datetime")
+     *
      */
     private $dateEvenement;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="veuillez saisir un lieu")
+     * @Assert\Length(min="8", minMessage="Vérifiez le lieu")
      */
     private $lieu;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Image(maxSize="2M", mimeTypesMessage="Vueillez verifier le format de votre image")
+     * @Assert\NotBlank(message="veuillez insérer une image")
+     *
      */
     private $featuredImage;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez saisir un prix")
      */
     private $prixAdulte;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $prixEnfant;
 
 
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" ,
-     *     inversedBy="evenements")
+     *     inversedBy="evenement")
      * @ORM\JoinColumn(nullable=false)
      */
 
-    private $categorie;
+    private $categories;
 
 
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,12 +132,12 @@ class Evenement
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
+    public function getFeaturedImage()
     {
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage(string $featuredImage): self
+    public function setFeaturedImage($featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 
@@ -150,5 +166,21 @@ class Evenement
         $this->prixEnfant = $prixEnfant;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param mixed $categories
+     */
+    public function setCategories($categories): void
+    {
+        $this->categories = $categories;
     }
 }
