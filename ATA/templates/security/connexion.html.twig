@@ -1,0 +1,28 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Galerie
+{% endblock %}
+{% block content %}
+<div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+<div class="main-content-wrapper section-padding-25">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
