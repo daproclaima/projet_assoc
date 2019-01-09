@@ -46,6 +46,13 @@ class Article
      */
     private $dateCreation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Membre",
+     *     inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $membre;
+
     public function getId(): ?int
     {
         return $this->id;

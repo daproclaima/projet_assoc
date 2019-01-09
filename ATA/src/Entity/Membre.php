@@ -66,6 +66,19 @@ class Membre
      */
     private $paiement;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Paiement",
+     *     mappedBy="membre")
+     */
+    private $checkPaiement;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article",
+     *     mappedBy="membre")
+     * @return int|null
+     */
+    private $articles;
+
     public function getId(): ?int
     {
         return $this->id;

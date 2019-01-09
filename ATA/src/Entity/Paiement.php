@@ -31,6 +31,13 @@ class Paiement
      */
     private $montant;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Membre",
+     *     inversedBy="checkPaiement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $membre;
+
     public function getId(): ?int
     {
         return $this->id;
