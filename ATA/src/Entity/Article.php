@@ -17,12 +17,12 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=255)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
@@ -32,29 +32,19 @@ class Article
     private $contenu;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=180, nullable=true)
      */
-    private $imageAssociee;
+    private $featuredImage;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $sidebar;
+    private $spotlight;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $categorie;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $auteur;
 
     public function getId(): ?int
     {
@@ -97,26 +87,26 @@ class Article
         return $this;
     }
 
-    public function getImageAssociee(): ?bool
+    public function getFeaturedImage(): ?string
     {
-        return $this->imageAssociee;
+        return $this->featuredImage;
     }
 
-    public function setImageAssociee(?bool $imageAssociee): self
+    public function setFeaturedImage(?string $featuredImage): self
     {
-        $this->imageAssociee = $imageAssociee;
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }
 
-    public function getSidebar(): ?bool
+    public function getSpotlight(): ?bool
     {
-        return $this->sidebar;
+        return $this->spotlight;
     }
 
-    public function setSidebar(bool $sidebar): self
+    public function setSpotlight(bool $spotlight): self
     {
-        $this->sidebar = $sidebar;
+        $this->spotlight = $spotlight;
 
         return $this;
     }
@@ -129,30 +119,6 @@ class Article
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): self
-    {
-        $this->auteur = $auteur;
 
         return $this;
     }
