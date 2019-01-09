@@ -51,7 +51,7 @@ class MembreFormType extends AbstractType
                 'label' => 'Ville',
                 'attr' => ['placeholder' => "Paris"]
             ])->add('paiement',ChoiceType::class,[
-                'placeholder' => 'Choose an option',
+                'placeholder' => 'Choix du moyen de paiement',
                 'choices' => [
                     'Paypal' => 'paypal',
                     'Cheque' => 'cheque',

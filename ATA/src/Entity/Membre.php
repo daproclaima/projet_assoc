@@ -288,4 +288,36 @@ class Membre implements UserInterface
     {
         $this->ville = $ville;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckPaiement()
+    {
+        return $this->checkPaiement;
+    }
+
+    /**
+     * @param mixed $checkPaiement
+     */
+    public function setCheckPaiement($checkPaiement): void
+    {
+        $this->checkPaiement = $checkPaiement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param mixed $articles
+     */
+    public function setArticles($articles): void
+    {
+        $this->articles = $articles;
+    }
 }

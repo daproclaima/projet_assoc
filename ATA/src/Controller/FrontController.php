@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontController extends AbstractController
 {
 
+    /**
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function index()
     {
         return $this->render('front/index.html.twig');

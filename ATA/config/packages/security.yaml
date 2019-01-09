@@ -4,6 +4,9 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        # Ensuite, nous devons dire à symfony quelle entité et quelle propriété
+        # interroger pour authentifier les utilisateurs. Autrement dit, quelle
+        # est notre table utilisateur et quelle est la colonne username
         membre_provider:
             entity:
                 class: App\Entity\Membre
@@ -22,6 +25,9 @@ security:
 
             # form_login: true
             # https://symfony.com/doc/current/security/form_login_setup.html
+
+            # route en charge de l’authentification du site
+
             form_login:
                 login_path: security_connexion
                 check_path: security_connexion

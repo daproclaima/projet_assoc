@@ -78,4 +78,20 @@ class Paiement
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMembre()
+    {
+        return $this->membre;
+    }
+
+    /**
+     * @param mixed $membre
+     */
+    public function setMembre($membre): void
+    {
+        $this->membre = $membre;
+    }
 }
