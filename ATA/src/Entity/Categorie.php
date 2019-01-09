@@ -34,6 +34,11 @@ class Categorie
     private $evenements;
 
 
+    public function __construct()
+    {
+        $this->evenements = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -62,5 +67,21 @@ class Categorie
         $this->slug = $slug;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvenements()
+    {
+        return $this->evenements;
+    }
+
+    /**
+     * @param mixed $evenements
+     */
+    public function setEvenements($evenements): void
+    {
+        $this->evenements = $evenements;
     }
 }
