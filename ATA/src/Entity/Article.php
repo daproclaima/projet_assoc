@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -32,7 +33,12 @@ class Article
     private $contenu;
 
     /**
-     * @ORM\Column(type="string", length=180, nullable=true)
+     * /**
+     * @ORM\Column(type="string", length=180)
+     * @Assert\Image(
+     *     mimeTypesMessage="Vérifier le format de votre image",
+     *     maxSize= "1M", maxSizeMessage="Votre image est trop lourde"
+     * )
      */
     private $featuredImage;
 
@@ -52,6 +58,10 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      */
     private $membre;
+
+    public function __construct(){
+        $this->dateCreation = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -87,19 +97,19 @@ class Article
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): self
+    public function setContenu($contenu): self
     {
         $this->contenu = $contenu;
 
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
+    public function getFeaturedImage()
     {
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage(?string $featuredImage): self
+    public function setFeaturedImage($featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 
@@ -129,4 +139,25 @@ class Article
 
         return $this;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getMembre()
+    {
+        return $this->membre;
+    }
+
+    /**
+     * @param mixed $membre
+     */
+    public function setMembre($membre):self
+    {
+        $this->membre = $membre;
+        return $this;
+
+    }
+
+
 }
