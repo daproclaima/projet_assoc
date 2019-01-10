@@ -33,7 +33,7 @@ class FrontController extends AbstractController
     {
         return $this->render('front/contact.html.twig');
     }
-    
+
     /**
      * @Route("/galerie",name="front_galerie")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -43,14 +43,25 @@ class FrontController extends AbstractController
         return $this->render('front/galerie.html.twig');
     }
 
+
     /**
-     * @Route("/categorie",name="front_categorie")
+     * @Route("/evenements",name="front_categorie_evenements")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function categorieEvenement()
     {
-        return $this->render('front/categorie.html.twig');
+        $evenement = $this->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->findAll();
+
+
+        return $this->render('front/categorie.html.twig', [
+            'evenement' => $evenement
+        ]);
+
+
     }
+
 
     /**
      * @Route("/article",name="front_article")
@@ -69,19 +80,43 @@ class FrontController extends AbstractController
         return $this->render('front/apropos.html.twig');
     }
 
-    /**
-     * @Route("/categories",
-     *     name="front_evenement")
-     * @param $id
-     * @param $slug
-     * @param $categorie
-     * @return Response
-     */
 
-    public function evenement()
+    /**
+     * @Route("/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}_{id<\d+>}.html",
+     *     name="front_evenement")
+     * @param $categorie
+     * @param $slug
+     * @param Evenement|null $evenement
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function evenement($categorie, $slug, Evenement $evenement = null)
 
     {
-        return $this->render('evenement/afficheEvenement.html.twig');
+        # Exemple d'URL
+        # /politique/vinci-autoroutes-va-envoyer-une-facture-aux-automobilistes_9841.htmlevenement-final
+
+        #$article = $this->getDoctrine()
+        #                               ->getRepository(Article::class)
+        #                              ->find($id);
+
+        if (null === $evenement) {
+            return $this->redirectToRoute('front_categorie_evenements', [], Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        #Verification du SLUG
+        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
+            return $this->redirectToRoute('front_evenement', [
+                'categorie' => $evenement->getCategories()->getSlug(),
+                'slug' => $evenement->getSlug(),
+                'id' => $evenement->getId()
+            ]);
+        }
+
+
+        # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
+        return $this->render('evenement/afficheEvenement.html.twig', [
+            'evenement' => $evenement
+        ]);
     }
 }
 

@@ -59,6 +59,11 @@ class EvenementController extends AbstractController
                 // updates the 'brochure' property to store the PDF file name
                 // instead of its contents
 
+                # Mise à jour de l'image'
+                $evenement->setFeaturedImage($fileName);
+
+                # Mise à jour du slug
+                $evenement->setSlug($this->slugify($evenement->getTitre()));
 
                 # Sauvegadre en BDD
                 $em = $this->getDoctrine()->getManager();
@@ -70,7 +75,7 @@ class EvenementController extends AbstractController
                     'Félicitations, votre Evénement est en ligne !');
 
                 # REDIRECTION
-                return $this->redirectToRoute('evenement_afficheEvenement', [], Response::HTTP_MOVED_PERMANENTLY);
+                return $this->redirectToRoute('front_categorie_evenements', [], Response::HTTP_MOVED_PERMANENTLY);
             }
 
         }
