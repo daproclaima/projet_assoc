@@ -1,20 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: SNITPRO
- * Date: 09/01/2019
- * Time: 13:05
- */
-
 namespace App\Controller;
 
 
 trait HelperTrait
 {
     /**
-    * @param $text
-    * @return false|string|string[]|null
-    */
+     * Permet de générer unSlug à partir d'un string
+     * @param $text
+     * @return false|string|string[]|null
+     */
     public function slugify($text)
     {
         // replace non letter or digits by -
