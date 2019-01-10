@@ -1464,7 +1464,9 @@ textarea:focus ~ .highlight {
   padding: 40px 0;
 }
 @media screen and (min-width: 991px) {
-  padding: 60px 30px 0 30px;
+  #gallery{
+    padding: 60px 30px 0 30px;
+  }
 }
 
 
@@ -1519,10 +1521,14 @@ textarea:focus ~ .highlight {
   padding: 5%;
 }
 @media screen and (min-width:768px) {
-  width: 60%;
+  #overlay img{
+    width: 60%;
+  }
 }
 @media screen and (min-width:1200px) {
-  width: 50%;
+  #overlay img{
+    width: 50%;
+  }
 }
 
 
@@ -1535,7 +1541,9 @@ textarea:focus ~ .highlight {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
-  font-size: 3em;
+  #nextButton{
+    font-size: 3em;
+  }
 }
 
 
@@ -1548,7 +1556,9 @@ textarea:focus ~ .highlight {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
-  font-size: 3em;
+  #prevButton{
+    font-size: 3em;
+  }
 }
 
 
@@ -1564,7 +1574,9 @@ textarea:focus ~ .highlight {
    opacity: 0.7;
  }
 @media screen and (min-width:768px) {
-  font-size: 3em;
+  #exitButton{
+    font-size: 3em;
+  }
 }
 
 .single-blog-post .post-content .post-meta .post-date-affiche{
@@ -1574,6 +1586,7 @@ textarea:focus ~ .highlight {
 .single-blog-post .post-content .post-meta .post-lieu{
   font-size: 1.3rem;
 }
+
 /**
 Page Evénement
  */

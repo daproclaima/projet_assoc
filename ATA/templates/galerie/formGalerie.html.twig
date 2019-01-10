@@ -1,0 +1,39 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Galerie
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/dropify-multiple.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2>
+                        Ajout de photos
+                    </h2><hr>
+                    {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block final_javascripts %}
+    <script src="{{ asset('js/dropify-multiple.js')}}"></script>
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                default: 'Glissez-d&eacute;posez un fichier ici ou cliquez',
+                replace: 'Glissez-d&eacute;posez un fichier ou cliquez pour remplacer',
+                remove:  'Supprimer',
+                error:   'D&eacute;sol&eacute;, le fichier est trop volumineux'
+            }
+        });
+    </script>
+{% endblock %}
+
