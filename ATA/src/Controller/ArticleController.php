@@ -53,7 +53,7 @@ class ArticleController extends AbstractController
 //            dump($article);
             # 1. Traitement de l'upload de l'image
 
-            /** @var UploadedFile $featuredImage */
+            /** @var  UploadedFile $featuredImage */
             $featuredImage = $article->getFeaturedImage();
 
             $fileName = $this->slugify($article->getTitre())
@@ -79,16 +79,21 @@ class ArticleController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
-        }
 
+            # Notification
+            $this->addFlash('notice',
+                'Félicitations, votre article est en ligne !');
+
+            # Redirection
+            return $this->redirectToRoute('front_article', [
+                'slug' => $article->getSlug(),
+                'id' => $article->getId()
+            ]);
+        }
 
         # Affichage dans la vue
         return $this->render('article/ajouterarticle.html.twig', [
             'form' => $form->createView()
         ]);
-
-
-
     }
-
 }
