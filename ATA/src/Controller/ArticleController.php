@@ -85,7 +85,7 @@ class ArticleController extends AbstractController
                 'Félicitations, votre article est en ligne !');
 
             # Redirection
-            return $this->redirectToRoute('front_article', [
+            return $this->redirectToRoute('front_un_article', [
                 'slug' => $article->getSlug(),
                 'id' => $article->getId()
             ]);
