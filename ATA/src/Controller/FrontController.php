@@ -63,6 +63,44 @@ class FrontController extends AbstractController
 
     }
 
+    /**
+     * @Route("/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}_{id<\d+>}.html",
+     *     name="front_evenement")
+     * @param $categorie
+     * @param $slug
+     * @param Evenement|null $evenement
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function evenement($categorie, $slug, Evenement $evenement = null)
+
+    {
+        # Exemple d'URL
+        # /politique/vinci-autoroutes-va-envoyer-une-facture-aux-automobilistes_9841.htmlevenement-final
+
+        #$article = $this->getDoctrine()
+        #                               ->getRepository(Article::class)
+        #                              ->find($id);
+
+        if (null === $evenement) {
+            return $this->redirectToRoute('front_categorie_evenements', [], \Symfony\Component\HttpFoundation\Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        #Verification du SLUG
+        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
+            return $this->redirectToRoute('front_evenement', [
+                'categorie' => $evenement->getCategories()->getSlug(),
+                'slug' => $evenement->getSlug(),
+                'id' => $evenement->getId()
+            ]);
+        }
+
+
+        # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
+        return $this->render('evenement/afficheEvenement.html.twig', [
+            'evenement' => $evenement
+        ]);
+    }
+
 
     /**
      * Affiche LES articles
@@ -85,7 +123,7 @@ class FrontController extends AbstractController
 
     /**
      * Affiche UN article
-     * @Route("/{slug<[a-zA-Z1-9\-_\/]+>}_{id<\d+>}.html",
+     * @Route("/{slug<[a-zA-Z0-9\-_\/]+>}_{id<\d+>}.html",
      *     name="front_article")
      *
      * @param Article $article
@@ -136,45 +174,6 @@ class FrontController extends AbstractController
     public function apropos()
     {
         return $this->render('front/apropos.html.twig');
-    }
-
-
-    /**
-     * @Route("/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}_{id<\d+>}.html",
-     *     name="front_evenement")
-     * @param $categorie
-     * @param $slug
-     * @param Evenement|null $evenement
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function evenement($categorie, $slug, Evenement $evenement = null)
-
-    {
-        # Exemple d'URL
-        # /politique/vinci-autoroutes-va-envoyer-une-facture-aux-automobilistes_9841.htmlevenement-final
-
-        #$article = $this->getDoctrine()
-        #                               ->getRepository(Article::class)
-        #                              ->find($id);
-
-        if (null === $evenement) {
-            return $this->redirectToRoute('front_categorie_evenements', [], Response::HTTP_MOVED_PERMANENTLY);
-        }
-
-        #Verification du SLUG
-        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
-            return $this->redirectToRoute('front_evenement', [
-                'categorie' => $evenement->getCategories()->getSlug(),
-                'slug' => $evenement->getSlug(),
-                'id' => $evenement->getId()
-            ]);
-        }
-
-
-        # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
-        return $this->render('evenement/afficheEvenement.html.twig', [
-            'evenement' => $evenement
-        ]);
     }
 }
 
