@@ -9,50 +9,47 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="post-content-area mb-100">
-                    <!-- Catagory Area -->
                     <div class="world-catagory-area">
-                        <div class="nav-tabs">
-                            <h2 class="title">Catégorie</h2>
-                        </div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="title">les Evénements</li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">Tous</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">Sorties</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                        <!-- Catagory Area -->
+                    <div class="world-catagory-area">
                         <div class="tab-content" id="myTabContent">
 
                             <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+
+                                {% for evenements in evenement %}
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post post-style-4 d-flex align-items-center">
                                     <!-- Post Thumbnail -->
                                     <div class="post-thumbnail">
-                                        <img src="{{ asset('images/b20.jpg') }}" alt="">
+                                        <img CLASS="image-evenement-categorie" src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
                                     </div>
                                     <!-- Post Content -->
                                     <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
+                                        <a href="{{ path('front_evenement',{'categorie': evenements.categories.nom , 'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
+                                            <h5>{{ evenements.titre }}</h5>
                                         </a>
-                                        <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
+                                        <p>{{ evenements.contenu }}</p>
                                         <!-- Post Meta -->
                                         <div class="post-meta">
-                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">{{ evenements.dateEvenement | date("d M Y") }}</a></p>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post post-style-4 d-flex align-items-center">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{ asset('images/b20.jpg') }}" alt="">
-                                    </div>
-                                    <!-- Post Content -->
-                                    <div class="post-content">
-                                        <a href="#" class="headline">
-                                            <h5>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h5>
-                                        </a>
-                                        <p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened...</p>
-                                        <!-- Post Meta -->
-                                        <div class="post-meta">
-                                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>

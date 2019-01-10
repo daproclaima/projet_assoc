@@ -18,11 +18,19 @@ class Evenement
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="veuillez saisir un titre")
      */
     private $titre;
+
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,11 +40,13 @@ class Evenement
      */
     private $contenu;
 
+
     /**
      * @ORM\Column(type="datetime")
      *
      */
     private $dateEvenement;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,6 +54,7 @@ class Evenement
      * @Assert\Length(min="8", minMessage="Vérifiez le lieu")
      */
     private $lieu;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,11 +64,13 @@ class Evenement
      */
     private $featuredImage;
 
+
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Veuillez saisir un prix")
      */
     private $prixAdulte;
+
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -69,6 +82,7 @@ class Evenement
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" ,
      *     inversedBy="evenements")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Veuillez choisir une catégorie")
      */
 
     private $categories;
@@ -182,5 +196,21 @@ class Evenement
     public function setCategories($categories): void
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
     }
 }
