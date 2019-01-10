@@ -19,16 +19,19 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le titre ne peut pas être vide.")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
+
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Le contenu ne peut pas être vide.")
      */
     private $contenu;
 

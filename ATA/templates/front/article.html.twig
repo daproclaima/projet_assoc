@@ -1,41 +1,60 @@
 {% extends "layout.html.twig" %}
 {% block page_title %}
-    Article
+    {{article.titre}}
 {% endblock %}
 {% block content %}
-<div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
-<div class="main-content-wrapper section-padding-25">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <div class="single-blog-content mb-100">
-                    <img src="{{ asset('images/bg2.jpg') }}" alt="">
-                    <!-- Post Meta -->
-                    <div class="post-meta">
-                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis. Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus. Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada. Nunc rutrum hendrerit semper.</h6>
-                        <h6>Maecenas vitae sem varius, imperdiet nisi a, tristique nisi. Sed scelerisque suscipit leo cursus accumsan. Donec vel turpis quam. Mauris non nisl nec nunc gravida ullamcorper id vestibulum magna. Donec non velit finibus, laoreet arcu nec, facilisis augue. Aliquam sed purus id erat accumsan congue. Mauris semper ullamcorper nibh non pellentesque. Aenean euismod purus sit amet quam vehicula ornare.</h6>
-                        <blockquote class="mb-30">
-                            <h6>Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex. Duis lacinia metus vel eros cursus pretium eget.</h6>
-                            <div class="post-author">
-                                <p>Robert Morgan</p>
-                            </div>
-                        </blockquote>
-                        <h6>Donec orci dolor, pretium in luctus id, consequat vitae nibh. Quisque hendrerit, lorem sit amet mollis malesuada, urna orci volutpat ex, sed scelerisque nunc velit et massa. Sed maximus id erat vel feugiat. Phasellus bibendum nisi non urna bibendum elementum. Aenean tincidunt nibh vitae ex facilisis ultrices. Integer ornare efficitur ultrices. Integer neque lectus, venenatis at pulvinar quis, aliquet id neque. Mauris ultrices consequat velit, sed dignissim elit posuere in. Cras vitae dictum dui.</h6>
 
+
+    {#{{ dump(article) }}#}
+    {#{{ dump(article.categorie.nom) }}#}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+
+
+                    <div class="single-blog-content mb-100">
+                        {#Ici, l'image de l'article#}
+                        <img src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
                         <!-- Post Meta -->
-                        <div class="post-meta second-part">
-                            <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">Sep 29, 2017 at 9:48 am</a></p>
+                        <div class="post-meta">
+                            <p><a href="#" class="post-author">
+                                    {{article.membre.prenom ~' '~article.membre.nom}}
+                                </a>
+                                on
+                                <a href="#" class="post-date">
+                                    {{ article.dateCreation | date('d/m/Y') }}
+                                </a>
+                            </p>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            {{ article.contenu | raw }}
+                            {#<blockquote class="mb-30">#}
+                                {#<h6>Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex. Duis lacinia metus vel eros cursus pretium eget.</h6>#}
+                                {#<div class="post-author">#}
+                                    {#<p>Robert Morgan</p>#}
+                                {#</div>#}
+                            {#</blockquote>#}
+
+                            <!-- Post Meta -->
+                            <div class="post-meta second-part">
+                                <p><a href="#" class="post-author">
+                                        {{article.membre.prenom ~' '~article.membre.nom}}
+                                    </a>
+                                    on
+                                        <a href="#" class="post-date">
+                                        {{ article.dateCreation | date('d/m/Y') }}
+                                    </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- SIDEBAR -->
+                {% include 'component/_sidebar.html.twig' %}
             </div>
-            <!-- SIDEBAR -->
-            {% include 'component/_sidebar.html.twig' %}
         </div>
     </div>
-</div>
 {% endblock %}

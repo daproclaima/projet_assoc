@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Article;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,12 +65,69 @@ class FrontController extends AbstractController
 
 
     /**
-     * @Route("/article",name="front_article")
+     * Affiche LES articles
+     * @Route("/articles",name="front_les_articles" )
      */
-    public function article()
+    public function lesArticles()
     {
-        return $this->render('front/article.html.twig');
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+
+
+        return $this->render('front/lesArticles.html.twig', [
+            'article' => $article
+        ]);
+
+
     }
+
+
+    /**
+     * Affiche UN article
+     * @Route("/{slug<[a-zA-Z1-9\-_\/]+>}_{id<\d+>}.html",
+     *     name="front_article")
+     *
+     * @param Article $article
+     * @param $slug
+     * @param id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+//
+    public function article($slug, article $article = null) // par défaut vaut null
+    {
+//        #####################################
+//               REQUETE TEST DE RECUP
+
+//        $article = $this->getDoctrine()
+//            ->getRepository(Article::class)
+//            ->find(5);
+//
+//        return $this->render('front/article.html.twig',
+//            [    'article' => $article ]);
+//        #####################################
+
+        #on s'assure que l'article ne soit pas existant
+        if(null === $article){
+
+            return $this->redirectToRoute('index',[],\Symfony\Component\HttpFoundation\Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        #verification du SLUG
+        if($article->getSlug() !== $slug){
+            return $this->redirectToRoute('front/article.html.twig',[
+                'slug'      => $article->getSlug(),
+                'id'        => $article->getId()
+            ]);
+
+        }
+
+        return $this->render('front/article.html.twig',[
+            'article' => $article
+        ]);
+
+    }
+
 
     /**
      * @Route("/apropos", name="front_apropos")

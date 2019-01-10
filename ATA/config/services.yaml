@@ -6,6 +6,7 @@
 
 parameters:
     evenement_assets_dir: '%kernel.project_dir%/public/images/product'
+    articles_assets_dir: '%kernel.project_dir%/public/images/product'
     locale: 'en'
 
 
