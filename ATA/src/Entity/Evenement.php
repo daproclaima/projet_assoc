@@ -67,7 +67,7 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie" ,
-     *     inversedBy="evenement")
+     *     inversedBy="evenements")
      * @ORM\JoinColumn(nullable=false)
      */
 

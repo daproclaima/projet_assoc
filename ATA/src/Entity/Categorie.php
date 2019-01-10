@@ -29,7 +29,7 @@ class Categorie
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Evenement" ,
-     *     mappedBy="categorie")
+     *     mappedBy="categories")
      */
     private $evenements;
 

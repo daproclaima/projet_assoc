@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,7 +47,7 @@ class FrontController extends AbstractController
      * @Route("/categorie",name="front_categorie")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function categorie()
+    public function categorieEvenement()
     {
         return $this->render('front/categorie.html.twig');
     }
@@ -69,23 +70,19 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/evenement", name="front_evenement")
+     * @Route("/categories",
+     *     name="front_evenement")
+     * @param $id
+     * @param $slug
+     * @param $categorie
+     * @return Response
      */
+
     public function evenement()
-    {
-        return $this->render('front/evenement.html.twig');
-    }
 
-
-    /**
-     * @Route("/event", name="evenement_afficheEvenement")
-     */
-    public function afficheEvenement()
     {
         return $this->render('evenement/afficheEvenement.html.twig');
     }
-
 }
 
 

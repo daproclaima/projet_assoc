@@ -19,7 +19,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualités</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ path('front_article') }}">Info</a>
-                                    <a class="dropdown-item" href="{{ path('front_evenement') }}">Evénements</a>
+                                    <a class="dropdown-item" href="{{ path('front_categorie') }}">Evénements</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -31,6 +31,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path ('front_contact')}}">Contact</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ path('nouvel_article') }}">Gestion Articles</a>
+                                    <a class="dropdown-item" href="{{ path('creation_evenement') }}">Gestion Evénements</a>
+                                </div>
+                            </li>
+
                         </ul>
                         <div class="items-connexion">
                             <ul class="navbar-nav justify-content-right mr-0">

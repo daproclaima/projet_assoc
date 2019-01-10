@@ -19,6 +19,20 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
+
+    # récupérer les 3 derniers événement
+    const MAX_EVENEMENT = 3;
+
+    public function DerniersEvenement()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(self::MAX_EVENEMENT)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Evenement[] Returns an array of Evenement objects
     //  */

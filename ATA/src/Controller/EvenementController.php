@@ -21,9 +21,9 @@ class EvenementController extends AbstractController
 {
     use HelperTrait;
     /**
-     * @Route("/creer-un-evenement", name="test")
+     * @Route("/creer-un-evenement", name="creation_evenement")
      */
-    public function nexEvenement(Request $request)
+    public function newEvenement(Request $request)
     {
 
         # Création d'un nouvel Evenement

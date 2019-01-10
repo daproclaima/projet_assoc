@@ -18,21 +18,21 @@
                     <div class="single-blog-post post-style-4 d-flex wow fadeInUpBig" data-wow-delay="0.2s">
                         <!-- Post Thumbnail -->
                         <div class="affiche-evenement">
-                            <img src="{{ asset('images/affiche1.jpg') }}" alt="">
+                            <img src="{{ asset('images/product/'~evenement.featuredImage) }}" alt="affiche evenement">
                         </div>
                     </div>
                 </div>
                 <div class="col-8">
                         <!-- Post Content -->
                         <a href="#" class="headline">
-                            <h2>Fête de la nature</h2>
+                            <h2>{{ evenement.titre }}</h2>
                         </a>
                         <div class="post-content">
-                            <h4>Le 20/01/2019 à 20h00</h4>
-                            <h5>Lieu de l'événement</h5>
+                            <h4>{{ evenement.dateEvenement | date("d M Y") }}</h4>
+                            <h5>{{ evenement.lieu }}</h5>
                             <!-- Post Meta -->
                             <div class="post-meta ">
-                                <h6>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</h6>
+                                <h6>{{ evenement.contenu }}</h6>
                             </div>
                         </div>
                 </div>
