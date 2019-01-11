@@ -9,11 +9,16 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Entity\Article;
+use App\Entity\Photos;
 use http\Env\Response;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class FrontController extends AbstractController
 {
@@ -42,7 +47,12 @@ class FrontController extends AbstractController
      */
     public function galerie()
     {
-        return $this->render('front/galerie.html.twig');
+        $photos = $this->getDoctrine()
+            ->getRepository(Photos::class)
+            ->findByDate();
+        return $this->render('front/galerie.html.twig',[
+            'photos' => $photos
+        ]);
     }
 
 
@@ -52,32 +62,34 @@ class FrontController extends AbstractController
      */
     public function categorieEvenement()
     {
+        $categories = $this->getDoctrine()
+            ->getRepository(Categorie::class)
+            ->findAll();
+
         $evenement = $this->getDoctrine()
             ->getRepository(Evenement::class)
             ->findAll();
 
-
         return $this->render('front/categorie.html.twig', [
-            'evenement' => $evenement
+            'categories'=> $categories,
+            'evenement'=> $evenement
         ]);
 
 
     }
 
+
     /**
-     * @Route("/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}_{id<\d+>}.html",
+     * @Route("{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
      *     name="front_evenement")
      * @param $categorie
      * @param $slug
      * @param Evenement|null $evenement
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function evenement($categorie, $slug, Evenement $evenement = null)
+    public function evenement( $slug, Evenement $evenement = null)
 
     {
-        # Exemple d'URL
-        # /politique/vinci-autoroutes-va-envoyer-une-facture-aux-automobilistes_9841.htmlevenement-final
-
         #$article = $this->getDoctrine()
         #                               ->getRepository(Article::class)
         #                              ->find($id);
@@ -178,19 +190,46 @@ class FrontController extends AbstractController
     }
 
 
+
+
+       
+    
+
     public function sidebar()
     {
+
+        $photos = $this->getDoctrine()
+            ->getRepository(Photos::class)
+            ->dernieresPhotos();
+
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
+
+        # Récupérer le 5 derniers articles
+        $evenements = $repository->findLatestEvenements();
+
+
+
         #Récuperation du Repository d' Article
         $repoArticle = $this->getDoctrine()
             ->getRepository(Article::class);
 
         # Récupérer le 5 derniers articles
         $articles = $repoArticle->findLatestArticles();
+    
 
 
         #Récuperation du Repository de Contact
         $repoContact = $this->getDoctrine()
             ->getRepository(Contact::class);
+        #Verification du SLUG
+        if ($evenement->getSlug() !== $slug) {
+            return $this->redirectToRoute('front_evenement', [
+                'slug' => $evenement->getSlug(),
+                'id' => $evenement->getId()
+            ]);
+        
 
         # Récupération des coordonnées de contact de l'entreprise
         $contact = $repoContact->find(1);
@@ -198,6 +237,8 @@ class FrontController extends AbstractController
 
         #Rendu de la vue
         return $this->render('component/_sidebar.html.twig', [
+            'evenements' => $evenements,
+            'photos' => $photos,
             'articles' => $articles,
             'contact' => $contact
         ]);

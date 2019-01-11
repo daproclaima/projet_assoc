@@ -62,6 +62,10 @@ class Article
      */
     private $membre;
 
+    /**
+     * Article constructor.
+     * @throws \Exception
+     */
     public function __construct(){
         $this->dateCreation = new \DateTime();
     }

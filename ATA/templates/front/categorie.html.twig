@@ -9,24 +9,33 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="post-content-area mb-100">
+
+
                     <div class="world-catagory-area">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="title">les Evénements</li>
+
+
 
                             <li class="nav-item">
                                 <a class="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">Tous</a>
                             </li>
 
+                            {% for categorie in categories %}
                             <li class="nav-item">
-                                <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">Sorties</a>
+                                <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">{{ categorie.nom }}</a>
                             </li>
+                            {% endfor %}
 
                         </ul>
                     </div>
+
+
                         <!-- Catagory Area -->
                     <div class="world-catagory-area">
                         <div class="tab-content" id="myTabContent">
 
+                        {% if evenement is not empty %}
                             <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
 
                                 {% for evenements in evenement %}
@@ -38,10 +47,10 @@
                                     </div>
                                     <!-- Post Content -->
                                     <div class="post-content">
-                                        <a href="{{ path('front_evenement',{'categorie': evenements.categories.slug , 'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
+                                        <a href="{{ path('front_evenement',{'categorie': evenements.categories.slug,'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
                                             <h5>{{ evenements.titre }}</h5>
                                         </a>
-                                        <p>{{ evenements.contenu }}</p>
+                                        <p>{{ evenements.contenu | summary }}</p>
                                         <!-- Post Meta -->
                                         <div class="post-meta">
                                             <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">{{ evenements.dateEvenement | date("d M Y") }}</a></p>
@@ -49,6 +58,15 @@
                                     </div>
                                 </div>
                                 {% endfor %}
+                                {% else %}
+
+                                    <div class="alert alert-danger">
+                                        <strong>
+                                            Aucune publication pour le moment
+                                        </strong>
+                                    </div>
+
+                                {% endif %}
 
                             </div>
                         </div>

@@ -22,6 +22,27 @@ class PhotosRepository extends ServiceEntityRepository
     // /**
     //  * @return Photos[] Returns an array of Photos objects
     //  */
+    # Récuperer tous les événemets par ordre decroissant d'Id
+    public function findByDate()
+    {
+        return $this->createQueryBuilder('photo')
+            ->orderBy('photo.dateAlbum', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    # récupérer les 6 dernières photos
+    const MAX_PHOTO = 6;
+
+    public function dernieresPhotos()
+    {
+        return $this->createQueryBuilder('photo')
+            ->orderBy('photo.dateAlbum', 'DESC')
+            ->setMaxResults(self::MAX_PHOTO)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     /*
     public function findByExampleField($value)
     {
