@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,22 +23,19 @@ class GalerieFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('album', EntityType::class, [
-                'class' => Album::class,
-                'choice_label' => 'titre',
-                'expanded' => false,
-                'multiple' => false,
-                'label' => false,
-                'data_class' => null,
-                'placeholder' => 'Album'
-            ])
+        $builder->add('titre', TextType::class, [
+            'label' => "Titre de l'événement",
+            'attr' => [
+                'placeholder' => "Titre de la photo"
+            ]
+        ])
                 ->add('featuredImage', FileType::class, [
                 'attr' => [
                     'class' => 'dropify'
                 ]
             ])
                 ->add('submit', SubmitType::class, [
-                    'label' => "créer Evénement"
+                    'label' => "Ajouter une photo"
             ]);
     }
 

@@ -5,7 +5,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/dropify-multiple.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha256-AWdeVMUYtwLH09F6ZHxNgvJI37p+te8hJuSMo44NVm0=" crossorigin="anonymous" />
 {% endblock %}
 
 {% block content %}
@@ -14,6 +14,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
+                    {% for message in app.flashes('notice') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <h2>
                         Ajout de photos
                     </h2><hr>
@@ -24,7 +29,7 @@
     </div>
 {% endblock %}
 {% block final_javascripts %}
-    <script src="{{ asset('js/dropify-multiple.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha256-SUaao5Q7ifr2twwET0iyXVy0OVnuFJhGVi5E/dqEiLU=" crossorigin="anonymous"></script>
     <script>
         $('.dropify').dropify({
             messages: {
@@ -36,4 +41,3 @@
         });
     </script>
 {% endblock %}
-

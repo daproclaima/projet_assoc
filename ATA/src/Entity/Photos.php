@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PhotosRepository")
@@ -23,25 +24,23 @@ class Photos
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="N'oubliez pas le titre le photo")
+     * @Assert\Length(max="25",maxMessage="Le nom de la photo doit contenir {{limit}} caratères")
      */
     private $featuredImage;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime(format="d-M-Y")
+     * @Assert\NotBlank(message="N'oubliez pas la photo !")
      */
     private $dateAlbum;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $imageSize;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Album",
-     *     inversedBy="photos")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $album;
+    public function __construct()
+    {
+        $this->dateAlbum = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -60,38 +59,14 @@ class Photos
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
+    public function getFeaturedImage()
     {
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage(string $featuredImage): self
+    public function setFeaturedImage( $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
-
-        return $this;
-    }
-
-    public function getDateAlbum(): ?\DateTimeInterface
-    {
-        return $this->dateAlbum;
-    }
-
-    public function setDateAlbum(\DateTimeInterface $dateAlbum): self
-    {
-        $this->dateAlbum = $dateAlbum;
-
-        return $this;
-    }
-
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
-
-    public function setImageSize(?int $imageSize): self
-    {
-        $this->imageSize = $imageSize;
 
         return $this;
     }

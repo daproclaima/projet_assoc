@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Entity\Article;
+use App\Entity\Photos;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +42,12 @@ class FrontController extends AbstractController
      */
     public function galerie()
     {
-        return $this->render('front/galerie.html.twig');
+        $photos = $this->getDoctrine()
+            ->getRepository(Photos::class)
+            ->findByDate();
+        return $this->render('front/galerie.html.twig',[
+            'photos' => $photos
+        ]);
     }
 
 
