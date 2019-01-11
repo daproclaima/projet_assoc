@@ -188,7 +188,7 @@ class FrontController extends AbstractController
 
     public function sidebar()
     {
-
+        # Récupération des photos pour la sidebar
         $photos = $this->getDoctrine()
             ->getRepository(Photos::class)
             ->dernieresPhotos();

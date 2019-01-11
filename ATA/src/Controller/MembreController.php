@@ -20,6 +20,22 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class MembreController extends AbstractController
 {
     /**
+     * @Route("membre.html",
+     *     name="membre_liste")
+     */
+    public function membre()
+    {
+        # Récupération de la listes des membres
+        $membres = $this->getDoctrine()
+            ->getRepository(Membre::class)
+            ->findAll();
+
+        # Affichage dans la vue
+        return $this->render('membre/membre.html.twig',[
+            'membres' => $membres
+        ]);
+    }
+    /**
      * @Route("/inscription.html",
      *     name="membre_inscription")
      * @param Request $request
