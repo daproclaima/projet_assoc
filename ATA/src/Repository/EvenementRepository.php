@@ -14,6 +14,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class EvenementRepository extends ServiceEntityRepository
 {
+    const MAX_RESULTS = 1;
+
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Evenement::class);
@@ -31,21 +34,15 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
 
-
-    # récupérer les 3 derniers événement
-    const MAX_EVENEMENT = 3;
-
-    public function DerniersEvenement()
+    #Récuperer les 3 derniers Evenement
+    public function findLatestEvenements()
     {
         return $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC')
-            ->setMaxResults(self::MAX_EVENEMENT)
+            ->setMaxResults(self::MAX_RESULTS)
             ->getQuery()
             ->getResult()
             ;
     }
-
-
-
 
 }

@@ -26,6 +26,13 @@
                         <!-- Post Content -->
                         <a href="#" class="headline">
                             <h2>{{ evenement.titre }}</h2>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="{{ path('evenement_edit', {
+                                        id: evenement.id
+                                    }) }}"><small>Editer cet Evénement</small></a>
+
+                            {% endif %}
+
                         </a>
                         <div class="post-content">
                             <h4>{{ evenement.dateEvenement | date("d M Y") }}</h4>

@@ -8,12 +8,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Entity\Article;
 use App\Entity\Photos;
 use http\Env\Response;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class FrontController extends AbstractController
 {
@@ -57,13 +61,17 @@ class FrontController extends AbstractController
      */
     public function categorieEvenement()
     {
+        $categories = $this->getDoctrine()
+            ->getRepository(Categorie::class)
+            ->findAll();
+
         $evenement = $this->getDoctrine()
             ->getRepository(Evenement::class)
             ->findAll();
 
-
         return $this->render('front/categorie.html.twig', [
-            'evenement' => $evenement
+            'categories'=> $categories,
+            'evenement'=> $evenement
         ]);
 
 
@@ -91,7 +99,7 @@ class FrontController extends AbstractController
 
     /**
      * Affiche UN article
-     * @Route("/{slug<[a-zA-Z1-9\-_\/]+>}_{id<\d+>}.html",
+     * @Route("/{slug<[a-zA-Z0-9\-_\/]+>}_{id<\d+>}.html",
      *     name="front_article")
      *
      * @param Article $article
@@ -146,19 +154,16 @@ class FrontController extends AbstractController
 
 
     /**
-     * @Route("/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}_{id<\d+>}.html",
+     * @Route("{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
      *     name="front_evenement")
      * @param $categorie
      * @param $slug
      * @param Evenement|null $evenement
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function evenement($categorie, $slug, Evenement $evenement = null)
+    public function evenement( $slug, Evenement $evenement = null)
 
     {
-        # Exemple d'URL
-        # /politique/vinci-autoroutes-va-envoyer-une-facture-aux-automobilistes_9841.htmlevenement-final
-
         #$article = $this->getDoctrine()
         #                               ->getRepository(Article::class)
         #                              ->find($id);
@@ -168,9 +173,8 @@ class FrontController extends AbstractController
         }
 
         #Verification du SLUG
-        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
+        if ($evenement->getSlug() !== $slug) {
             return $this->redirectToRoute('front_evenement', [
-                'categorie' => $evenement->getCategories()->getSlug(),
                 'slug' => $evenement->getSlug(),
                 'id' => $evenement->getId()
             ]);
@@ -178,23 +182,33 @@ class FrontController extends AbstractController
 
 
         # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
-        return $this->render('evenement/afficheEvenement.html.twig', [
+        return $this->render('evenement/evenement.html.twig', [
             'evenement' => $evenement
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     public function sidebar()
     {
+
         $photos = $this->getDoctrine()
             ->getRepository(Photos::class)
             ->dernieresPhotos();
-        return $this->render('component/_sidebar.html.twig',[
+
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
+
+        # Récupérer le 5 derniers articles
+        $evenements = $repository->findLatestEvenements();
+
+
+        #Rendu de la vue
+        return $this->render('component/_sidebar.html.twig', [
+            'evenements' => $evenements,
             'photos' => $photos
         ]);
     }
+
 }
 
 
