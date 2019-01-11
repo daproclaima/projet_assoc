@@ -182,6 +182,19 @@ class FrontController extends AbstractController
             'evenement' => $evenement
         ]);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sidebar()
+    {
+        $photos = $this->getDoctrine()
+            ->getRepository(Photos::class)
+            ->dernieresPhotos();
+        return $this->render('component/_sidebar.html.twig',[
+            'photos' => $photos
+        ]);
+    }
 }
 
 

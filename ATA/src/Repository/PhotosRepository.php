@@ -31,6 +31,18 @@ class PhotosRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+    # récupérer les 6 dernières photos
+    const MAX_PHOTO = 6;
+
+    public function dernieresPhotos()
+    {
+        return $this->createQueryBuilder('photo')
+            ->orderBy('photo.dateAlbum', 'DESC')
+            ->setMaxResults(self::MAX_PHOTO)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     /*
     public function findByExampleField($value)
     {
