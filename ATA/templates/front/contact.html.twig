@@ -33,7 +33,7 @@
                     </div>
                 </section>
             </div>
-            {% include 'component/_sidebar.html.twig' %}
+            {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
         </div>
     </div>
 </div>

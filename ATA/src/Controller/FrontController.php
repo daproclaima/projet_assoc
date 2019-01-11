@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Evenement;
 use App\Entity\Article;
 use http\Env\Response;
@@ -179,19 +180,29 @@ class FrontController extends AbstractController
 
     public function sidebar()
     {
-        #Récuperation du Repository
-        $repository = $this->getDoctrine()
+        #Récuperation du Repository d' Article
+        $repoArticle = $this->getDoctrine()
             ->getRepository(Article::class);
 
         # Récupérer le 5 derniers articles
-        $articles = $repository->findLatestArticles();
+        $articles = $repoArticle->findLatestArticles();
+
+
+        #Récuperation du Repository de Contact
+        $repoContact = $this->getDoctrine()
+            ->getRepository(Contact::class);
+
+        # Récupération des coordonnées de contact de l'entreprise
+        $contact = $repoContact->find(1);
 
 
         #Rendu de la vue
         return $this->render('component/_sidebar.html.twig', [
             'articles' => $articles,
+            'contact' => $contact
         ]);
     }
+
 }
 
 

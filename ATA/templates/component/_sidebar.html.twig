@@ -46,7 +46,10 @@
         <div class="sidebar-widget-area">
             <h5 class="title">Contact</h5>
             <div class="widget-content">
-                <p>Nom de l'Association<br>Adresse<br>Téléphone : 0123456789<br>Email</p>
+                <p>Association Culturelle ATA
+                    <br>Adresse: {{ contact.adresse ~ ' ' ~ contact.codePostal ~ ' ' ~ contact.ville}}
+                    <br>Téléphone : {{ contact.telephone}}
+                    <br>Email: {{ contact.telephone }}</p>
             </div>
         </div>
         <!-- Widget Réseaux sociaux -->
