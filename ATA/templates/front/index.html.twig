@@ -53,7 +53,7 @@
                 </div>
             </div>
             <!-- SIDEBAR -->
-            {% include 'component/_sidebar.html.twig' %}
+            {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
         </div>
     </div>
 </div>

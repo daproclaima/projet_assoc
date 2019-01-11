@@ -32,6 +32,9 @@ class ArticleController extends AbstractController
     /**
      * Formulaire pour ajouter un Article
      * @Route("/creer-un-article", name="nouvel_article")
+     * @param $request
+     * @Security("has_role('ROLE_ADMIN')")
+     * @return Response | RedirectResponse
      */
     public function newArticle(Request $request)
     {
@@ -105,10 +108,10 @@ class ArticleController extends AbstractController
      * Formulaire pour éditer un article existant
      * @Route("/editer-un-article/{id<\d+>}",
      *  name="editer_article")
-     *      Security("article.isAuteur(user)")
-     * @param Article
-     * @param Request
-     * @return Response
+     * @Security("article.isAuteur(user)")
+     * @param $article
+     * @param $request
+     * @return Response | RedirectResponse
      */
     public function editerArticle(Article $article,
                                   Request $request)

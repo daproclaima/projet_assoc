@@ -175,6 +175,23 @@ class FrontController extends AbstractController
     {
         return $this->render('front/apropos.html.twig');
     }
+
+
+    public function sidebar()
+    {
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Article::class);
+
+        # Récupérer le 5 derniers articles
+        $articles = $repository->findLatestArticles();
+
+
+        #Rendu de la vue
+        return $this->render('component/_sidebar.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
 }
 
 

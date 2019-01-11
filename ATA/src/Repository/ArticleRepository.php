@@ -14,9 +14,23 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
+    const MAX_RESULTS= 3;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+
+    #Récuperer les 3 derniers Articles
+    public function findLatestArticles()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(self::MAX_RESULTS)
+            ->getQuery()
+            ->getResult()
+            ;
     }
     // /**
     //  * @return Article[] Returns an array of Article objects
@@ -46,4 +60,6 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
 }
