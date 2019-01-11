@@ -60,4 +60,41 @@ class MembreController extends AbstractController
         ]);
     }
 
+    /**
+     * Formulaire pour éditer un membre
+     * @Route("/editer-un-membre/{id<\d+>}.html", name="membre_edit")
+     * @param Membre $membre
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function editMembre(Membre $membre, Request $request)
+    {
+        # Création du formulaire avec les information de la BDD
+        $form = $this->createForm(MembreFormType::class,$membre)
+            ->handleRequest($request);
+
+        # Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()){
+
+            # Sauvegarde en BDD
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($membre);
+            $em->flush();
+
+            # Notification
+            $this->addFlash('notice',
+                'Membre modifié');
+
+            # Redirection
+            return $this->redirectToRoute('membre',[
+                'membre' => $membre
+            ]);
+        }
+
+        # Affichage dans la vue
+        return $this->render('membre/inscription.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
 }
