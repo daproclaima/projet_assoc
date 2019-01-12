@@ -13,7 +13,6 @@ use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Entity\Article;
 use App\Entity\Photos;
-use http\Env\Response;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +37,18 @@ class FrontController extends AbstractController
      */
     public function contact()
     {
-        return $this->render('front/contact.html.twig');
+        #Récuperation du Repository de Contact
+        $repoContact = $this->getDoctrine()
+            ->getRepository(Contact::class);
+
+
+        # Récupération des coordonnées de contact de l'entreprise
+        $contact = $repoContact->findBy(['id'=>'1'],[],['limit'=>'1'],[]);
+
+        #Rendu de la vue
+        return $this->render('front/contact.html.twig', [
+            'contact' => $contact
+        ]);
     }
 
     /**
@@ -80,7 +90,7 @@ class FrontController extends AbstractController
 
 
     /**
-     * @Route("{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
+     * @Route("{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
      *     name="front_evenement")
      * @param $categorie
      * @param $slug
@@ -98,10 +108,10 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('front_categorie_evenements', [], \Symfony\Component\HttpFoundation\Response::HTTP_MOVED_PERMANENTLY);
         }
 
+
         #Verification du SLUG
-        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
+        if ($evenement->getSlug() !== $slug) {
             return $this->redirectToRoute('front_evenement', [
-                'categorie' => $evenement->getCategories()->getSlug(),
                 'slug' => $evenement->getSlug(),
                 'id' => $evenement->getId()
             ]);
@@ -109,7 +119,7 @@ class FrontController extends AbstractController
 
 
         # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
-        return $this->render('evenement/afficheEvenement.html.twig', [
+        return $this->render('evenement/evenement.html.twig', [
             'evenement' => $evenement
         ]);
     }
@@ -206,7 +216,7 @@ class FrontController extends AbstractController
         $repository = $this->getDoctrine()
             ->getRepository(Evenement::class);
 
-        # Récupérer le 5 derniers articles
+        # Récupérer le 3 derniers évènements
         $evenements = $repository->findLatestEvenements();
 
 
@@ -215,7 +225,7 @@ class FrontController extends AbstractController
         $repoArticle = $this->getDoctrine()
             ->getRepository(Article::class);
 
-        # Récupérer le 5 derniers articles
+        # Récupérer les 5 derniers articles
         $articles = $repoArticle->findLatestArticles();
     
 
@@ -223,12 +233,6 @@ class FrontController extends AbstractController
         #Récuperation du Repository de Contact
         $repoContact = $this->getDoctrine()
             ->getRepository(Contact::class);
-        #Verification du SLUG
-        if ($evenement->getSlug() !== $slug) {
-            return $this->redirectToRoute('front_evenement', [
-                'slug' => $evenement->getSlug(),
-                'id' => $evenement->getId()
-            ]);
         
 
         # Récupération des coordonnées de contact de l'entreprise
@@ -243,6 +247,7 @@ class FrontController extends AbstractController
             'contact' => $contact
         ]);
     }
+
 
 }
 

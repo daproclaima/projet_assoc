@@ -49,12 +49,14 @@
         </div>
         <!-- Widget Contact -->
         <div class="sidebar-widget-area">
-            <h5 class="title">Contact</h5>
+            <a href="{{ path('front_contact') }}"><h5 class="title">Contact</h5></a>
             <div class="widget-content">
-                <p>Association Culturelle ATA
-                    <br>Adresse: {{ contact.adresse ~ ' ' ~ contact.codePostal ~ ' ' ~ contact.ville}}
-                    <br>Téléphone : {{ contact.telephone}}
-                    <br>Email: {{ contact.telephone }}</p>
+                <p>
+                    <h5>Association Culturelle ATA</h5>
+                    <br><h6>Adresse: </h6>{{ contact.adresse ~ ' ' ~ contact.codePostal ~ ' ' ~ contact.ville}}
+                    <br><h6>Téléphone :</h6>{{ contact.telephone}}
+                    <br><h6>Email:</h6>{{ contact.email}}
+                </p>
             </div>
         </div>
         <!-- Widget Réseaux sociaux -->

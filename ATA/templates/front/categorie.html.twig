@@ -47,7 +47,7 @@
                                     </div>
                                     <!-- Post Content -->
                                     <div class="post-content">
-                                        <a href="{{ path('front_evenement',{'categorie': evenements.categories.slug,'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
+                                        <a href="{{ path('front_evenement',{'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
                                             <h5>{{ evenements.titre }}</h5>
                                         </a>
                                         <p>{{ evenements.contenu | summary }}</p>

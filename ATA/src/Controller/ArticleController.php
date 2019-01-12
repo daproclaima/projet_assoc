@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
 
     /**
      * Formulaire pour ajouter un Article
-     * @Route("/creer-un-article", name="nouvel_article")
+     * @Route("/creer-un-article", name="article_creation")
      * @param $request
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response | RedirectResponse
@@ -107,7 +107,7 @@ class ArticleController extends AbstractController
     /**
      * Formulaire pour éditer un article existant
      * @Route("/editer-un-article/{id<\d+>}",
-     *  name="editer_article")
+     *  name="article_edition")
      * @Security("article.isAuteur(user)")
      * @param $article
      * @param $request
@@ -182,10 +182,40 @@ class ArticleController extends AbstractController
             ]);
         }
 
+
+
         # Affichage dans la vue
         return $this->render('article/ajouterArticle.html.twig', [
             'form' => $form->createView()
         ]);
 
     }
+
+    /**
+     * Méthode de suppression d'article
+     * Formulaire pour éditer un article existant
+     * @Route("/supprimer-un-article/{id<\d+>}",
+     *  name="article_suppression")
+     * @Security("article.isAuteur(user)")
+     * @param $id
+     *
+     */
+    public function supprimerArticle($id)
+    {
+
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+
+        if($this->getId() === $id) {
+
+            return $em = $this->getDoctrine()
+                ->getManager()
+                ->remove($article)
+                ->flush();
+        }
+
+    }
+
+
 }

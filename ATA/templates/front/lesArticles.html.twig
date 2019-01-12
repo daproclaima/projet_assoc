@@ -7,7 +7,7 @@
     <div class="main-content-wrapper section-padding-25">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12">
+                <div class="col-12 col-md-8 col-lg-8">
                     <div class="post-content-area mb-100">
                         <div class="world-catagory-area">
                             <h3>Les Articles</h3>
@@ -23,14 +23,14 @@
                                         <div class="single-blog-post post-style-4 d-flex align-items-center">
                                             <!-- Post Thumbnail -->
                                             <div class="post-thumbnail">
-                                                <img src="{{ asset('images/product/'~articles.featuredImage) }}" alt="{{ articles.titre }}">
+                                                <img CLASS="image-evenement-categorie" src="{{ asset('images/product/'~articles.featuredImage) }}" alt="">
                                             </div>
                                             <!-- Post Content -->
                                             <div class="post-content">
-                                                <a href=" {{ path('front_article',{'slug': articles.slug , 'id' : articles.id}) }}"  class="headline">
+                                                <a href="{{ path('front_article',{'slug': articles.slug, 'id': articles.id}) }}" class="headline">
                                                     <h5>{{ articles.titre }}</h5>
                                                 </a>
-                                                <p>{{ articles.contenu |raw }}</p>
+                                                <p>{{ articles.contenu | summary }}</p>
                                                 <!-- Post Meta -->
                                                 <div class="post-meta">
                                                     <p><a href="#" class="post-author">
@@ -52,6 +52,7 @@
                     </div>
                 </div>
                 <!-- ZONE SIDEBAR -->
+                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
             </div>
         </div>
     </div>

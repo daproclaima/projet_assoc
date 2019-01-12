@@ -30,7 +30,25 @@
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
+
+                            <div class="col-1">
+                                <a class=""></a>
+                            </div>
                             {{ article.contenu | raw }}
+                            {# bouton delete à afficher si admin et auteur #}
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a href="{{ path('article_edition', {id: article.id}) }}">
+                                    <small>Editer cet Article</small>
+                                    <i class="fas fa-pencil-alt fa-sm"></i>
+
+                                </a>
+                                <a href="{{ path('article_suppression', {id: article.id}) }}">
+                                    <small>Supprimer cet Article</small>
+                                    <i class="far fa-trash-alt fa-sm"></i>
+
+                                </a>
+
+                            {% endif %}
                             {#<blockquote class="mb-30">#}
                                 {#<h6>Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex. Duis lacinia metus vel eros cursus pretium eget.</h6>#}
                                 {#<div class="post-author">#}
