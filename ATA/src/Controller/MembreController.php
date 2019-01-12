@@ -20,6 +20,24 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class MembreController extends AbstractController
 {
     /**
+     * @Route("membre.html",
+     *     name="membre_liste")
+     */
+    public function membre()
+    {
+        # Récupération de la listes des membres
+        $membres = $this->getDoctrine()
+            ->getRepository(Membre::class)
+            ->findAll();
+        $nbrMembres = count($membres);
+
+        # Affichage dans la vue
+        return $this->render('membre/membre.html.twig',[
+            'membres' => $membres,
+            'nbrMembres' => $nbrMembres
+        ]);
+    }
+    /**
      * @Route("/inscription.html",
      *     name="membre_inscription")
      * @param Request $request
@@ -58,6 +76,56 @@ class MembreController extends AbstractController
         return $this->render('membre/inscription.html.twig',[
                 'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Formulaire pour éditer un membre
+     * @Route("/editer-un-membre/{id<\d+>}.html", name="membre_edit")
+     * @param Membre $membre
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function editMembre(Membre $membre, Request $request)
+    {
+        # Création du formulaire avec les information de la BDD
+        $form = $this->createForm(MembreFormType::class,$membre)
+            ->handleRequest($request);
+
+        # Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()){
+
+            # Sauvegarde en BDD
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($membre);
+            $em->flush();
+
+            # Notification
+            $this->addFlash('notice',
+                'Membre modifié');
+
+            # Redirection
+            return $this->redirectToRoute('membre',[
+                'membre' => $membre
+            ]);
+        }
+
+        # Affichage dans la vue
+        return $this->render('membre/inscription.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/supprimer-un-membre/{id<\d+>}.html", name="membre_supprimer")
+     */
+    public function suppMembre(Membre $membre)
+    {
+        # Suppression du membre en BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($membre);
+        $em->flush();
+
+        return $this->redirectToRoute("membre_liste");
     }
 
 }

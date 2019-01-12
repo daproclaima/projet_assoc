@@ -1644,3 +1644,18 @@ Page Evénement
     height: 280px;
   }
 }
+/* Bouton modifier et supprimer*/
+.sup{
+  font-size: 2em;
+}
+.modif{
+  font-size: 2rem;
+
+}
+.sup:hover{
+  color:Tomato;
+
+}
+.modif:hover{
+  color:#007bff;
+}
