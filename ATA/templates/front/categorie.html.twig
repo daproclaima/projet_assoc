@@ -7,31 +7,24 @@
 <div class="main-content-wrapper section-padding-25">
     <div class="container">
         <div class="row justify-content-center">
+
             <div class="col-12">
                 <div class="post-content-area mb-100">
-
-
                     <div class="world-catagory-area">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="title">les Evénements</li>
-
-
-
                             <li class="nav-item">
                                 <a class="nav-link active" id="tab1" data-toggle="tab" href="#world-tab-1" role="tab" aria-controls="world-tab-1" aria-selected="true">Tous</a>
                             </li>
-
                             {% for categorie in categories %}
                             <li class="nav-item">
                                 <a class="nav-link" id="tab2" data-toggle="tab" href="#world-tab-2" role="tab" aria-controls="world-tab-2" aria-selected="false">{{ categorie.nom }}</a>
                             </li>
                             {% endfor %}
-
                         </ul>
                     </div>
 
-
-                        <!-- Catagory Area -->
+                    <!-- Catagory Area -->
                     <div class="world-catagory-area">
                         <div class="tab-content" id="myTabContent">
 

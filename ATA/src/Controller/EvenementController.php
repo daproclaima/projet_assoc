@@ -176,5 +176,31 @@ class EvenementController extends AbstractController
         return $this->render('evenement/formEvenement.html.twig', [
             'form' => $form->createView()
         ]);
+
+
+    }
+
+
+    /**
+     * @param Evenement $evenement
+     * @Route("/supprimer-un-evenement/{id<\d+>}",
+     *     name="evenement_delete")
+     * @return
+     */
+    
+    # uppression d'un evenement en BDD
+    public function deleteEvenement(Evenement $evenement){
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($evenement);
+        $em->flush();
+
+
+        # REDIRECTION
+        return $this->redirectToRoute('front_categorie_evenements', [
+            'categorie' => $evenement->getCategories()->getSlug(),
+            'slug' => $evenement->getSlug(),
+            'id' => $evenement->getId()
+        ]);
+
     }
 }

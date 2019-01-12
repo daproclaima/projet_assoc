@@ -160,7 +160,7 @@ class FrontController extends AbstractController
      * @param Evenement|null $evenement
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function evenement( $slug, Evenement $evenement = null)
+    public function evenement( $categorie, $slug, Evenement $evenement = null)
 
     {
         #$article = $this->getDoctrine()
@@ -172,17 +172,21 @@ class FrontController extends AbstractController
         }
 
         #Verification du SLUG
-        if ($evenement->getSlug() !== $slug) {
+        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
             return $this->redirectToRoute('front_evenement', [
                 'slug' => $evenement->getSlug(),
                 'id' => $evenement->getId()
             ]);
         }
 
+        $categories = $this->getDoctrine()
+            ->getRepository(Categorie::class)
+            ->findAll();
 
         # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
         return $this->render('evenement/evenement.html.twig', [
-            'evenement' => $evenement
+            'evenement' => $evenement,
+            'categories' => $categories
         ]);
     }
 
