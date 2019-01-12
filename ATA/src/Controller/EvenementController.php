@@ -188,7 +188,7 @@ class EvenementController extends AbstractController
      * @return
      */
     
-    # uppression d'un evenement en BDD
+    # Suppression d'un evenement en BDD
     public function deleteEvenement(Evenement $evenement){
         $em = $this->getDoctrine()->getManager();
         $em->remove($evenement);
