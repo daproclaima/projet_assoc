@@ -191,29 +191,27 @@ class ArticleController extends AbstractController
 
     }
 
+
     /**
-     * Méthode de suppression d'article
-     * Formulaire pour éditer un article existant
-     * @Route("/supprimer-un-article/{id<\d+>}",
-     *  name="article_suppression")
-     * @Security("article.isAuteur(user)")
-     * @param $id
-     *
+     * Methode de suppression d'article
+     * @param Article $article
+     * @Route("/supprimer-un-article_{id<\d+>}.html",
+     *     name="article_delete")
+     * @return
      */
-    public function supprimerArticle($id)
-    {
 
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->find($id);
+    # Suppression d'un evenement en BDD
+    public function deleteArticle(Article $article){
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
 
-        if($this->getId() === $id) {
 
-            return $em = $this->getDoctrine()
-                ->getManager()
-                ->remove($article)
-                ->flush();
-        }
+        # REDIRECTION
+        return $this->redirectToRoute('front_les_articles', [
+            'slug' => $article->getSlug(),
+            'id' => $article->getId()
+        ]);
 
     }
 

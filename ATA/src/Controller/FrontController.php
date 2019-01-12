@@ -89,40 +89,6 @@ class FrontController extends AbstractController
     }
 
 
-    /**
-     * @Route("{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
-     *     name="front_evenement")
-     * @param $categorie
-     * @param $slug
-     * @param Evenement|null $evenement
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function evenement( $slug, Evenement $evenement = null)
-
-    {
-        #$article = $this->getDoctrine()
-        #                               ->getRepository(Article::class)
-        #                              ->find($id);
-
-        if (null === $evenement) {
-            return $this->redirectToRoute('front_categorie_evenements', [], \Symfony\Component\HttpFoundation\Response::HTTP_MOVED_PERMANENTLY);
-        }
-
-
-        #Verification du SLUG
-        if ($evenement->getSlug() !== $slug) {
-            return $this->redirectToRoute('front_evenement', [
-                'slug' => $evenement->getSlug(),
-                'id' => $evenement->getId()
-            ]);
-        }
-
-
-        # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
-        return $this->render('evenement/evenement.html.twig', [
-            'evenement' => $evenement
-        ]);
-    }
 
 
     /**
