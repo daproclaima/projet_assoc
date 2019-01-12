@@ -100,13 +100,13 @@ class Membre implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paiement",
-     *     mappedBy="membre")
+     *     mappedBy="membre", cascade={"remove"})
      */
     private $checkPaiement;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article",
-     *     mappedBy="membre")
+     *     mappedBy="membre", cascade={"remove"})
      * @return int|null
      */
     private $articles;

@@ -29,10 +29,12 @@ class MembreController extends AbstractController
         $membres = $this->getDoctrine()
             ->getRepository(Membre::class)
             ->findAll();
+        $nbrMembres = count($membres);
 
         # Affichage dans la vue
         return $this->render('membre/membre.html.twig',[
-            'membres' => $membres
+            'membres' => $membres,
+            'nbrMembres' => $nbrMembres
         ]);
     }
     /**
@@ -111,6 +113,19 @@ class MembreController extends AbstractController
         return $this->render('membre/inscription.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/supprimer-un-membre/{id<\d+>}.html", name="membre_supprimer")
+     */
+    public function suppMembre(Membre $membre)
+    {
+        # Suppression du membre en BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($membre);
+        $em->flush();
+
+        return $this->redirectToRoute("membre_liste");
     }
 
 }

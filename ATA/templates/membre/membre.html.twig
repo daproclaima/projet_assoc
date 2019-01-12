@@ -9,10 +9,63 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h2>
-                        Liste des adhérants
+                        Liste des {{ nbrMembres }} adhérants
                     </h2>
                     <hr>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Code postal</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Mode de paiement</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
+                            {% for unMembre in membres %}
+
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <td>{{ unMembre.nom }}</td>
+                                    <td>{{ unMembre.prenom }}</td>
+                                    <td>{{ unMembre.email }}</td>
+                                    <td>{{ unMembre.telephone }}</td>
+                                    <td>{{ unMembre.adresse }}</td>
+                                    <td>{{ unMembre.codePostal }}</td>
+                                    <td>{{ unMembre.ville }}</td>
+                                    <td>{{ unMembre.paiement }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ path('membre_edit', {
+                                            id: unMembre.id
+                                        }) }}">
+                                            <span class="modif">
+                                                <i class="fas fa-wrench modif"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ path('membre_supprimer', {
+                                            id: unMembre.id
+                                        }) }}">
+                                            <span class="sup">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

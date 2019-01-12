@@ -58,7 +58,7 @@ class Article
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Membre",
      *     inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $membre;
 

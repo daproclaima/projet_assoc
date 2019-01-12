@@ -34,7 +34,7 @@ class Paiement
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Membre",
      *     inversedBy="checkPaiement")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $membre;
 
