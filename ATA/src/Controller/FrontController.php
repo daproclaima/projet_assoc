@@ -37,8 +37,9 @@ class FrontController extends AbstractController
      */
     public function contact()
     {
+
         #Rendu de la vue
-        return $this->render('front/contact.html.twig' );
+        return $this->render('front/contact.html.twig');
     }
 
     /**
@@ -56,29 +57,91 @@ class FrontController extends AbstractController
     }
 
 
+
+    ##################################### CONTROLLERS HOCINE  ################################################
+
+
     /**
-     * @Route("/evenements",name="front_categorie_evenements")
+     * @Route("/evenements",name="front_categories")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function categorieEvenement()
+    public function toutesCategories()
     {
         $categories = $this->getDoctrine()
             ->getRepository(Categorie::class)
             ->findAll();
 
+        # on récupere tous les Evenements par ordre de date décroissant
         $evenement = $this->getDoctrine()
             ->getRepository(Evenement::class)
-            ->findAll();
+            ->findByDate();
 
         return $this->render('front/categorie.html.twig', [
             'categories'=> $categories,
             'evenement'=> $evenement
         ]);
+    }
 
+
+    /**
+     * @Route("/evenements/{slug<[a-zA-Z0-9-/]+>}", name="front_categorie_evenements")
+     * @param $categorie
+     * @param Evenement|null $evenement
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function evenementsParCategorie($slug, Categorie $categories= null){
+
+        if(null === $categories){
+            return $this->redirectToRoute('front_categories',[],Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        $cats = $this->getDoctrine()
+            ->getRepository(Categorie::class)
+            ->findAll();
+
+        return $this->render('evenement/evenementsParCategorie.html.twig',[
+            'categories' => $categories,
+            'evenement' => $categories->getEvenements(),
+            'cats' => $cats
+        ]);
 
     }
 
 
+
+    /**
+     * @Route("evenement/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
+     *     name="front_evenement")
+     * @param $categorie
+     * @param $slug
+     * @param Evenement|null $evenement
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function evenement( $categorie, $slug, Evenement $evenement = null)
+
+    {
+
+
+        if (null === $evenement) {
+            return $this->redirectToRoute('front_categorie_evenements', [], Response::HTTP_MOVED_PERMANENTLY);
+        }
+
+        #Verification du SLUG
+        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
+            return $this->redirectToRoute('front_evenement', [
+                'slug' => $evenement->getSlug(),
+                'id' => $evenement->getId()
+            ]);
+        }
+
+        return $this->render('evenement/evenement.html.twig', [
+            'evenement' => $evenement
+        ]);
+
+    }
+
+
+    ######################### FIN CONTROLEURS HOCINE #######################################################
 
 
     /**
@@ -156,43 +219,7 @@ class FrontController extends AbstractController
     }
 
 
-    /**
-     * @Route("{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
-     *     name="front_evenement")
-     * @param $categorie
-     * @param $slug
-     * @param Evenement|null $evenement
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function evenement( $categorie, $slug, Evenement $evenement = null)
 
-    {
-        #$article = $this->getDoctrine()
-        #                               ->getRepository(Article::class)
-        #                              ->find($id);
-
-        if (null === $evenement) {
-            return $this->redirectToRoute('front_categorie_evenements', [], Response::HTTP_MOVED_PERMANENTLY);
-        }
-
-        #Verification du SLUG
-        if ($evenement->getSlug() !== $slug || $evenement->getCategories()->getSlug() !== $categorie) {
-            return $this->redirectToRoute('front_evenement', [
-                'slug' => $evenement->getSlug(),
-                'id' => $evenement->getId()
-            ]);
-        }
-
-        $categories = $this->getDoctrine()
-            ->getRepository(Categorie::class)
-            ->findAll();
-
-        # return new Response("<html><body><h1>PAGE ARTICLE : $id</h1></body></html>");
-        return $this->render('evenement/evenement.html.twig', [
-            'evenement' => $evenement,
-            'categories' => $categories
-        ]);
-    }
 
     public function sidebar()
     {
@@ -236,6 +263,8 @@ class FrontController extends AbstractController
             'contact' => $contact
         ]);
     }
+
+
 
 
 }

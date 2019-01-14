@@ -32,12 +32,6 @@
                         {% include 'component/_test.html.twig' %}
                     </div>
 
-                    <div class="post-content">
-                    {# l'include ci-desous implémente la map google.
-                     _test.html.twig est un copié collé de https://developers.google.com/maps/documentation/javascript/adding-a-google-map
-                     _googleMap.html.twig est une version factorisée mais non oppérationelle#}
-                    {% include 'component/_test.html.twig' %}
-                    </div>
                 </section>
             </div>
             {{ render(controller('App\\Controller\\FrontController::sidebar')) }}

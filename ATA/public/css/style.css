@@ -258,7 +258,7 @@ img {
   padding: 50px 0; }
 
 .section-padding-25-0 {
-  padding: 25px 0 0 0; }
+  padding: 25px 0; }
 .section-padding-25{
   padding: 25px 0;
 }
@@ -1702,3 +1702,6 @@ Page Evénement
 
                             /*#### Seb, le 13-01-2019 ####*/
 /* ----------------------------- Styles sur Article(s)-- // FIN // -------------*/
+.nav-link-categories:active{
+  color: darkred;
+}

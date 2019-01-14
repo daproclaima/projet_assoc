@@ -35,7 +35,7 @@ class Evenement
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="veuillez saisir un contenu")
+     * @Assert\NotBlank(message="veuillez saisir du contenu")
      * @Assert\Length(min="8", minMessage="Votre contenu est trop court")
      *
      */
