@@ -1659,3 +1659,46 @@ Page Evénement
 .modif:hover{
   color:#007bff;
 }
+
+
+
+/* ----------------------------- Styles sur Article(s) -- # DEBUT # ------------*/
+
+.background-article{
+  background-color: #D7FAFF;
+}
+
+.border-photo{
+  box-sizing: border-box;
+  border-left: 0.1rem solid #f8f9fa;
+  border-right: 0.1rem solid #f8f9fa;
+  margin-left:0rem;
+  margin-right:0rem;
+}
+
+.layout-article .lien-edition:hover{
+  /*color: #480ce8;*/
+  color:#00DDFF;
+}
+.layout-article .lien-suppression:hover{
+  /*color: #480ce8;*/
+  color:#FF0D39;
+}
+.layout-article .article-titre:after {
+  background-color: #050308;
+  display: block;
+  height: 0.5rem;
+  margin: 1rem 0 1.25rem;
+  width: 3.2rem;
+  content: "";
+}
+
+.layout-article .single-blog-content .post-meta.second-part {
+  border-bottom: none;
+  border-top: 2px dotted;
+  border-color: #f1f1f1;
+  margin-bottom: 0;
+  margin-top: 30px; }
+
+                            /*#### Seb, le 13-01-2019 ####*/
+/* ----------------------------- Styles sur Article(s)-- // FIN // -------------*/

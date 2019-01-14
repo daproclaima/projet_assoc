@@ -37,18 +37,8 @@ class FrontController extends AbstractController
      */
     public function contact()
     {
-        #Récuperation du Repository de Contact
-        $repoContact = $this->getDoctrine()
-            ->getRepository(Contact::class);
-
-
-        # Récupération des coordonnées de contact de l'entreprise
-        $contact = $repoContact->findBy(['id'=>'1'],[],['limit'=>'1'],[]);
-
         #Rendu de la vue
-        return $this->render('front/contact.html.twig', [
-            'contact' => $contact
-        ]);
+        return $this->render('front/contact.html.twig' );
     }
 
     /**
