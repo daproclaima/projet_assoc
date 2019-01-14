@@ -8,45 +8,60 @@
     {#{{ dump(article) }}#}
     {#{{ dump(article.categorie.nom) }}#}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
-    <div class="main-content-wrapper section-padding-25">
+    <div class="main-content-wrapper section-padding-25 layout-article">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-md-8 col-lg-8">
 
 
-                    <div class="single-blog-content mb-100">
+                    <div class="mx-lg-auto">
+
+                        <header class="row">
+                            <h1 class="col-12 article-titre">{{article.titre}}</h1>
+                        </header>
+                        {#<div class="row">#}
+                            {#<hr class="col-1 bg-primary ml-4 pt-1 mb-4">#}
+                        {#</div>#}
                         {#Ici, l'image de l'article#}
-                        <img src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
-                        <!-- Post Meta -->
-                        <div class="post-meta">
-                            <p><a href="#" class="post-author">
-                                    {{article.membre.prenom ~' '~article.membre.nom}}
+                        <div class="row border-photo">
+                            <aside class=" col-10 mx-auto mt-2 mb-2 " >
+                                <a href="{{ asset('images/product/'~article.featuredImage) }}">
+                                    <img class="border rounded" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
                                 </a>
-                                on
+                            </aside>
+                        </div>
+                    </div>
+
+                        <!-- Post Meta -->
+                        <div class="post-meta col-12 mt-3">
+                            <p class="text-center"><a href="#" class="post-author">
+                                    De {{article.membre.prenom ~' '~article.membre.nom}},
+                                </a>publié le
                                 <a href="#" class="post-date">
                                     {{ article.dateCreation | date('d/m/Y') }}
                                 </a>
                             </p>
                         </div>
                         <!-- Post Content -->
-                        <div class="post-content">
+                        <div class="single-blog-post post-content single-blog-content mt-3 mb-5 ">
 
-                            <div class="col-1">
-                                <a class=""></a>
+                            <div class="col-12 py-3">
+                                {{ article.contenu | raw }}
                             </div>
-                            {{ article.contenu | raw }}
+
                             {# bouton delete à afficher si admin et auteur #}
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{{ path('article_edition', {id: article.id}) }}">
-                                    <small>Editer cet Article</small>
-                                    <i class="fas fa-pencil-alt fa-sm"></i>
+                                <div class = "col-12 ml-0">
+                                    <a class="lien-edition" href="{{ path('article_edition', {id: article.id}) }}">
+                                        <small>Editer cet Article</small>
+                                        <i class="fas fa-pencil-alt fa-sm"></i>
 
-                                </a>
-                                <a href="{{ path('article_delete', {id: article.id}) }}">
-                                    <small>Supprimer cet Article</small>
-                                    <i class="far fa-trash-alt fa-sm"></i>
-
-                                </a>
+                                    </a>
+                                    <a class="lien-suppression" href="{{ path('article_delete', {id: article.id}) }}">
+                                        <small class="ml-5">Supprimer cet Article</small>
+                                        <i class="far fa-trash-alt fa-sm"></i>
+                                    </a>
+                                </div>
 
                             {% endif %}
                             {#<blockquote class="mb-30">#}
@@ -57,20 +72,21 @@
                             {#</blockquote>#}
 
                             <!-- Post Meta -->
-                            <div class="post-meta second-part">
+                            <div class="post-meta second-part col-12 ml-0">
                                 <p><a href="#" class="post-author">
-                                        {{article.membre.prenom ~' '~article.membre.nom}}
+                                        De {{article.membre.prenom ~' '~article.membre.nom}},
                                     </a>
-                                    on
+                                    publié le
                                         <a href="#" class="post-date">
                                         {{ article.dateCreation | date('d/m/Y') }}
                                     </a>
                                 </p>
-                                {%  include 'component/socialmedia.html.twig' %}
+                                {#{%  include 'component/socialmedia.html.twig' %}#}
 
                             </div>
                         </div>
-                    </div>
+
+
                 </div>
                 <!-- SIDEBAR -->
                 {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
