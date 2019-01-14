@@ -1,59 +1,65 @@
 {% extends "layout.html.twig" %}
+{% set active = categories.slug %}
 {% block page_title %}
-    Les articles
+    Catégorie
 {% endblock %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
     <div class="main-content-wrapper section-padding-25">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-8">
+                <div class="col-12">
                     <div class="post-content-area mb-100">
                         <div class="world-catagory-area">
-                            <h3>Les Articles</h3>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="title">les Evénements</li>
+                                <li class="nav-item">
+                                    <a class="nav-categorie" href="{{ path('front_categories') }}">Tous</a>
+                                </li>
+                                {% for categorie in cats %}
+                                    <li {{ active == categorie.slug ? 'class="current"'}}>
+                                        <a class="nav-link" href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
+
                         <!-- Catagory Area -->
                         <div class="world-catagory-area">
                             <div class="tab-content" id="myTabContent">
-                            {% if article is not empty %}
+
+                                {% if evenement is not empty %}
                                 <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
 
-                                    {% for articles in article %}
+                                    {% for evenements in evenement %}
                                         <!-- Single Blog Post -->
                                         <div class="single-blog-post post-style-4 d-flex align-items-center">
                                             <!-- Post Thumbnail -->
                                             <div class="post-thumbnail">
-                                                <img CLASS="image-evenement-categorie" src="{{ asset('images/product/'~articles.featuredImage) }}" alt="">
+                                                <img CLASS="image-evenement-categorie" src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
                                             </div>
                                             <!-- Post Content -->
                                             <div class="post-content">
-                                                <a href="{{ path('front_article',{'slug': articles.slug, 'id': articles.id}) }}" class="headline">
-                                                    <h5>{{ articles.titre }}</h5>
+                                                <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}" class="headline">
+                                                    <h5>{{ evenements.titre }}</h5>
                                                 </a>
-                                                <p>{{ articles.contenu | summary }}</p>
+                                                <p>{{ evenements.contenu | summary }}</p>
                                                 <!-- Post Meta -->
                                                 <div class="post-meta">
-                                                    <p><a href="#" class="post-author">
-                                                            {{articles.membre.prenom ~' '~articles.membre.nom}}
-                                                        </a>
-                                                        on
-                                                        <a href="#" class="post-date">
-                                                            {{ articles.dateCreation | date('d/m/Y') }}
-                                                        </a>
-                                                    </p>
+                                                    <p><a href="#" class="post-author">Katy Liu</a> on <a href="#" class="post-date">{{ evenements.dateEvenement | date("d M Y") }}</a></p>
                                                 </div>
                                             </div>
                                         </div>
                                     {% endfor %}
-                            {% else %}
+                                    {% else %}
 
                                         <div class="alert alert-danger">
                                             <strong>
-                                                Aucun article pour le moment
+                                                Aucune publication pour le moment
                                             </strong>
                                         </div>
 
-                            {% endif %}
+                                    {% endif %}
 
                                 </div>
                             </div>
@@ -61,7 +67,6 @@
                     </div>
                 </div>
                 <!-- ZONE SIDEBAR -->
-                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
             </div>
         </div>
     </div>

@@ -31,7 +31,10 @@ class ArticleController extends AbstractController
 
     /**
      * Formulaire pour ajouter un Article
-     * @Route("/creer-un-article", name="nouvel_article")
+     * @Route("/creer-un-article", name="article_creation")
+     * @param $request
+     * @Security("has_role('ROLE_ADMIN')")
+     * @return Response | RedirectResponse
      */
     public function newArticle(Request $request)
     {
@@ -104,11 +107,11 @@ class ArticleController extends AbstractController
     /**
      * Formulaire pour éditer un article existant
      * @Route("/editer-un-article/{id<\d+>}",
-     *  name="editer_article")
-     *      Security("article.isAuteur(user)")
-     * @param Article
-     * @param Request
-     * @return Response
+     *  name="article_edition")
+     * @Security("article.isAuteur(user)")
+     * @param $article
+     * @param $request
+     * @return Response | RedirectResponse
      */
     public function editerArticle(Article $article,
                                   Request $request)
@@ -179,10 +182,38 @@ class ArticleController extends AbstractController
             ]);
         }
 
+
+
         # Affichage dans la vue
         return $this->render('article/ajouterArticle.html.twig', [
             'form' => $form->createView()
         ]);
 
     }
+
+
+    /**
+     * Methode de suppression d'article
+     * @param Article $article
+     * @Route("/supprimer-un-article_{id<\d+>}.html",
+     *     name="article_delete")
+     * @return
+     */
+
+    # Suppression d'un evenement en BDD
+    public function deleteArticle(Article $article){
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
+
+
+        # REDIRECTION
+        return $this->redirectToRoute('front_les_articles', [
+            'slug' => $article->getSlug(),
+            'id' => $article->getId()
+        ]);
+
+    }
+
+
 }
