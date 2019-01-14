@@ -29,14 +29,14 @@
         <!-- Widget Derniers articles -->
         <div class="sidebar-widget-area">
             <h5 class="title">Derniers Articles</h5>
-            <div class="widget-content">
+            <div class="widget-content widget-article">
                 <!-- Single Blog Post -->
                 {% for article in articles %}
-                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
+                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post mb-2">
                         <!-- Post Thumbnail -->
-                        <div class="post-thumbnail">
+                        <div class="post-thumbnail ">
                             {% if article.featuredImage is not null  %}
-                            <img src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
+                            <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}"><img class="ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
                             {% else %}
                             <img src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
                             {% endif %}

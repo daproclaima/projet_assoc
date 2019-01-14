@@ -1662,10 +1662,37 @@ Page Evénement
 
 
 
-/* ----------------------------- Styles sur Article(s) -- # DEBUT # ------------*/
+/* ----------------------------- Styles sur Articles -- # DEBUT # ------------*/
 
-.background-article{
-  background-color: #D7FAFF;
+/*.background-article{*/
+  /*background-color: #D7FAFF;*/
+/*}*/
+
+
+.layout-article .collection-blog-post{
+  border-left:0.2rem solid #050308;
+  min-height: 15rem;
+
+}
+
+.layout-article .image-articles{
+
+
+}
+
+
+
+
+
+/*------------------------------ Pour un article------------------------------*/
+
+.layout-article .article-titre:after {
+  background-color: #050308;
+  display: block;
+  height: 0.5rem;
+  margin: 1rem 0 1.25rem;
+  width: 3.2rem;
+  content: "";
 }
 
 .border-photo{
@@ -1676,6 +1703,14 @@ Page Evénement
   margin-right:0rem;
 }
 
+.layout-article .single-blog-content .post-meta.second-part {
+  border-bottom: none;
+  border-top: 0.1rem dotted;
+  border-color: #f1f1f1;
+  margin-bottom: 0;
+  /*margin-top: 30px;*/
+}
+
 .layout-article .lien-edition:hover{
   /*color: #480ce8;*/
   color:#00DDFF;
@@ -1684,24 +1719,58 @@ Page Evénement
   /*color: #480ce8;*/
   color:#FF0D39;
 }
-.layout-article .article-titre:after {
-  background-color: #050308;
-  display: block;
-  height: 0.5rem;
-  margin: 1rem 0 1.25rem;
-  width: 3.2rem;
-  content: "";
+/*----------------------- image de l'article -----------------------------------*/
+
+.publication-image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: none;
 }
 
-.layout-article .single-blog-content .post-meta.second-part {
-  border-bottom: none;
-  border-top: 2px dotted;
-  border-color: #f1f1f1;
-  margin-bottom: 0;
-  margin-top: 30px; }
+.publication-image-overlay .publication-image-overlay-close {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  line-height: 35px;
+  font-size: 20px;
+  color: #eee;
+  text-align: center;
+  cursor: pointer;
+}
+
+.publication-image-overlay img {
+  width: auto;
+  max-width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* -----------------------------    Pour les articles en sidebar ---------------*/
+.widget-article .single-blog-post {
+  min-height:7rem;
+}
+
+
+
 
                             /*#### Seb, le 13-01-2019 ####*/
 /* ----------------------------- Styles sur Article(s)-- // FIN // -------------*/
 .nav-link-categories:active{
   color: darkred;
 }
+
+

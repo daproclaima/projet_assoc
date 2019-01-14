@@ -28,7 +28,7 @@
                             <aside class=" col-10 mx-auto mt-2 mb-2 " >
                                 {% if article.featuredImage is not null %}
                                 <a href="{{ asset('images/product/'~article.featuredImage) }}">
-                                    <img class="border rounded" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
+                                    <img class="border rounded publication-image"  src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
                                 </a>
                                 {#{% else %}#}
                                 {#<div class="post-thumbnail">#}

@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
-    <div class="main-content-wrapper section-padding-25">
+    <div class="main-content-wrapper section-padding-25 layout-article">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-8">
@@ -20,21 +20,21 @@
 
                                     {% for articles in article %}
                                         <!-- Single Blog Post -->
-                                        <div class="single-blog-post post-style-4 d-flex align-items-center">
+                                        <div class="single-blog-post collection-blog-post post-style-4 d-flex align-items-center mb-2">
                                             <!-- Post Thumbnail -->
                                             {% if articles.featuredImage is not null  %}
                                                 <div class="post-thumbnail">
-                                                    <img class="image-evenement-categorie" src="{{ asset('images/product/'~articles.featuredImage) }}" alt="">
+                                                    <a href="{{ path('front_article',{'slug': articles.slug, 'id': articles.id}) }}"><img class="image-articles ml-1" src="{{ asset('images/product/'~articles.featuredImage) }}" alt="{{ articles.titre }}"></a>
                                                 </div>
                                             {% else %}
                                                 <div class="post-thumbnail">
-                                                    <img class="image-evenement-categorie" src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
+                                                    <img class="image-articles" src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
                                                 </div>
                                             {% endif %}
                                             <!-- Post Content -->
                                             <div class="post-content">
                                                 <a href="{{ path('front_article',{'slug': articles.slug, 'id': articles.id}) }}" class="headline">
-                                                    <h5>{{ articles.titre }}</h5>
+                                                    <h5>{{ articles.titre | summary }}</h5>
                                                 </a>
                                                 <p>{{ articles.contenu | summary }}</p>
                                                 <!-- Post Meta -->
