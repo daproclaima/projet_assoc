@@ -69,7 +69,7 @@ class MembreController extends AbstractController
                 'Félicitation, vous pouvez maintenant vous connecter !');
 
             # Redirection
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('security_connexion');
         }
 
         # Affichage dans la vue
@@ -87,13 +87,15 @@ class MembreController extends AbstractController
      */
     public function editMembre(Membre $membre, Request $request)
     {
-        # Création du formulaire avec les information de la BDD
+        # Création du formulaire avec les informations de la BDD
         $form = $this->createForm(MembreFormType::class,$membre)
             ->handleRequest($request);
 
+        $password = $membre->getPassword();
+        dump($password);
         # Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()){
-
+            $membre->setPassword($password);
             # Sauvegarde en BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($membre);
@@ -128,4 +130,39 @@ class MembreController extends AbstractController
         return $this->redirectToRoute("membre_liste");
     }
 
+    /**
+     * @Route("/reset_password/{token}", name="membre_reset_password")
+     * @param Request $request
+     * @param string $token
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        if ($request->isMethod('POST')) {
+            $entityManager = $this->getDoctrine()->getManager();
+            // Récupération de l'utilisateur correspondant au token présent dans l'url
+            $membre = $entityManager->getRepository(Membre::class)->findOneByResetToken($token);
+            /* @var $membre Membre */
+
+            if ($membre === null) {
+                $this->addFlash('danger', 'Token Inconnu');
+                return $this->redirectToRoute('index');
+            }
+
+            // Reset du token et nouveau mot de passe
+            $membre[0]->setResetToken(null);
+            $membre[0]->setPassword($passwordEncoder->encodePassword($membre[0], $request->request->get('password')));
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Mot de passe mis à jour');
+
+            return $this->redirectToRoute('security_connexion');
+        }else {
+
+            return $this->render('security/reset_password.html.twig', ['token' => $token]);
+        }
+
+    }
 }

@@ -5,6 +5,11 @@
 {% block content %}
     {% include 'component/_sliderAccueil.html.twig' %}
     {% include 'component/_flashinfo.html.twig' %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 <div class="main-content-wrapper section-padding-25-0">
     <div class="container">
         <div class="row justify-content-center">

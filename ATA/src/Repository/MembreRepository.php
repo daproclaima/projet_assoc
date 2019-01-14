@@ -19,6 +19,23 @@ class MembreRepository extends ServiceEntityRepository
         parent::__construct($registry, Membre::class);
     }
 
+    public function findOneByResetToken($token)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.resetToken = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findOneByEmail($email)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Membre[] Returns an array of Membre objects
     //  */

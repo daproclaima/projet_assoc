@@ -6,7 +6,7 @@ security:
         in_memory: { memory: ~ }
         # Ensuite, nous devons dire à symfony quelle entité et quelle propriété
         # interroger pour authentifier les utilisateurs. Autrement dit, quelle
-        # est notre table utilisateur et quelle est la colonne username
+        # est notre entité utilisateur et quelle est la propriete username
         membre_provider:
             entity:
                 class: App\Entity\Membre

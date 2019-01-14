@@ -111,6 +111,28 @@ class Membre implements UserInterface
      */
     private $articles;
 
+    /**
+     * @var string le token qui servira lors de l'oubli de mot de passe
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $resetToken;
+
+    /**
+     * @return string
+     */
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * @param string $resetToken
+     */
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
+    }
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -320,4 +342,5 @@ class Membre implements UserInterface
     {
         $this->articles = $articles;
     }
+
 }
