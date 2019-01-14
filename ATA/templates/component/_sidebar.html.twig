@@ -35,12 +35,16 @@
                     <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
+                            {% if article.featuredImage is not null  %}
                             <img src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
+                            {% else %}
+                            <img src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
+                            {% endif %}
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a      href=" {{ path('front_article',{'slug': article.slug , 'id' : article.id}) }}" class="headline">
-                                <h5 class="mb-0">{{ article.titre }}</h5>
+                            <a      href=" {{ path('front_article',{'slug': article.slug , 'id' : article.id}) }}" class="headline" >
+                                <h5 class="mb-0">{{ article.titre | summary }}</h5>
                             </a>
                         </div>
                     </div>

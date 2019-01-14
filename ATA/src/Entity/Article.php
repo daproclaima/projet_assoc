@@ -37,7 +37,7 @@ class Article
 
     /**
      * /**
-     * @ORM\Column(type="string", length=180)
+     * @ORM\Column(type="string", length=180, nullable=true)
      * @Assert\Image(
      *     mimeTypesMessage="Vérifier le format de votre image",
      *     maxSize= "1M", maxSizeMessage="Votre image est trop lourde"

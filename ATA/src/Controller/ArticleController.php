@@ -62,21 +62,24 @@ class ArticleController extends AbstractController
 
             /** @var  UploadedFile $featuredImage */
             $featuredImage = $article->getFeaturedImage();
+            if (null !== $featuredImage) {
 
-            $fileName = $this->slugify($article->getTitre())
-                . '.' . $featuredImage->guessExtension();
+                $fileName = $this->slugify($article->getTitre())
+                    . '.' . $featuredImage->guessExtension();
 
-            try {
-                $featuredImage->move(
-                    $this->getParameter('articles_assets_dir'),
-                    $fileName
-                );
-            } catch (FileException $e) {
+                try {
+                    $featuredImage->move(
+                        $this->getParameter('articles_assets_dir'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                # Modification du nom de l'image
+                $article->setFeaturedImage($fileName);
 
             }
-
-            # Modification du nom de l'image
-            $article->setFeaturedImage($fileName);
 
             # Mise en format du Slug
             $article->setSlug($this->slugify($article->getTitre()));
@@ -208,7 +211,7 @@ class ArticleController extends AbstractController
 
 
         # REDIRECTION
-        return $this->redirectToRoute('front_les_articles', [
+        return $this->redirectToRoute('front_categorie_evenements', [
             'slug' => $article->getSlug(),
             'id' => $article->getId()
         ]);
