@@ -27,11 +27,22 @@ class EvenementRepository extends ServiceEntityRepository
     public function findById()
     {
         return $this->createQueryBuilder('e')
-            ->orderBy('a.id', 'DESC')
+            ->orderBy('e.id', 'DESC')
             ->getQuery()
             ->getResult()
             ;
     }
+
+    # Récuperer tous les événemets par ordre decroissant de date
+    public function findBydate()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.dateEvenement', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
 
     #Récuperer les 3 derniers Evenement
@@ -44,5 +55,6 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 
 }

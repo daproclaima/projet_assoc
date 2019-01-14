@@ -258,7 +258,7 @@ img {
   padding: 50px 0; }
 
 .section-padding-25-0 {
-  padding: 25px 0 0 0; }
+  padding: 25px 0; }
 .section-padding-25{
   padding: 25px 0;
 }
@@ -1658,4 +1658,8 @@ Page Evénement
 }
 .modif:hover{
   color:#007bff;
+}
+
+.nav-link-categories:active{
+  color: darkred;
 }
