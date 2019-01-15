@@ -1660,7 +1660,9 @@ Page Evénement
   color:#007bff;
 }
 
-
+#paypal-button-container{
+  display: none;
+}
 
 /* ----------------------------- Styles sur Article(s) -- # DEBUT # ------------*/
 

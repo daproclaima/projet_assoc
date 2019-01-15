@@ -75,7 +75,12 @@ class MembreController extends AbstractController
         # Affichage dans la vue
         return $this->render('membre/inscription.html.twig',[
                 'form' => $form->createView()
+
+
         ]);
+
+
+
     }
 
     /**
