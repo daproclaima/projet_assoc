@@ -33,13 +33,12 @@
 
                         <a href="{{ path('evenement_delete', {
                             id: evenement.id
-                        }) }}"><small>Supprimer cet Evénement</small></a>
+                        }) }}" data-toggle="modal" data-target="#Modal{{ evenement.id }}"><small>Supprimer cet Evénement</small></a>
 
                     {% endif %}
                         <!-- Post Content -->
                         <a href="#" class="headline">
                             <h2>{{ evenement.titre }}</h2>
-
                         </a>
 
                         <div class="post-content">
@@ -50,25 +49,32 @@
                                 <h5 class="text-affiche-evenement">{{ evenement.contenu | raw }}</h5>
                             </div>
                         </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Modal{{ evenement.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Etes vous certains de vouloir supprimer ce produit
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                    <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
+                                            id: evenement.id
+                                        }) }}">OUI</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal -->
                 </div>
+
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block final_javascripts %}
-    <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha256-SUaao5Q7ifr2twwET0iyXVy0OVnuFJhGVi5E/dqEiLU=" crossorigin="anonymous"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script>
-        CKEDITOR.replace( 'form[contenu]' );
-        $('.dropify').dropify({
-            messages: {
-                default: 'Glissez-d&eacute;posez un fichier ici ou cliquez',
-                replace: 'Glissez-d&eacute;posez un fichier ou cliquez pour remplacer',
-                remove:  'Supprimer',
-                error:   'D&eacute;sol&eacute;, le fichier est trop volumineux'
-            }
-        });
-    </script>
 {% endblock %}
