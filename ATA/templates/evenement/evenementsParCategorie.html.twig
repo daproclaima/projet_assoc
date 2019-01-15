@@ -1,4 +1,5 @@
 {% extends "layout.html.twig" %}
+{% set current = categories.slug %}
 {% block page_title %}
     Catégorie
 {% endblock %}
@@ -18,8 +19,8 @@
                                     <a class="nav-categorie" href="{{ path('front_categories') }}">Tous</a>
                                 </li>
                                 {% for categorie in cats %}
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ current == categorie.slug ? 'active'}}" href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
+                                    <li>
+                                        <a class="nav-link {{ current == categorie.slug ? 'active' }}" href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>

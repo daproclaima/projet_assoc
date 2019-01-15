@@ -19,13 +19,13 @@
                     <div class="post-content">
                         <h5>Adresse</h5>
                         <p class ="col-12 col-lg-8 item-text" id="adresse">
-                            2 Avenue de Eugène Pottier<br>
-                            Trappes, 78190 - FRANCE
+                            {{ contacts.adresse }}<br>
+                            {{ contacts.ville }}, {{ contacts.codePostal }} - FRANCE
                         </p>
                         <h5>Coordonnées</h5>
                         <p class ="col-12 col-lg-8 item-text" id="coordonnees">
-                            Tél: 01 55 48 50 95<br>
-                            Email: administration@ata.fr
+                            Tél: {{ contacts.telephone }}<br>
+                            Email: {{ contacts.email }}
                         </p>
                         {# l'include ci-desous implémente la map google.
                          _test.html.twig est un copié collé de https://developers.google.com/maps/documentation/javascript/adding-a-google-map

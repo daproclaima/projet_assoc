@@ -37,9 +37,12 @@ class FrontController extends AbstractController
      */
     public function contact()
     {
+        $contacts = $this->getDoctrine()->getRepository(Contact::class)->find(1);
 
         #Rendu de la vue
-        return $this->render('front/contact.html.twig');
+        return $this->render('front/contact.html.twig', [
+            'contacts' => $contacts
+            ]);
     }
 
     /**
