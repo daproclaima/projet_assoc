@@ -20,11 +20,11 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/ajouter-mes-coordonees",
-     *     name="ccoordonees_ajout")
+     *     name="coordonees_ajout")
      * @param Request $request
      * @return Response
      */
-    public function inscription(Request $request)
+    public function ajoutContact(Request $request)
     {
         # Création d'un utilisateur
         $contact = new Contact();
@@ -54,4 +54,43 @@ class ContactController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * @Route("/editer-mes-coordonees",
+     *     name="edit_contact")
+     * @param Request $request
+     * @return Response
+     */
+    public function editContact(Contact $contact, Request $request)
+    {
+
+        # Création du Formulaire
+        $form = $this->createForm(ContactFormType::class, $contact)
+            ->handleRequest($request);
+
+
+        # Si le formulaire est soumis et valide
+        if($form->isSubmitted() && $form->isValid()){
+
+        # Sauvegadre en BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($contact);
+        $em->flush();
+
+        # NOTIFICATION
+        $this->addFlash('notice',
+            'Félicitations, votre article a été édité !');
+
+        # REDIRECTION
+        return $this->redirectToRoute('front_contact');
+
+        }
+
+        #affichage dans la vue
+        return $this->render('contact/formContact.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }
