@@ -59,7 +59,7 @@ class ContactFormType extends AbstractType
             ])
 
             ->add('Submit',SubmitType::class,[
-                'label' => "Ajouter"
+                'label' => "Editer mes coordonées"
             ]);
     }
     public function configureOptions(OptionsResolver $resolver)
