@@ -90,37 +90,53 @@ class MembreController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-//    public function editMembre(Membre $membre, Request $request)
-//    {
-//        # Création du formulaire avec les informations de la BDD
-//        $form = $this->createForm(MembreFormType::class,$membre)
+    public function editMembre(Membre $membre, Request $request)
+    {
+        $password = $membre->getPassword();
+        # Création du formulaire avec les informations de la BDD
+//        $form = $this->createForm(MembreFormType::class,[
+//            'prenom' => $membre->getPrenom(),
+//            'nom' => $membre->getNom(),
+//            'email' => $membre->getEmail(),
+//            'telephone' => $membre->getTelephone(),
+//            'adresse' => $membre->getAdresse(),
+//            'codePostal' => $membre->getCodePostal(),
+//            'ville' => $membre->getVille()
+//        ])
 //            ->handleRequest($request);
+
+        $form = $this->createForm(MembreFormType::class, $membre)
+            ->handleRequest($request);
+
+        # Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()){
+die('test');
+//            $data = $form->getData();
 //
-//        $password = $membre->getPassword();
-//        //dump($password);
-//        # Si le formulaire est soumis et valide
-//        if ($form->isSubmitted() && $form->isValid()){
-//            $membre->setPassword($password);
-//            # Sauvegarde en BDD
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($membre);
-//            $em->flush();
-//
-//            # Notification
-//            $this->addFlash('notice',
-//                'Membre modifié');
-//
-//            # Redirection
+//            # FIXME : Comment gérer la validation ?
+//            $membre->setPrenom($data['prenom']);
+
+            $membre->setPassword($password);
+
+            # Sauvegarde en BDD
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            # Notification
+            $this->addFlash('notice',
+                'Membre modifié');
+
+            # Redirection
 //            return $this->redirectToRoute('membre',[
 //                'membre' => $membre
 //            ]);
-//        }
-//
-//        # Affichage dans la vue
-//        return $this->render('membre/inscription.html.twig',[
-//            'form' => $form->createView()
-//        ]);
-//    }
+        }
+
+        # Affichage dans la vue
+        return $this->render('membre/inscription.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 
     /**
      * @Route("/supprimer-un-membre/{id<\d+>}.html", name="membre_supprimer")

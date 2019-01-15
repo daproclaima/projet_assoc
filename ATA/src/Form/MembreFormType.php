@@ -67,7 +67,8 @@ class MembreFormType extends AbstractType
        # Le formulaire s'attends à recevoir des données de type Membre
        # Il s'agit d'une sécurité suplémentaire
        $resolver->setDefaults([
-           'data_class' => Membre::class
+           'data_class' => Membre::class,
+           'mapped' => false
        ]);
     }
 
