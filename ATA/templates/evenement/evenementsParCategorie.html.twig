@@ -1,8 +1,9 @@
 {% extends "layout.html.twig" %}
-{% set active = categories.slug %}
 {% block page_title %}
     Catégorie
 {% endblock %}
+{% set current = categories.slug %}
+{% set active = 'Categorie' %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
     <div class="main-content-wrapper section-padding-25">
@@ -17,8 +18,8 @@
                                     <a class="nav-categorie" href="{{ path('front_categories') }}">Tous</a>
                                 </li>
                                 {% for categorie in cats %}
-                                    <li {{ active == categorie.slug ? 'class="current"'}}>
-                                        <a class="nav-link" href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ current == categorie.slug ? 'active'}}" href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>

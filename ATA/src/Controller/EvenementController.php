@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EvenementFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
@@ -23,6 +24,7 @@ class EvenementController extends AbstractController
     use HelperTrait;
     /**
      * @Route("/creer-un-evenement", name="creation_evenement")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newEvenement(Request $request)
     {
@@ -96,6 +98,7 @@ class EvenementController extends AbstractController
      * Formulaire Pour editer un Evenement
      * @Route("/editer-un-evenemnt/{id<\d+>}",
      *     name="evenement_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editEvenement(Evenement $evenement, Request $request)
     {
@@ -186,6 +189,7 @@ class EvenementController extends AbstractController
      * @Route("/supprimer-un-evenement/{id<\d+>}",
      *     name="evenement_delete")
      * @return
+     * @Security("has_role('ROLE_ADMIN')")
      */
     
     # suppression d'un evenement en BDD

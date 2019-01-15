@@ -2,7 +2,7 @@
 {% block page_title %}
     Inscription
 {% endblock %}
-
+{% set active = 'Inscription' %}
 {% block content %}
 <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
 <div class="main-content-wrapper section-padding-25">
@@ -22,7 +22,7 @@
                 {{ form(form,{attr:{novalidate: 'novalidate'}}) }}
 
 
-                    <div id="paypal-button-container" class="hidden"></div>
+                    {#<div id="paypal-button-container" class="hidden"></div>#}
 
 
             </div>

@@ -2,6 +2,7 @@
 {% block page_title %}
     Liste des adhérants
 {% endblock %}
+{% set active = 'Admin' %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
     <div class="main-content-wrapper section-padding-25">
@@ -25,7 +26,7 @@
                                 <th scope="col">Code postal</th>
                                 <th scope="col">Ville</th>
                                 <th scope="col">Mode de paiement</th>
-                                <th scope="col">Modifier</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Supprimer</th>
                             </tr>
                             </thead>
@@ -43,15 +44,7 @@
                                     <td>{{ unMembre.codePostal }}</td>
                                     <td>{{ unMembre.ville }}</td>
                                     <td>{{ unMembre.paiement }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ path('membre_edit', {
-                                            id: unMembre.id
-                                        }) }}">
-                                            <span class="modif">
-                                                <i class="fas fa-wrench modif"></i>
-                                            </span>
-                                        </a>
-                                    </td>
+                                    <td>{{ unMembre.roles[0] }}</td>
                                     <td class="text-center">
                                         <a href="{{ path('membre_supprimer', {
                                             id: unMembre.id

@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,7 @@ class ContactController extends AbstractController
      *     name="coordonees_ajout")
      * @param Request $request
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function ajoutContact(Request $request)
     {
@@ -61,6 +63,7 @@ class ContactController extends AbstractController
      *     name="edit_contact")
      * @param Request $request
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editContact(Contact $contact, Request $request)
     {

@@ -1,7 +1,8 @@
 {% extends "layout.html.twig" %}
 {% block page_title %}
-    Galerie
+    Connexion
 {% endblock %}
+{% set active = 'Connexion' %}
 {% block content %}
 <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
 <div class="main-content-wrapper section-padding-25">
@@ -24,6 +25,7 @@
                 {% endfor %}
 
                 {{ form(form) }}
+                <a href="{{ path("security_password") }}">Mot de passe oublié</a>
             </div>
         </div>
     </div>
