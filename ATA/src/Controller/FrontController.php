@@ -267,7 +267,19 @@ class FrontController extends AbstractController
         ]);
     }
 
+    public function sliderAccueil()
+    {
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
+        # Récupérer le 3 derniers évènements
+        $evenements = $repository->findLatestEvenements();
 
+        #Rendu de la vue
+        return $this->render('component/_sliderAccueil.html.twig', [
+            'evenements' => $evenements
+        ]);
+    }
 
 
 }
