@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Photos;
 use App\Form\GalerieFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -24,6 +25,7 @@ class GalerieController extends AbstractController
     /**
      * @Route("/ajouter-des-photos", name="galerie_ajoutPhoto")
      * @param Request $request
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function ajoutPhoto(Request $request)
     {

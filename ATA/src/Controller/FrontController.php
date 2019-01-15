@@ -37,9 +37,12 @@ class FrontController extends AbstractController
      */
     public function contact()
     {
+        $contacts = $this->getDoctrine()->getRepository(Contact::class)->find(1);
 
         #Rendu de la vue
-        return $this->render('front/contact.html.twig');
+        return $this->render('front/contact.html.twig', [
+            'contacts' => $contacts
+            ]);
     }
 
     /**
@@ -264,7 +267,19 @@ class FrontController extends AbstractController
         ]);
     }
 
+    public function sliderAccueil()
+    {
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
+        # Récupérer le 3 derniers évènements
+        $evenements = $repository->findLatestEvenements();
 
+        #Rendu de la vue
+        return $this->render('component/_sliderAccueil.html.twig', [
+            'evenements' => $evenements
+        ]);
+    }
 
 
 }

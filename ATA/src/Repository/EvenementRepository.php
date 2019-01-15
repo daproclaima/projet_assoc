@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class EvenementRepository extends ServiceEntityRepository
 {
-    const MAX_RESULTS = 1;
+    const MAX_RESULTS = 3;
 
 
     public function __construct(RegistryInterface $registry)

@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,7 @@ class ContactController extends AbstractController
      *     name="coordonees_ajout")
      * @param Request $request
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function ajoutContact(Request $request)
     {
@@ -61,9 +63,12 @@ class ContactController extends AbstractController
      *     name="edit_contact")
      * @param Request $request
      * @return Response
+     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function editContact(Contact $contact, Request $request)
+    public function editContact(Request $request)
     {
+        # On récupére l'id du contact qui seras toujour le 1, car on auras toujours qu'un contact pour l'association
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->find(1);
 
         # Création du Formulaire
         $form = $this->createForm(ContactFormType::class, $contact)

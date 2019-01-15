@@ -15,42 +15,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="hero-post-slide">
+                        {% for unEvenement in evenements %}
                         <!-- Slide -->
                         <div class="single-slide d-flex align-items-center">
                             <div class="post-number">
-                                <p>1</p>
+                                <p>{{ loop.index }}</p>
                             </div>
                             <div class="post-title">
-                                <a href="single-blog.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex</a>
+                                <a href="{{ path('front_evenement',{'categorie':unEvenement.categories.slug, 'slug': unEvenement.slug, 'id': unEvenement.id}) }}">{{unEvenement.titre}} | {{ unEvenement.dateEvenement | date("d M Y") }}</a>
                             </div>
                         </div>
-                        <!-- Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-number">
-                                <p>2</p>
-                            </div>
-                            <div class="post-title">
-                                <a href="single-blog.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex</a>
-                            </div>
-                        </div>
-                        <!-- Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-number">
-                                <p>3</p>
-                            </div>
-                            <div class="post-title">
-                                <a href="single-blog.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex</a>
-                            </div>
-                        </div>
-                        <!-- Slide -->
-                        <div class="single-slide d-flex align-items-center">
-                            <div class="post-number">
-                                <p>4</p>
-                            </div>
-                            <div class="post-title">
-                                <a href="single-blog.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex</a>
-                            </div>
-                        </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>

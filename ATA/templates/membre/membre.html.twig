@@ -2,6 +2,7 @@
 {% block page_title %}
     Liste des adhérants
 {% endblock %}
+{% set active = 'Admin' %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
     <div class="main-content-wrapper section-padding-25">
@@ -25,7 +26,7 @@
                                 <th scope="col">Code postal</th>
                                 <th scope="col">Ville</th>
                                 <th scope="col">Mode de paiement</th>
-                                <th scope="col">Modifier</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Supprimer</th>
                             </tr>
                             </thead>
@@ -43,25 +44,40 @@
                                     <td>{{ unMembre.codePostal }}</td>
                                     <td>{{ unMembre.ville }}</td>
                                     <td>{{ unMembre.paiement }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ path('membre_edit', {
-                                            id: unMembre.id
-                                        }) }}">
-                                            <span class="modif">
-                                                <i class="fas fa-wrench modif"></i>
-                                            </span>
-                                        </a>
-                                    </td>
+                                    <td>{{ unMembre.roles[0] }}</td>
                                     <td class="text-center">
                                         <a href="{{ path('membre_supprimer', {
                                             id: unMembre.id
-                                        }) }}">
+                                        }) }}" data-toggle="modal" data-target="#Modal{{ unMembre.id }}">
                                             <span class="sup">
                                                 <i class="fas fa-trash-alt"></i>
                                             </span>
                                         </a>
                                     </td>
                                 </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="Modal{{ unMembre.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Etes vous certains de vouloir supprimer ce produit
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                                <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('membre_supprimer', {
+                                                        id: unMembre.id
+                                                    }) }}">OUI</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin Modal -->
                             {% endfor %}
                             </tbody>
                         </table>
