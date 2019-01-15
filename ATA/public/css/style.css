@@ -1776,3 +1776,11 @@ Page Evénement
 }
 
 
+/* ----------------------------- Styles sur Page Contact -- # DEBUT # ------------*/
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+}
+                            /*#### Seb, le 15-01-2019 ####*/
+/* ----------------------------- Styles sur Contact --     // FIN // -------------*/
+
