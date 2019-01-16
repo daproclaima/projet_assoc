@@ -2,76 +2,73 @@
 /**
  * Created by PhpStorm.
  * User: boussaid
- * Date: 14/01/2019
- * Time: 00:53
+ * Date: 16/01/2019
+ * Time: 16:02
  */
 
 namespace App\Form;
 
 
-use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('adresse', TextType::class, [
-        'label' => "Adresse de l'association",
-        'attr' => [
-            'placeholder' => "Saisissez l'adresse"
-        ]
-        ])
 
-                ->add('ville', TextType::class, [
-            'label' => "Ville",
-            'attr' => [
-                'placeholder' => "Saisissez la ville"
-            ]
+    {
+        $builder
+            ->add('nom', TextType::class, [
+                'label' => "Nom",
+                'attr' => [
+                    'placeholder' => "Saisissez votre nom"
+                ]
             ])
 
-            ->add('codePostal', IntegerType::class, [
-                'label' => "Code postal",
+            ->add('prenom', TextType::class, [
+                'label' => "Prénom",
                 'attr' => [
-                    'placeholder' => "Saisissez le code postal"
+                    'placeholder' => "Saisissez votre prénom"
                 ]
             ])
 
             ->add('email', EmailType::class, [
                 'label' => "E-mail",
                 'attr' => [
-                    'placeholder' => "Saisissez l'adresse e-mail de l'association"
+                    'placeholder' => "Saisissez votre e-mail"
                 ]
             ])
-
-            ->add('telephone', TextType::class, [
-                'label' => "Téléphone",
+            ->add('objet', TextType::class, [
+                'label' => "Objet",
                 'attr' => [
-                    'placeholder' => "saisissez le numero de téléphone de l'association"
+                    'placeholder' => "l'objet de votre contact"
                 ]
             ])
-
+            ->add('message', TextareaType::class, [
+                'label' => "Message",
+                'attr' => [
+                    'placeholder' => "Votre message"
+                ]
+            ])
             ->add('Submit',SubmitType::class,[
-                'label' => "Editer mes coordonées"
-            ]);
+                'label' => "Envoyer"
+            ])
+        ;
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Contact::class
-        ]);
+        $resolver->setDefault('data_class', null);
     }
+
 
     public function getBlockPrefix()
     {
         return 'form';
     }
-
 }

@@ -17,6 +17,16 @@
                         </div>
 
                         <div class="post-content">
+                            {% for message in app.flashes('notice') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <h5>Formulaire de contact</h5>
+                            {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
+                        </div>
+
+                        <div class="post-content">
                             <h5>Adresse</h5>
                             <p class ="col-12 col-lg-8 item-text" id="adresse">
                                 {{ contacts.adresse }}<br>
@@ -32,6 +42,8 @@
                              _googleMap.html.twig est une version factorisée mais non oppérationelle#}
                             {% include 'component/_test.html.twig' %}
                         </div>
+
+                        {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
 
                     </section>
                 </div>

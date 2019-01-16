@@ -21,13 +21,13 @@
                                 <th scope="col">Nom</th>
                                 <th scope="col">Prénom</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Téléphone</th>
+                                <th scope="col">Tél</th>
                                 <th scope="col">Adresse</th>
-                                <th scope="col">Code postal</th>
+                                <th scope="col">CP</th>
                                 <th scope="col">Ville</th>
-                                <th scope="col">Mode de paiement</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Supprimer</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Supp</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,8 +43,16 @@
                                     <td>{{ unMembre.adresse }}</td>
                                     <td>{{ unMembre.codePostal }}</td>
                                     <td>{{ unMembre.ville }}</td>
-                                    <td>{{ unMembre.paiement }}</td>
                                     <td>{{ unMembre.roles[0] }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ path('membre_edit', {
+                                            id: unMembre.id
+                                        }) }}">
+                                            <span class="modif">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ path('membre_supprimer', {
                                             id: unMembre.id
@@ -54,6 +62,7 @@
                                             </span>
                                         </a>
                                     </td>
+
                                 </tr>
                                 <!-- Modal -->
                                 <div class="modal fade" id="Modal{{ unMembre.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

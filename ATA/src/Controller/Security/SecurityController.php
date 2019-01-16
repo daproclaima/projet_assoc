@@ -87,7 +87,7 @@ class SecurityController extends AbstractController
             $url = $this->generateUrl('membre_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
 
             // Envoie du mail avec l'url contenant le token
-            $message = (new Swift_Message('Forgot Password'))
+            $message = (new Swift_Message('Mot de passe oublié'))
                 ->setFrom('test.ATA@test.fr')
                 ->setTo($membre[0]->getEmail())
                 ->setBody(

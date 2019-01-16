@@ -10,7 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Contact;
-use App\Form\ContactFormType;
+use App\Form\EditeContactFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,13 +26,13 @@ class ContactController extends AbstractController
      * @return Response
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function ajoutContact(Request $request)
+    public function ajoutCoordonees(Request $request)
     {
         # Création d'un utilisateur
         $contact = new Contact();
 
         #Création du formulaire MembreFormType
-        $form = $this->createForm(ContactFormType::class,$contact)
+        $form = $this->createForm(EditeContactFormType::class,$contact)
             ->handleRequest($request);
 
         # Soumission du formulaire
@@ -52,7 +52,7 @@ class ContactController extends AbstractController
         }
 
         # Affichage dans la vue
-        return $this->render('contact/formContact.html.twig',[
+        return $this->render('front/contact.html.twig',[
             'form' => $form->createView()
         ]);
     }
@@ -65,13 +65,13 @@ class ContactController extends AbstractController
      * @return Response
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function editContact(Request $request)
+    public function editCoordonees(Request $request)
     {
         # On récupére l'id du contact qui seras toujour le 1, car on auras toujours qu'un contact pour l'association
         $contact = $this->getDoctrine()->getRepository(Contact::class)->find(1);
 
         # Création du Formulaire
-        $form = $this->createForm(ContactFormType::class, $contact)
+        $form = $this->createForm(EditeContactFormType::class, $contact)
             ->handleRequest($request);
 
 
