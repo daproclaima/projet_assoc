@@ -17,10 +17,18 @@
                 <ul class="my-1 row">
                     <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Mentions légales</a></li>
                     <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Carte du site web</a></li>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Informations de contact</a></li>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Liens vers les pages principales</a></li>
+                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="{{path ('front_contact')}}">Informations de contact</a></li>
+                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4">
+                        <ul>
+                            <li><a href="{{ path('front_les_articles') }}">Info</a></li>
+                            <li><a href="{{ path('front_categories')}}">Evénements</a></li>
+                            <li><a href="{{ path('front_galerie') }}">Galerie</a></li>
+                            <li><a href="{{ path('front_apropos') }}">A propos</a></li>
+                            <li><a href="{{ path('index') }}">Accueil</a></li>
+                        </ul>
                     <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Télécharger le formulaire d'inscription</a></li>
                 </ul>
+            </div>
         </div>
     </div>
 </footer>
