@@ -184,7 +184,7 @@ class FrontController extends AbstractController
      * @return RedirectResponse
      */
 //
-    public function article($slug, $id, Article $article = null) // par défaut vaut null
+    public function article($slug, Article $article = null) // par défaut vaut null
     {
 //        #####################################
 //               REQUETE TEST DE RECUP
@@ -197,7 +197,7 @@ class FrontController extends AbstractController
 //            [    'article' => $article ]);
 //        #####################################
 
-        #on s'assure que l'article existe
+        #on s'assure que l'article existe. Si ce n'est pas le cas, on renvoie sur front_les_articles
         if(null === $article){
 
             return $this->redirectToRoute('front_les_articles',[],Response::HTTP_MOVED_PERMANENTLY);

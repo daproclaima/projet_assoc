@@ -51,15 +51,15 @@
                             </p>
                         </div>
                         <!-- Post Content -->
-                        <div class="single-blog-post post-content single-blog-content mt-3 mb-5 ">
+                        <div class="single-blog-post post-content single-blog-content ">
 
-                            <div class="col-12 py-3">
+                            <div class="col-12 pt-3">
                                 {{ article.contenu | raw }}
                             </div>
 
                             {# bouton delete à afficher si admin et auteur #}
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <div class = "col-12 ml-0">
+                                <div class = "col-12 ">
                                     <a class="lien-edition" href="{{ path('article_edition', {id: article.id}) }}">
                                         <small>Editer cet Article</small>
                                         <i class="fas fa-pencil-alt fa-sm"></i>
