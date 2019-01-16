@@ -1688,6 +1688,14 @@ Page Evénement
 
 
 /*------------------------------ Pour un article------------------------------*/
+.layout-article .modal{
+  position:absolute;
+}
+
+.layout-article .modal-content {
+
+}
+
 
 .layout-article .article-titre:after {
   background-color: #050308;
@@ -1697,6 +1705,7 @@ Page Evénement
   width: 3.2rem;
   content: "";
 }
+
 
 .border-photo{
   box-sizing: border-box;
@@ -1772,6 +1781,15 @@ Page Evénement
 
                             /*#### Seb, le 13-01-2019 ####*/
 /* ----------------------------- Styles sur Article(s)-- // FIN // -------------*/
+
+/* ----------------------------- Styles sur Contact --- # DEBUT # --------------*/
+#map {
+  height: 20rem;
+  width: 100%;
+}
+                            /*#### Seb, le 15-01-2019 ####*/
+/* ----------------------------- Styles sur page Contact -- // FIN // ----------*/
+
 .nav-link-categories:active{
   color: darkred;
 }

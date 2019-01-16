@@ -200,21 +200,18 @@ class ArticleController extends AbstractController
      * @param Article $article
      * @Route("/supprimer-un-article_{id<\d+>}.html",
      *     name="article_delete")
-     * @return
+     * @return RedirectResponse
      */
 
-    # Suppression d'un evenement en BDD
+    # Suppression d'un article en BDD
     public function deleteArticle(Article $article){
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($article);
         $em->flush();
 
-
         # REDIRECTION
-        return $this->redirectToRoute('front_categorie_evenements', [
-            'slug' => $article->getSlug(),
-            'id' => $article->getId()
-        ]);
+        return $this->redirectToRoute('front_les_articles', []);
 
     }
 
