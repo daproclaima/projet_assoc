@@ -15,6 +15,7 @@ use App\Entity\Article;
 use App\Entity\Photos;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -147,12 +148,16 @@ class FrontController extends AbstractController
     ######################### FIN CONTROLEURS HOCINE #######################################################
 
 
+
+    ######################## DEBUT CONTROLLERS SEBASTIEN ###################################
+
     /**
      * Affiche LES articles
      * @Route("/articles",name="front_les_articles" )
      */
     public function lesArticles()
     {
+
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
@@ -171,13 +176,15 @@ class FrontController extends AbstractController
      * @Route("/{slug<[a-zA-Z0-9\-_\/]+>}_{id<\d+>}.html",
      *     name="front_article")
      *
-     * @param Article $article
+     * @param Article | null $article
      * @param $slug
      * @param id
+     * @param Article|null $article
      * @return \Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse
      */
 //
-    public function article($slug, article $article = null) // par défaut vaut null
+    public function article($slug, Article $article = null) // par défaut vaut null
     {
 //        #####################################
 //               REQUETE TEST DE RECUP
@@ -190,11 +197,12 @@ class FrontController extends AbstractController
 //            [    'article' => $article ]);
 //        #####################################
 
-        #on s'assure que l'article ne soit pas existant
+        #on s'assure que l'article existe
         if(null === $article){
 
-            return $this->redirectToRoute('index',[],\Symfony\Component\HttpFoundation\Response::HTTP_MOVED_PERMANENTLY);
+            return $this->redirectToRoute('front_les_articles',[],Response::HTTP_MOVED_PERMANENTLY);
         }
+
 
         #verification du SLUG
         if($article->getSlug() !== $slug){
@@ -211,6 +219,10 @@ class FrontController extends AbstractController
 
     }
 
+
+
+
+    ######################## FIN CONTROLLERS SEBASTIEN ###################################
 
     /**
      * @Route("/apropos", name="front_apropos")
