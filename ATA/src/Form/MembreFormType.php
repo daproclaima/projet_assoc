@@ -67,9 +67,7 @@ class MembreFormType extends AbstractType
             ->add('ville',TextType::class,[
                 'label' => 'Ville',
                 'attr' => ['placeholder' => "Paris"]
-            ])
-
-            ->add('Submit',SubmitType::class,[
+            ])->add('Submit',SubmitType::class,[
                 'label' => "Je m'inscris"
             ])
 
