@@ -13,7 +13,6 @@ use App\Entity\Membre;
 use App\Membre\Listener\MembrePasswordFieldSubscriber;
 use App\Membre\MembreRequest;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -77,11 +76,11 @@ class MembreFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-       # On dit au formulaire qu'il va recevoir des données de type MembreRequest
+        # On dit au formulaire qu'il va recevoir des données de type MembreRequest
 
-       $resolver->setDefaults([
-           'data_class' => MembreRequest::class
-       ]);
+        $resolver->setDefaults([
+            'data_class' => MembreRequest::class
+        ]);
     }
 
 }
