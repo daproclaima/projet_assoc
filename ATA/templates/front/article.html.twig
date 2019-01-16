@@ -12,7 +12,7 @@
     <div class="main-content-wrapper section-padding-25 layout-article">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-8">
+                <div class="col-12 col-md-9 col-lg-8">
 
 
                     <div class="mx-lg-auto">
@@ -65,19 +65,38 @@
                                         <i class="fas fa-pencil-alt fa-sm"></i>
 
                                     </a>
-                                    <a class="lien-suppression" href="{{ path('article_delete', {id: article.id}) }}">
-                                        <small class="ml-5">Supprimer cet Article</small>
+                                    <a class="lien-suppression" href="{{ path('article_delete', {id: article.id}) }}" data-toggle="modal" data-target="#Modal{{ article.id }}">
+                                        <small class="ml-5" >Supprimer cet Article</small>
                                         <i class="far fa-trash-alt fa-sm"></i>
                                     </a>
                                 </div>
 
+
                             {% endif %}
-                            {#<blockquote class="mb-30">#}
-                                {#<h6>Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex. Duis lacinia metus vel eros cursus pretium eget.</h6>#}
-                                {#<div class="post-author">#}
-                                    {#<p>Robert Morgan</p>#}
-                                {#</div>#}
-                            {#</blockquote>#}
+                            <!-- Modal -->
+                            <div class="modal fade" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Etes vous certains de vouloir supprimer ce produit?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                            <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
+                                                    id: article.id
+                                                }) }}">OUI</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin Modal -->
+
 
                             <!-- Post Meta -->
                             <div class="post-meta second-part col-12 ml-0">
