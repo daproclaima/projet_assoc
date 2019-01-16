@@ -50,13 +50,6 @@ class MembreFormType extends AbstractType
             ])->add('ville',TextType::class,[
                 'label' => 'Ville',
                 'attr' => ['placeholder' => "Paris"]
-            ])->add('paiement',ChoiceType::class,[
-                'placeholder' => 'Choix du moyen de paiement',
-                'choices' => [
-                    'Paypal' => 'paypal',
-                    'Cheque' => 'cheque',
-                    'Espèce' => 'espece'
-                ]
             ])->add('Submit',SubmitType::class,[
                 'label' => "Je m'inscris"
             ]);

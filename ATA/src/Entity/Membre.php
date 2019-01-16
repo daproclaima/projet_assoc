@@ -93,10 +93,6 @@ class Membre implements UserInterface
      */
     private $roles = [];
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $paiement;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paiement",
