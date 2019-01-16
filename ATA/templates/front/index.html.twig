@@ -4,10 +4,10 @@
 {% endblock %}
 {% set active = 'Accueil' %}
 {% block content %}
-    {#{% include 'component/_sliderAccueil.html.twig' %}#}
-    {{ render(controller('App\\Controller\\FrontController::sliderAccueil')) }}
-    {#{% include 'component/_flashinfo.html.twig' %}#}
 
+
+    {% if (is_granted("IS_AUTHENTICATED_FULLY")) %}
+        {{ render(controller('App\\Controller\\FrontController::sliderAccueil')) }}
 <div class="main-content-wrapper section-padding-25-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -62,5 +62,24 @@
         </div>
     </div>
 </div>
+    {% else %}
+        <div class="hero-area height-100-vh bg-img background-overlay" style="background-image: url({{ asset('images/balade-familiale.jpeg') }});">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <div class="col-12">
+                        {% include 'component/_flashinfo.html.twig' %}
+                    </div>
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="single-blog-title text-center">
+
+                            <div class="post-cta"><a href="#">travel</a></div>
+                            <h3>How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
 

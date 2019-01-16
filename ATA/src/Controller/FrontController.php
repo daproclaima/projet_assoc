@@ -16,7 +16,6 @@ use App\Entity\Article;
 use App\Entity\Photos;
 use App\Form\ContactFormType;
 use App\Repository\ArticleRepository;
-use http\Env\Request;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
