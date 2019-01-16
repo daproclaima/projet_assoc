@@ -54,7 +54,8 @@
         $('.hero-post-slide').owlCarousel({
             items: 3,
             margin: 30,
-            loop: true,
+            // loop: true,
+            // Seb https://github.com/OwlCarousel2/OwlCarousel2/issues/539 plugins.js:33 Uncaught TypeError: Cannot read property 'clone' of undefineat e.run (plugins.js:33)at Object.f [as run] (jquery-2.2.4.min.js:2)at e.update (plugins.js:33)at e.<anonymous> (plugins.js:33)at f (jquery-2.2.4.min.js:2)
             dots: false,
             autoplay: true,
             autoplayTimeout: 3500, // Autoplay Timeout 1s = 1000ms
