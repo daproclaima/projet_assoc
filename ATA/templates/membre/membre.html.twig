@@ -22,10 +22,7 @@
                                 <th scope="col">Prénom</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Tél</th>
-                                <th scope="col">Adresse</th>
-                                <th scope="col">CP</th>
-                                <th scope="col">Ville</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Adhésion</th>
                                 <th scope="col">Modifier</th>
                                 <th scope="col">Supp</th>
                             </tr>
@@ -40,10 +37,16 @@
                                     <td>{{ unMembre.prenom }}</td>
                                     <td>{{ unMembre.email }}</td>
                                     <td>{{ unMembre.telephone }}</td>
-                                    <td>{{ unMembre.adresse }}</td>
-                                    <td>{{ unMembre.codePostal }}</td>
-                                    <td>{{ unMembre.ville }}</td>
-                                    <td>{{ unMembre.roles[0] }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ path('index', {
+                                            id: unMembre.id
+                                        }) }}">
+                                            <span class="modif">
+                                                <i class="fas fa-sync"></i>
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ path('membre_edit', {
                                             id: unMembre.id
