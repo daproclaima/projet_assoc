@@ -1,6 +1,10 @@
 {% extends "layout.html.twig" %}
 {% block page_title %}
-    Inscription
+    {% if app.request.requestUri == path('membre_inscription') %}
+        Inscription
+    {% else %}
+        Modification
+    {% endif %}
 {% endblock %}
 {% set active = 'Inscription' %}
 {% block content %}
@@ -9,8 +13,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
+{#{{ dump(app.request.requestUri)}}#}
                 <h2>
-                    Inscription
+                    {% if app.request.requestUri == path('membre_inscription') %}
+                        Inscription
+                    {% else %}
+                        Modification
+                    {% endif %}
                 </h2>
                 <hr>
                 {% for message in app.flashes('notice') %}
@@ -21,104 +30,9 @@
                 {# L'option novalidate permet de supprimer la validation html5#}
                 {{ form(form,{attr:{novalidate: 'novalidate'}}) }}
 
-
-                    <div id="paypal-button-container" class="hidden"></div>
-
-
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
 
-{% block final_javascripts %}
-    <script>
-
-        $("select").change(function () {
-
-            var paiement = "";
-
-            $("select option:selected").each(function () {
-                paiement = $(this).text();
-
-                console.log(paiement);
-
-                if(paiement === 'Paypal'){
-                    $('#paypal-button-container').show();
-
-                }else{
-                    $('#paypal-button-container').hide();
-                }
-            });
-
-
-        });
-
-
-    </script>
-
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
-    <script>
-
-        // Render the PayPal button
-        paypal.Button.render({
-// Set your environment
-            env: 'sandbox', // sandbox | production
-
-// Specify the style of the button
-            style: {
-                layout: 'vertical',  // horizontal | vertical
-                size:   'medium',    // medium | large | responsive
-                shape:  'rect',      // pill | rect
-                color:  'gold'       // gold | blue | silver | white | black
-            },
-
-// Specify allowed and disallowed funding sources
-//
-// Options:
-// - paypal.FUNDING.CARD
-// - paypal.FUNDING.CREDIT
-// - paypal.FUNDING.ELV
-            funding: {
-                allowed: [
-                    paypal.FUNDING.CARD,
-                    paypal.FUNDING.CREDIT
-                ],
-                disallowed: []
-            },
-
-// Enable Pay Now checkout flow (optional)
-            commit: true,
-
-// PayPal Client IDs - replace with your own
-// Create a PayPal app: https://developer.paypal.com/developer/applications/create
-            client: {
-                sandbox: 'AS9MxbIjL9tR1J9AYMYx3WYt8DRYxg6h8e7c9VzSDh6Uhdvu4yf6iHVqih3Cfk9aYfxsSNqAw24O_iCm',
-                production: '<insert production client id>'
-            },
-
-            payment: function (data, actions) {
-                return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                amount: {
-                                    total: '20',
-                                    currency: 'EUR'
-                                }
-                            }
-                        ]
-                    }
-                });
-            },
-
-            onAuthorize: function (data, actions) {
-                return actions.payment.execute()
-                    .then(function () {
-                        window.alert('Payment Complete!');
-                    });
-            }
-        }, '#paypal-button-container');
-    </script>
-{% endblock %}

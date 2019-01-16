@@ -318,6 +318,9 @@ img {
 .logo-f{
   width: 100px;
 }
+.logo-profil{
+  width: 12rem;
+}
 .items-connexion{
   margin-left: 3rem;
 }
@@ -1775,4 +1778,17 @@ Page Evénement
   color: darkred;
 }
 
+/* Profil*/
+.card-body .btn-info{
+  width: 100%;
+}
+.card .card-body ul li{
+  line-height: 3rem;
+}
+.card-body .btn-info{
+  font-size: 1rem;
+}
+.card-body .btn-info:hover{
+  font-size: 1rem;
+}
 

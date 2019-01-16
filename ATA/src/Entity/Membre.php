@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MembreRepository")
@@ -23,63 +22,40 @@ class Membre implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="N'oubliez pas votre nom")
-     * @Assert\Length(max="50", maxMessage="Votre nom est trop long.
-     * {{ limit }} caractères max. ")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="N'oubliez pas votre prénom")
-     * @Assert\Length(max="50", maxMessage="Votre prénom est trop long.
-     * {{ limit }} caractères max. ")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=80)
-     * @Assert\Email(message="Vérifiez votre email.")
-     * @Assert\NotBlank(message="Saisissez votre email")
-     * @Assert\Length(max="80", maxMessage="Votre email est trop long. {{ limit }} caractères max.")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="N'oubliez pas votre mot de passe")
-     * @Assert\Length(min="8", minMessage="Votre mot de passe est trop court. {{ limit }} caractères min.",
-     *     max="20", maxMessage="Votre mot de passe est trop long. {{ limit }} caractères max.")
-     * @Assert\Regex(
-     *     pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$/",
-     *     message="Votre mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre."
-     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Assert\NotBlank(message="N'oubliez pas votre numéros de téléphone !")
-     * @Assert\Regex(pattern="/^0[1-9]?[0-9]\d{8}$/", message="Votre numéro de téléphone doit commencer par un 0 et doit contenir 10 chiffres")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="N'oubliez pas votre adresse !")
-     * @Assert\Length(min="8", minMessage="Vérifiez votre adresse !")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=5)
-     * @Assert\NotBlank(message="N'oubliez pas le code postal")
-     * @Assert\Regex(pattern="/^[0-9]{5}$/",message="Vérifiez le code postal, il doit contenir 5 chiffres")
      */
     private $codePostal;
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="N'oubliez pas la ville !")
      */
     private $ville;
 
@@ -92,11 +68,6 @@ class Membre implements UserInterface
      * @ORM\Column(type="array")
      */
     private $roles = [];
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $paiement;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paiement",
@@ -138,6 +109,7 @@ class Membre implements UserInterface
         $this->articles = new ArrayCollection();
         $this->dateInscription =new \DateTime();
     }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -251,17 +223,6 @@ class Membre implements UserInterface
         return $this;
     }
 
-    public function getPaiement(): ?string
-    {
-        return $this->paiement;
-    }
-
-    public function setPaiement(string $paiement): self
-    {
-        $this->paiement = $paiement;
-
-        return $this;
-    }
     /**
     * Returns the salt that was originally used to encode the password.
     *
@@ -305,10 +266,12 @@ class Membre implements UserInterface
 
     /**
      * @param mixed $ville
+     * @return Membre
      */
-    public function setVille($ville): void
+    public function setVille($ville): self
     {
         $this->ville = $ville;
+        return $this;
     }
 
     /**
@@ -341,6 +304,26 @@ class Membre implements UserInterface
     public function setArticles($articles): void
     {
         $this->articles = $articles;
+    }
+
+    public function update(
+        string $prenom,
+        string $nom,
+        string $email,
+        string $telephone,
+        string $adresse,
+        string $codePostal,
+        string $ville
+    )
+    {
+        $this
+            ->setPrenom($prenom)
+            ->setNom($nom)
+            ->setEmail($email)
+            ->setTelephone($telephone)
+            ->setAdresse($adresse)
+            ->setCodePostal($codePostal)
+            ->setVille($ville);
     }
 
 }

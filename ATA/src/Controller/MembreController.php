@@ -11,6 +11,9 @@ namespace App\Controller;
 
 use App\Entity\Membre;
 use App\Form\MembreFormType;
+use App\Membre\MembreRequest;
+use App\Membre\MembreRequestHandler;
+use App\Membre\MembreUpdateRequestHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,36 +42,35 @@ class MembreController extends AbstractController
             'nbrMembres' => $nbrMembres
         ]);
     }
+
     /**
      * @Route("/inscription.html",
      *     name="membre_inscription")
      * @param Request $request
+     * @param MembreRequestHandler $membreRequestHandler
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
     public function inscription(Request $request,
+                                MembreRequestHandler $membreRequestHandler,
                                 UserPasswordEncoderInterface $passwordEncoder)
     {
         # Création d'un utilisateur
-        $membre = new Membre();
+        $membre = new MembreRequest();
         $membre->setRoles(['ROLE_MEMBRE']);
 
         #Création du formulaire MembreFormType
-        $form = $this->createForm(MembreFormType::class,$membre)
+        $form = $this->createForm(MembreFormType::class,$membre, ['validation_groups' => ['registration']])
                     ->handleRequest($request);
 
         # Soumission du formulaire
         if($form->isSubmitted() && $form->isValid()){
-            # Encodage du mot de passe
-            $membre->setPassword($passwordEncoder->encodePassword($membre,$membre->getPassword()));
 
-            # Sauvegarde en BDD
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($membre);
-            $em->flush();
+            $membre = $membreRequestHandler->handle($membre);
 
             # Notification
             $this->addFlash('notice',
-                'Félicitation, vous pouvez maintenant vous connecter !');
+                'Félicitation ' . $membre->getPrenom() . ', vous pouvez maintenant vous connecter !');
 
             # Redirection
             return $this->redirectToRoute('security_connexion');
@@ -77,8 +79,6 @@ class MembreController extends AbstractController
         # Affichage dans la vue
         return $this->render('membre/inscription.html.twig',[
                 'form' => $form->createView()
-
-
         ]);
 
     }
@@ -88,39 +88,38 @@ class MembreController extends AbstractController
      * @Route("/editer-un-membre/{id<\d+>}.html", name="membre_edit")
      * @param Membre $membre
      * @param Request $request
+     * @param MembreUpdateRequestHandler $updateRequestHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-//    public function editMembre(Membre $membre, Request $request)
-//    {
-//        # Création du formulaire avec les informations de la BDD
-//        $form = $this->createForm(MembreFormType::class,$membre)
-//            ->handleRequest($request);
-//
-//        $password = $membre->getPassword();
-//        //dump($password);
-//        # Si le formulaire est soumis et valide
-//        if ($form->isSubmitted() && $form->isValid()){
-//            $membre->setPassword($password);
-//            # Sauvegarde en BDD
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($membre);
-//            $em->flush();
-//
-//            # Notification
-//            $this->addFlash('notice',
-//                'Membre modifié');
-//
-//            # Redirection
-//            return $this->redirectToRoute('membre',[
-//                'membre' => $membre
-//            ]);
-//        }
-//
-//        # Affichage dans la vue
-//        return $this->render('membre/inscription.html.twig',[
-//            'form' => $form->createView()
-//        ]);
-//    }
+    public function editMembre(Membre $membre, Request $request, MembreUpdateRequestHandler $updateRequestHandler)
+    {
+
+        $membreRequest = MembreRequest::createFromMembre($membre);
+
+        $form = $this->createForm(MembreFormType::class, $membreRequest, ['validation_groups' => ['update']])
+            ->handleRequest($request);
+
+        # Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $membre = $updateRequestHandler->handle($membreRequest, $membre);
+
+            # Notification
+            $this->addFlash('notice',
+                'Félicitation ' . $membre->getPrenom() . ', votre profil est à jour !');
+
+            # Redirection
+            return $this->redirectToRoute('membre_edit', [
+                'id' => $membre->getId()
+            ]);
+
+        }
+
+        # Affichage dans la vue
+        return $this->render('membre/inscription.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 
     /**
      * @Route("/supprimer-un-membre/{id<\d+>}.html", name="membre_supprimer")
@@ -154,7 +153,7 @@ class MembreController extends AbstractController
 
             if ($membre === null) {
                 $this->addFlash('danger', 'Token Inconnu');
-                return $this->redirectToRoute('index');
+                return $this->redirectToRoute('security_connexion');
             }
 
             // Reset du token et nouveau mot de passe
