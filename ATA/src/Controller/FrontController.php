@@ -158,13 +158,13 @@ class FrontController extends AbstractController
     public function lesArticles()
     {
 
-        $article = $this->getDoctrine()
+        $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
 
 
         return $this->render('front/lesArticles.html.twig', [
-            'article' => $article
+            'articles' => $articles
         ]);
 
 
@@ -184,7 +184,7 @@ class FrontController extends AbstractController
      * @return RedirectResponse
      */
 //
-    public function article($slug, Article $article = null) // par défaut vaut null
+    public function article($slug, $id, Article $article = null) // par défaut vaut null
     {
 //        #####################################
 //               REQUETE TEST DE RECUP
