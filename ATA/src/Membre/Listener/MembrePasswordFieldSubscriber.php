@@ -10,6 +10,7 @@ namespace App\Membre\Listener;
 
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -28,8 +29,13 @@ class MembrePasswordFieldSubscriber implements EventSubscriberInterface
         $membre = $event->getData();
         $form = $event->getForm();
 
-        if ($membre || null !== $membre->getId()) {
+        if($membre && null !== $membre->getId()) {
             $form->remove('password');
+//            $form->remove('Submit');
+            $form->add('Submit',SubmitType::class,[
+                'label' => "Modifier"
+            ]);
+
         }
     }
 

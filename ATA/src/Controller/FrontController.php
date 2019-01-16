@@ -14,6 +14,7 @@ use App\Entity\Evenement;
 use App\Entity\Article;
 use App\Entity\Photos;
 use App\Repository\ArticleRepository;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -111,7 +112,6 @@ class FrontController extends AbstractController
     }
 
 
-
     /**
      * @Route("evenement/{categorie<[a-zA-Z0-9-/]+>}/{slug<[a-zA-Z0-9-/]+>}-{id<\d+>}",
      *     name="front_evenement")
@@ -164,7 +164,6 @@ class FrontController extends AbstractController
 
 
     }
-
 
     /**
      * Affiche UN article
@@ -221,7 +220,17 @@ class FrontController extends AbstractController
         return $this->render('front/apropos.html.twig');
     }
 
-
+    /**
+     * @Route("/profil/{id<\d+>}.html", name="front_profil")
+     * @return Response
+     */
+    public function profil()
+    {
+        $membre = $this->getUser();
+        return $this->render('membre/profil.html.twig',[
+            'membre' => $membre
+        ]);
+    }
 
 
     public function sidebar()

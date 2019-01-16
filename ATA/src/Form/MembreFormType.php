@@ -28,8 +28,8 @@ class MembreFormType extends AbstractType
         $builder
 
             ->add('prenom',TextType::class,[
-            'label' => 'Prénom',
-            'attr' => ['placeholder' => "Votre prénom"]
+                'label' => 'Prénom',
+                'attr' => ['placeholder' => "Votre prénom"]
             ])
 
             ->add('nom',TextType::class,[
@@ -44,7 +44,7 @@ class MembreFormType extends AbstractType
 
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
-                'mapped' => false,
+
                 'attr' => ['placeholder' => "Mot de passe"]
             ])
 
@@ -79,8 +79,8 @@ class MembreFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-       # Le formulaire s'attends à recevoir des données de type Membre
-       # Il s'agit d'une sécurité suplémentaire
+       # On dit au formulaire qu'il va recevoir des données de type MembreRequest
+
        $resolver->setDefaults([
            'data_class' => MembreRequest::class
        ]);

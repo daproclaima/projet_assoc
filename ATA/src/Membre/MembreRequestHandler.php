@@ -38,7 +38,7 @@ class MembreRequestHandler
             ->setCodePostal($membreRequest->getCodePostal())
             ->setVille($membreRequest->getVille())
             ->setRoles($membreRequest->getRoles())
-            ->setPaiement('none')
+
         ;
 
         # Sauvegarde en BDD

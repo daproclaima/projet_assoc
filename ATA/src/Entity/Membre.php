@@ -70,11 +70,6 @@ class Membre implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $paiement;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Paiement",
      *     mappedBy="membre", cascade={"remove"})
      */
@@ -228,17 +223,6 @@ class Membre implements UserInterface
         return $this;
     }
 
-    public function getPaiement(): ?string
-    {
-        return $this->paiement;
-    }
-
-    public function setPaiement(string $paiement): self
-    {
-        $this->paiement = $paiement;
-
-        return $this;
-    }
     /**
     * Returns the salt that was originally used to encode the password.
     *
@@ -332,7 +316,8 @@ class Membre implements UserInterface
         string $ville
     )
     {
-        $this->setPrenom($prenom)
+        $this
+            ->setPrenom($prenom)
             ->setNom($nom)
             ->setEmail($email)
             ->setTelephone($telephone)

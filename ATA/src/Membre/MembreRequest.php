@@ -83,6 +83,7 @@ class MembreRequest
     {
         $membreRequest = new self();
         $membreRequest
+            ->setId($membre->getId())
             ->setPrenom($membre->getPrenom())
             ->setNom($membre->getNom())
             ->setEmail($membre->getEmail())

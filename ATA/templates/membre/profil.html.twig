@@ -1,0 +1,55 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Profil {{ app.user.prenom }}
+{% endblock %}
+{% set active = 'Profil' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay"
+         style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2>
+                        Profil
+                    </h2>
+                    <hr>
+                    <div class="row justify-content-md-center">
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="text-center pt-3">
+                                    <img class="card-img-top logo-profil " src="{{ asset('images/logo-n.png') }}" alt="Card {{ asset('images/logo-n.png') }}">
+                                </div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">{{ membre.prenom ~ ' ' ~ membre.nom }}</h3>
+                                    <ul>
+                                        <li><span class="font-bold">Email :</span> {{ membre.email }}</li>
+                                        <li><span class="font-bold">Adresse :</span> {{ membre.adresse }}</li>
+                                        <li><span class="font-bold">Code postal :</span> {{ membre.codePostal }}</li>
+                                        <li><span class="font-bold">Ville :</span> {{ membre.ville }}</li>
+                                    </ul>
+
+
+                                    <a class="mt-2 btn btn-info" href="{{ path('membre_edit', {id: membre.id}) }}">
+                                        Modifier mes informations
+                                        <i class="fas fa-user-edit"></i>
+
+                                    </a>
+                                    <br>
+
+                                    <a class="mt-2 btn btn-info" href="{{ path('security_password') }}">
+                                        Modifier mon mot de passe
+                                        <i class="fas fa-user-cog"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -153,7 +153,7 @@ class MembreController extends AbstractController
 
             if ($membre === null) {
                 $this->addFlash('danger', 'Token Inconnu');
-                return $this->redirectToRoute('index');
+                return $this->redirectToRoute('security_connexion');
             }
 
             // Reset du token et nouveau mot de passe
