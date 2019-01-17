@@ -29,11 +29,11 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="{{ path('evenement_edit', {
                             id: evenement.id
-                        }) }}"><small>Editer cet Evénement</small></a>
+                        }) }}"><small>Editer cet Evénement</small></a><span></span>
 
                         <a href="{{ path('evenement_delete', {
                             id: evenement.id
-                        }) }}" data-toggle="modal" data-target="#Modal{{ evenement.id }}"><small>Supprimer cet Evénement</small></a>
+                        }) }}" data-toggle="modal" data-target="#Modal{{ evenement.id }}"><small>Supprimer cet Evénement</small><i class="far fa-trash-alt fa-sm"></i></a>
 
                     {% endif %}
                         <!-- Post Content -->

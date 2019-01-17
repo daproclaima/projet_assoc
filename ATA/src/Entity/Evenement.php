@@ -22,7 +22,8 @@ class Evenement
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="veuillez saisir un titre")
+     * @Assert\NotBlank(message="veuillez saisir un titre", groups={"registration", "update"})
+     *
      */
     private $titre;
 
@@ -36,7 +37,7 @@ class Evenement
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="veuillez saisir du contenu")
-     * @Assert\Length(min="8", minMessage="Votre contenu est trop court")
+     * @Assert\Length(min="8", minMessage="Votre contenu est trop court", groups={"registration", "update"})
      *
      */
     private $contenu;
@@ -44,7 +45,6 @@ class Evenement
 
     /**
      * @ORM\Column(type="datetime")
-     *
      */
     private $dateEvenement;
 
@@ -52,14 +52,15 @@ class Evenement
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="veuillez saisir un lieu")
-     * @Assert\Length(min="8", minMessage="Vérifiez le lieu")
+     * @Assert\Length(min="8", minMessage="Vérifiez le lieu", groups={"registration", "update"})
+     *
      */
     private $lieu;
 
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Image(maxSize="2M", mimeTypesMessage="Vueillez verifier le format de votre image")
+     * @Assert\Image(maxSize="2M", mimeTypesMessage="Vueillez verifier le format de votre image", groups={"registration"})
      * @Assert\NotBlank(message="veuillez insérer une image")
      *
      */
@@ -68,15 +69,23 @@ class Evenement
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Veuillez saisir un prix")
+     * @Assert\NotBlank(message="Veuillez saisir un prix", groups={"registration", "update"})
+     *
      */
     private $prixAdulte;
 
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
      */
     private $prixEnfant;
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $flashInfo;
 
 
     /**
@@ -213,5 +222,21 @@ class Evenement
     public function setSlug($slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFlashInfo()
+    {
+        return $this->flashInfo;
+    }
+
+    /**
+     * @param mixed $flashInfo
+     */
+    public function setFlashInfo($flashInfo): void
+    {
+        $this->flashInfo = $flashInfo;
     }
 }

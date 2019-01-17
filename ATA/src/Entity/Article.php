@@ -158,6 +158,7 @@ class Article
 
     /**
      * @param mixed $membre
+     * @return Article
      */
     public function setMembre($membre):self
     {

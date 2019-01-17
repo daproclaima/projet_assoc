@@ -16,6 +16,7 @@ use App\Entity\Article;
 use App\Entity\Photos;
 use App\Form\ContactFormType;
 use App\Repository\ArticleRepository;
+use Psr\Container\ContainerInterface;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +35,8 @@ class FrontController extends AbstractController
      */
     public function index()
     {
+
+
         return $this->render('front/index.html.twig');
     }
 
@@ -56,6 +59,22 @@ class FrontController extends AbstractController
 
 
     ##################################### CONTROLLERS HOCINE  ################################################
+
+    public function flashInfo()
+    {
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
+
+        # Récupérer le derniers évènements
+        $flash = $repository->findByFlashInfo();
+
+        #Rendu de la vue
+        return $this->render('component/_flashinfo.html.twig', [
+            'flash' => $flash
+        ]);
+    }
+
 
     /**
      *
@@ -343,11 +362,14 @@ class FrontController extends AbstractController
         ]);
     }
 
+
+
     public function sliderAccueil()
     {
         #Récuperation du Repository
         $repository = $this->getDoctrine()
             ->getRepository(Evenement::class);
+
         # Récupérer le 3 derniers évènements
         $evenements = $repository->findLatestEvenements();
 
