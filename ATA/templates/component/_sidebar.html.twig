@@ -6,56 +6,70 @@
             <h5 class="title">Derniers Evénements</h5>
             <div class="widget-content">
 
-             {% for evenement in evenements %}
-                <!-- Single Blog Post -->
-                <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
-                    <!-- Post Thumbnail -->
-                    <div class="post-thumbnail">
-                        <img src="{{ asset('images/product/'~evenement.featuredImage) }}" alt="">
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-
-                        <a href="{{ path('front_evenement',{'categorie': evenement.categories.slug,'slug': evenement.slug, 'id': evenement.id}) }}" class="headline">
-                            <h5 class="mb-0">{{ evenement.titre }}</h5>
-                            <p class="p-0 m-0">{{ evenement.dateEvenement | date('d/M/Y') }}</p>
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
-
-            </div>
-        </div>
-        <!-- Widget Derniers articles -->
-        <div class="sidebar-widget-area">
-            <h5 class="title">Derniers Articles</h5>
-            <div class="widget-content widget-article">
-                <!-- Single Blog Post -->
-                {% for article in articles %}
-                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post mb-2">
+                {% for evenement in evenements %}
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post post-style-2 d-flex align-items-center widget-post">
                         <!-- Post Thumbnail -->
-                        <div class="post-thumbnail ">
-                            {% if article.featuredImage is not null  %}
-                            <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}"><img class="ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
-                            {% else %}
-                            <img src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
-                            {% endif %}
+                        <div class="post-thumbnail">
+                            <img src="{{ asset('images/product/'~evenement.featuredImage) }}" alt="">
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a      href=" {{ path('front_article',{'slug': article.slug , 'id' : article.id}) }}" class="headline" >
-                                <h5 class="mb-0">{{ article.titre | summary }}</h5>
+
+                            <a href="{{ path('front_evenement',{'categorie': evenement.categories.slug,'slug': evenement.slug, 'id': evenement.id}) }}"
+                               class="headline">
+                                <h5 class="mb-0">{{ evenement.titre }}</h5>
+                                <p class="p-0 m-0">{{ evenement.dateEvenement | date('d/M/Y') }}</p>
                             </a>
                         </div>
                     </div>
                 {% endfor %}
+
             </div>
         </div>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADHERANT') %}
+            <!-- Widget Derniers articles -->
+            <div class="sidebar-widget-area">
+                <h5 class="title">Derniers Articles</h5>
+                <div class="widget-content widget-article">
+                    <!-- Single Blog Post -->
+                    {% for article in articles %}
+                        <div class="single-blog-post post-style-2 d-flex align-items-center widget-post mb-2">
+                            <!-- Post Thumbnail -->
+                            <div class="post-thumbnail ">
+                                {% if article.featuredImage is not null %}
+                                    <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}"><img
+                                                class="ml-1" src="{{ asset('images/product/'~article.featuredImage) }}"
+                                                alt="{{ article.titre }}"></a>
+                                {% else %}
+                                    <img src="{{ asset('images/product/') }}image-defaut.jpg" alt="Aucune image">
+                                {% endif %}
+                            </div>
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <a href=" {{ path('front_article',{'slug': article.slug , 'id' : article.id}) }}"
+                                   class="headline">
+                                    <h5 class="mb-0">{{ article.titre | summary }}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
         <!-- Widget Contact -->
         <div class="sidebar-widget-area">
             <h5 class="title">Contact</h5>
             <div class="widget-content">
-                <p>Nom de l'Association<br>Adresse<br>Téléphone : 0123456789<br>Email</p>
+                <h3>Association Assirem Tagmatt u Amazoul</h3>
+                <ul>
+                    <li><h6>Adresse : </h6>{{ contact.adresse }}</li>
+                    <li><h6>Ville : </h6>{{ contact.ville }}</li>
+                    <li><h6>Code Postal : </h6>{{ contact.codePostal }}</li>
+                    <li><h6>Tel : </h6>{{ contact.telephone }}</li>
+                    <li><h6>Mail : </h6>{{ contact.email }}</li>
+                </ul>
             </div>
         </div>
         <!-- Widget Réseaux sociaux -->
@@ -72,23 +86,28 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar-widget-area">
-            <h5 class="title">Galerie</h5>
-            <div class="widget-content">
-                <section class="gallery-block compact-gallery m-0 p-0">
-                    <div class="container">
-                        <div class="row no-gutters">
-                            {% for unePhoto in photos %}
-                                <div class="col-md-6 col-lg-4 item zoom-on-hover">
-                                    <a class="lightbox" href="#">
-                                        <img class="img-fluid image" src="{{ asset('images/photos/'~unePhoto.featuredImage) }}">
-                                    </a>
-                                </div>
-                            {% endfor %}
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADHERANT') %}
+            <!-- Widget Gallerie -->
+            <div class="sidebar-widget-area">
+                <h5 class="title">Galerie</h5>
+                <div class="widget-content">
+                    <section class="gallery-block compact-gallery m-0 p-0">
+                        <div class="container">
+                            <div class="row no-gutters">
+                                {% for unePhoto in photos %}
+                                    <div class="col-md-6 col-lg-4 item zoom-on-hover">
+                                        <a class="lightbox" href="#">
+                                            <img class="img-fluid image"
+                                                 src="{{ asset('images/photos/'~unePhoto.featuredImage) }}">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </div>
