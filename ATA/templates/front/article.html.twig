@@ -92,7 +92,7 @@
                         </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                <div class="modal fade show" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -106,7 +106,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
-                                <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
+                                <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('article_delete', {
                                         id: article.id
                                     }) }}">OUI</a></button>
                             </div>

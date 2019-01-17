@@ -1463,6 +1463,10 @@ textarea:focus ~ .highlight {
         font-size: 14px;
         color: #959595; }
 
+      .footer-part{
+        padding:0;
+      }
+
 /* ---- Galerie ---- */
 
 #gallery {
