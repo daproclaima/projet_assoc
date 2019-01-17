@@ -343,6 +343,10 @@ class FrontController extends AbstractController
         ]);
     }
 
+//    public function rxSociaux(){
+//        return $this->render('component/_socialmedia.html.twig', []);
+//    }
+
     public function sliderAccueil()
     {
         #Récuperation du Repository
