@@ -47,6 +47,9 @@ class AdhesionController extends AbstractController
             $em->persist($paiement);
             $em->flush();
 
+            # Redirection sur la liste des membres
+            return $this->redirectToRoute("membre_liste");
+
         }
 
         #affichage dans la vue
