@@ -11,9 +11,9 @@
                     <div id="breakingNewsTicker" class="ticker">
                         <ul>
                             {% for evenement in flash %}
-                                <li><a href="#">{{ evenement.titre }}</a></li>
-                                <li><a href="#">{{ evenement.lieu }}</a></li>
-                                <li><a href="#">le {{ evenement.dateEvenement | date('d/m/Y' ) }} à {{ evenement.dateEvenement | date('h:m') }}</a></li>
+                                <li><a href="{{ path('membre_inscription') }}">{{ evenement.titre }}</a></li>
+                                <li><a href="{{ path('membre_inscription') }}">{{ evenement.lieu }}</a></li>
+                                <li><a href="{{ path('membre_inscription') }}">le {{ evenement.dateEvenement | date('d/m/Y' ) }} à {{ evenement.dateEvenement | date('h:m') }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

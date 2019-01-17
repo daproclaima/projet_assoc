@@ -1,4 +1,5 @@
 <!-- ========== Sidebar Area ========== -->
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 <div class="col-12 col-md-8 col-lg-4">
     <div class="post-sidebar-area wow fadeInUpBig" data-wow-delay="0.2s">
         <!-- Widget Derniers evenements -->
@@ -99,3 +100,4 @@
         {% endif %}
     </div>
 </div>
+{% endif %}
