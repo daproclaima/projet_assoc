@@ -117,17 +117,18 @@ class EvenementController extends AbstractController
         $form = $this->createForm(EvenementFormType::class, $evenement)
             ->handleRequest($request);
 
-
+//        dump ($evenement);
         # Traitment des données POST
         #$form->handleRequest($request);
 
         # Si le formulaire est soumis et valide
         if($form->isSubmitted() && $form->isValid()){
-            # dump ($evenement);
+             dump ($evenement);
             #1. traitement de l'upload de l'image. Documentation : https://symfony.com/doc/current/controller/upload_file.html
             // $file stores the uploaded PDF file
 
             $featuredImage = $evenement->getFeaturedImage();
+//            dump ($evenement);
             if(null !== $featuredImage) {
 
                 /** @var UploadedFile $featuredImage */

@@ -1678,23 +1678,15 @@ Page Evénement
 
 }
 
-.layout-article .image-articles{
-
-
-}
+/*.layout-article .article-lien a:hover{*/
+  /*color: #480CE8;*/
+/*}*/
 
 
 
 
 
 /*------------------------------ Pour un article------------------------------*/
-.layout-article .modal{
-  position:absolute;
-}
-
-.layout-article .modal-content {
-
-}
 
 
 .layout-article .article-titre:after {

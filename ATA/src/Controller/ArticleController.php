@@ -33,21 +33,21 @@ class ArticleController extends AbstractController
      * Formulaire pour ajouter un Article
      * @Route("/creer-un-article", name="article_creation")
      * @param $request
+     * @param $membre
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response | RedirectResponse
      */
     public function newArticle(Request $request)
     {
-//      # Récupération d'un Membre
-        $membre = $this->getDoctrine()
-            ->getRepository(Membre::class)
-            ->find(1);
+////      # Récupération d'un Membre
+//        $membre = $this->getDoctrine()
+//            ->getRepository(Membre::class)
+//            ->find(1);
 
 
         # Création d'un Nouvel Article
         $article = new Article();
-        $article->setMembre($membre);
-//        $article->setMembre($this->getUser());
+        $article->setMembre($this->getUser());
 
 
         # Création du Formulaire +  Traitement des données POST

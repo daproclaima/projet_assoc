@@ -57,8 +57,9 @@
                                 {{ article.contenu | raw }}
                             </div>
 
-                            {# bouton delete à afficher si admin et auteur #}
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {# bouton delete et édition à afficher si admin et auteur #}
+                            {% if  is_granted('IS_AUTHENTICATED_FULLY') and article.isAuteur(app.user) %}
+
                                 <div class = "col-12 ">
                                     <a class="lien-edition" href="{{ path('article_edition', {id: article.id}) }}">
                                         <small>Editer cet Article</small>
@@ -73,29 +74,7 @@
 
 
                             {% endif %}
-                            <!-- Modal -->
-                            <div class="modal fade" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Etes vous certains de vouloir supprimer ce produit?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
-                                            <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
-                                                    id: article.id
-                                                }) }}">OUI</a></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Fin Modal -->
+
 
 
                             <!-- Post Meta -->
@@ -109,12 +88,32 @@
                                     </a>
                                 </p>
                                 {#{%  include 'component/socialmedia.html.twig' %}#}
-
                             </div>
                         </div>
-
-
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Etes vous certains de vouloir supprimer ce produit?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
+                                        id: article.id
+                                    }) }}">OUI</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal -->
                 <!-- SIDEBAR -->
                 {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
             </div>

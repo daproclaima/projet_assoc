@@ -9,6 +9,7 @@
 namespace App\Form;
 
 
+use App\Controller\HelperTrait;
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -21,6 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleFormType extends AbstractType
 {
+
+    use HelperTrait;
     public function buildForm(FormBuilderInterface $builder, array $options)
 
     {

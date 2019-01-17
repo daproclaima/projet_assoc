@@ -166,6 +166,7 @@ class Article
 
     }
 
+
     /**
      * Vérifier qu'un membre est bien l'auteur de
      * l'article
