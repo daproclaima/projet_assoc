@@ -12,6 +12,7 @@ use App\Entity\Evenement;
 use App\Form\EvenementFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -19,9 +20,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class EvenementController extends AbstractController
 {
     use HelperTrait;
+
     /**
      * @Route("/creer-un-evenement", name="creation_evenement")
      * @Security("has_role('ROLE_ADMIN')")
@@ -33,7 +36,7 @@ class EvenementController extends AbstractController
         $evenement = new Evenement();
 
         # Création du Formulaire
-        $form = $this->createForm(EvenementFormType::class, $evenement)
+        $form = $this->createForm(EvenementFormType::class, $evenement, ['validation_groups' => ['registration']])
             ->handleRequest($request);
 
         # Si le formulaire est soumis et valide
@@ -99,72 +102,74 @@ class EvenementController extends AbstractController
      * @Route("/editer-un-evenemnt/{id<\d+>}",
      *     name="evenement_edit")
      * @Security("has_role('ROLE_ADMIN')")
+     * @param Evenement $evenement
+     * @param Request $request
+     * @param Packages $packages
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function editEvenement(Evenement $evenement, Request $request)
+    public function editEvenement(Evenement $evenement, Request $request, Packages $packages)
     {
 
-        # on récupére l'image de l'evenement
+        # On récupère l'image de l'article
         $featuredImageName = $evenement->getFeaturedImage();
 
         /**
-         * notre formulaire attend une instance de file pour l'édition de la featured image
+         * Notre formulaire attend une instance de File
+         * pour l'edition de la featuredImage.
          */
         $evenement->setFeaturedImage(
-            new File($this->getParameter('evenement_assets_dir').'/'.$evenement->getFeaturedImage())
+            new File($this->getParameter('articles_assets_dir')
+                . '/' . $featuredImageName)
         );
 
-        # Création du Formulaire
-        $form = $this->createForm(EvenementFormType::class, $evenement)
+        # Création du Formulaire + # Traitement des données POST
+        $form = $this->createForm(EvenementFormType::class, $evenement,[
+            'image_url' => $packages->getUrl('/images/' . $featuredImageName),
+            'validation_groups' => ['update']
+        ])
             ->handleRequest($request);
 
-
-        # Traitment des données POST
-        #$form->handleRequest($request);
-
         # Si le formulaire est soumis et valide
-        if($form->isSubmitted() && $form->isValid()){
-            # dump ($evenement);
-            #1. traitement de l'upload de l'image. Documentation : https://symfony.com/doc/current/controller/upload_file.html
-            // $file stores the uploaded PDF file
+        if ($form->isSubmitted() && $form->isValid()) {
+
+             #dump($evenement); die;
+            # 1. Traitement de l'upload de l'image
 
             $featuredImage = $evenement->getFeaturedImage();
-            if(null !== $featuredImage) {
 
+            if (null !== $featuredImage) {
                 /** @var UploadedFile $featuredImage */
                 $featuredImage = $evenement->getFeaturedImage();
-                $fileName = $this->slugify($evenement->getTitre()) . '.' . $featuredImage->guessExtension();
 
-                // Move the file to the directory where brochures are stored
+                $fileName = $this->slugify($evenement->getTitre())
+                    . '.' . $featuredImage->guessExtension();
+
                 try {
                     $featuredImage->move(
                         $this->getParameter('evenement_assets_dir'),
                         $fileName
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+
                 }
 
-                // updates the 'brochure' property to store the PDF file name
-                // instead of its contents
-
-                # Mise à jour de l'image'
+                # Mise à jour de l'image
                 $evenement->setFeaturedImage($fileName);
-            }else {
+            } else {
                 $evenement->setFeaturedImage($featuredImageName);
             }
 
-            # Mise à jour du slug
+            # Mise à jour du Slug
             $evenement->setSlug($this->slugify($evenement->getTitre()));
 
-
-            # Sauvegadre en BDD
+            # Sauvegarde en BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($evenement);
             $em->flush();
 
             # NOTIFICATION
             $this->addFlash('notice',
-                'Félicitations, votre evenement a été édité !');
+                'Félicitations, l\'évenement a bien été édité !');
 
             # REDIRECTION
             return $this->redirectToRoute('front_evenement', [
@@ -191,9 +196,10 @@ class EvenementController extends AbstractController
      * @return
      * @Security("has_role('ROLE_ADMIN')")
      */
-    
+
     # suppression d'un evenement en BDD
-    public function deleteEvenement(Evenement $evenement){
+    public function deleteEvenement(Evenement $evenement)
+    {
         $em = $this->getDoctrine()->getManager();
         $em->remove($evenement);
         $em->flush();
@@ -207,4 +213,6 @@ class EvenementController extends AbstractController
         ]);
 
     }
+
+
 }

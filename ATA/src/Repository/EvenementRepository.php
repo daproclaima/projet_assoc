@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class EvenementRepository extends ServiceEntityRepository
 {
+    const MAX_RESULTS_FLASH = 1;
     const MAX_RESULTS = 3;
 
 
@@ -37,7 +38,7 @@ class EvenementRepository extends ServiceEntityRepository
     public function findBydate()
     {
         return $this->createQueryBuilder('e')
-            ->orderBy('e.dateEvenement', 'DESC')
+            ->orderBy('e.dateEvenement', 'ASC')
             ->getQuery()
             ->getResult()
             ;
@@ -56,5 +57,17 @@ class EvenementRepository extends ServiceEntityRepository
             ;
     }
 
+
+    #recuperer le dernier evenement ayant un flashInfo 1
+    public function findByFlashInfo()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.flashInfo = 1')
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(self::MAX_RESULTS_FLASH)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
 }

@@ -14,6 +14,7 @@ use App\Entity\Categorie;
 use App\Entity\Evenement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -61,9 +62,10 @@ class EvenementFormType extends AbstractType
                 'label' => "lieu de l'événement"
             ])
 
-            ->add('featuredImage', FileType::class, [
-                'attr' => [
-                    'class' => 'dropify'
+            ->add('featuredimage', FileType::class, [
+                'attr'     => [
+                    'class' => 'dropify',
+                    'data-default-file' => $options['image_url']
                 ]
             ])
 
@@ -83,13 +85,23 @@ class EvenementFormType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'label' => "créer Evénement"
+            ])
+
+            ->add('flashInfo', CheckboxType::class, [
+                'required' => false,
+                'attr' => [
+                    'data-toggle' => 'toggle',
+                    'data-on' => 'Oui',
+                    'data-off' => 'Non'
+                ]
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Evenement::class
+            'data_class' => Evenement::class,
+            'image_url' => null
         ]);
     }
 

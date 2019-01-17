@@ -35,6 +35,7 @@ class ArticleController extends AbstractController
      * @param $request
      * @Security("has_role('ROLE_ADMIN')")
      * @return Response | RedirectResponse
+     * @throws \Exception
      */
     public function newArticle(Request $request)
     {
