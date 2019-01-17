@@ -98,7 +98,7 @@ class FrontController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $data =$form->getData();
-            dump($data);
+//            dump($data);
             $objet = $data['objet'];
 
             // Envoie du mail contact
@@ -370,7 +370,6 @@ class FrontController extends AbstractController
             'contact' => $contact
         ]);
     }
-
 
 
     public function sliderAccueil()

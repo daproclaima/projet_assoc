@@ -25,7 +25,7 @@
                                             <!-- Post Thumbnail -->
                                             {% if article.featuredImage is not null  %}
                                                 <div class="post-thumbnail">
-                                                    <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}"><img class="image-articles ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
+                                                    <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}" class="article-lien"><img class="image-articles ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
                                                 </div>
                                             {% else %}
                                                 <div class="post-thumbnail">
@@ -43,7 +43,7 @@
                                                     <p><a href="#" class="post-author">
                                                             {{article.membre.prenom ~' '~article.membre.nom}}
                                                         </a>
-                                                        on
+                                                        , publié le
                                                         <a href="#" class="post-date">
                                                             {{ article.dateCreation | date('d/m/Y') }}
                                                         </a>

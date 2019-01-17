@@ -1,33 +1,33 @@
 <!-- ***** Footer Area Start ***** -->
 <footer class="footer-area">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-2">
+        <div class="row d-flex justify-content-between">
+
+            <div class="footer-part col-12 col-md-4 align-self-center text-align-center d-flex justify-content-center mb-4">
                 <div class="footer-single-widget">
                     <a href="#"><img class="logo-f" src="{{ asset('images/logo.png') }}" alt="Logo"></a>
                 </div>
             </div>
-            <div class="col-12 col-md-6 align-self-center">
-                <p class="m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+            <div class="footer-part col-12 col-md-4 d-flex justify-content-center align-self-center text-center mb-4 row">
+                <ul class="col-xs-12 col-sm-6">
+                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                    <li><a href="{{ path('front_apropos') }}">A propos</a></li>
+                    <li><a href="{{path ('front_contact')}}">Contacts</a></li>
+                </ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <ul class="col-xs-12 col-sm-6">
+                    <li><a href="{{ path('front_les_articles') }}">Info</a></li>
+                    <li><a href="{{ path('front_categories')}}">Evénements</a></li>
+                    <li><a href="{{ path('front_galerie') }}">Galerie</a></li>
+                </ul>
+                {% endif %}
+            </div>
+
+            <div class="footer-part col-12 col-md-4 align-self-center text-center mb-4">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-
-            </div>
-            <div class="col-12 text-align-center mt-5">
-                <ul class="my-1 row">
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Mentions légales</a></li>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Carte du site web</a></li>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="{{path ('front_contact')}}">Informations de contact</a></li>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4">
-                        <ul>
-                            <li><a href="{{ path('front_les_articles') }}">Info</a></li>
-                            <li><a href="{{ path('front_categories')}}">Evénements</a></li>
-                            <li><a href="{{ path('front_galerie') }}">Galerie</a></li>
-                            <li><a href="{{ path('front_apropos') }}">A propos</a></li>
-                            <li><a href="{{ path('index') }}">Accueil</a></li>
-                        </ul>
-                    <li class="col-xs-12 col-sm-6 col-md-4 mb-4"><a href="#">Télécharger le formulaire d'inscription</a></li>
-                </ul>
             </div>
         </div>
     </div>

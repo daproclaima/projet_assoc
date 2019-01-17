@@ -2011,6 +2011,10 @@ textarea:focus ~ .highlight {
     color: #959595;
 }
 
+      .footer-part{
+        padding:0;
+      }
+
 /* ---- Galerie ---- */
 
 #gallery {
@@ -2252,20 +2256,12 @@ height: 100%;
 
 }
 
-.layout-article .image-articles {
-
-
-}
+/*.layout-article .article-lien a:hover{*/
+  /*color: #480CE8;*/
+/*}*/
 
 
 /*------------------------------ Pour un article------------------------------*/
-.layout-article .modal {
-    position: absolute;
-}
-
-.layout-article .modal-content {
-
-}
 
 
 .layout-article .article-titre:after {
