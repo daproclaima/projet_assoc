@@ -77,7 +77,7 @@ class FrontController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             $data =$form->getData();
-            dump($data);
+//            dump($data);
             $objet = $data['objet'];
 
             // Envoie du mail contact

@@ -1,6 +1,11 @@
 {% extends "layout.html.twig" %}
 {% block page_title %}
-    Rédiger un Article
+
+    {% if app.request.requestUri == path('article_creation') %}
+        Ajouter un Article
+    {% else %}
+        Editer un article
+    {% endif %}
 {% endblock %}
 {% set active = 'Admin' %}
 {% block stylesheets %}
@@ -17,7 +22,11 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h2>
-                        Ajout d'un Article
+                        {% if app.request.requestUri == path('article_creation') %}
+                            Ajouter un Article
+                        {% else %}
+                            Editer un article
+                        {% endif %}
                     </h2><hr>
                     {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
                 </div>
