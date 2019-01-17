@@ -107,6 +107,7 @@ class Membre implements UserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->checkPaiement = new ArrayCollection();
         $this->dateInscription =new \DateTime();
     }
     

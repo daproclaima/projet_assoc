@@ -38,7 +38,7 @@ class Paiement
      */
     private $membre;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -90,7 +90,7 @@ class Paiement
     /**
      * @param mixed $membre
      */
-    public function setMembre($membre): void
+    public function setMembre($membre)
     {
         $this->membre = $membre;
     }

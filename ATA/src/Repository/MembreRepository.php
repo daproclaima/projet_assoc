@@ -36,6 +36,14 @@ class MembreRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function findById()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Membre[] Returns an array of Membre objects
     //  */

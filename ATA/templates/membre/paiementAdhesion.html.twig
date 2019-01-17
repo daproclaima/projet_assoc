@@ -1,33 +1,29 @@
 {% extends "layout.html.twig" %}
 {% block page_title %}
-    Mot de pass oublié
+    Adhésion
 {% endblock %}
-{% set active = 'Admin' %}
+{% set active = 'Adhesion' %}
 {% block content %}
     <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
     <div class="main-content-wrapper section-padding-25">
         <div class="container">
             <div class="row justify-content-center">
-                <div col-12>
-                    <h3>Mot de passe oublié</h3>
-                </div>
                 <div class="col-12">
+                    {#{{ dump(app.request.requestUri)}}#}
+                    <h2>
+                        Adhésion
+                    </h2>
+                    <hr>
                     {% for message in app.flashes('notice') %}
                         <div class="alert alert-success">
                             {{ message }}
                         </div>
                     {% endfor %}
-                    <form method="post">
 
-                        <h1 class="h3 mb-3 font-weight-normal">Votre Email</h1>
-                        <label for="inputEmail" class="sr-only">Email</label>
-                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                    Adhérant : {{ membre[0].prenom }} {{membre[0].nom}}
 
-                        <button class="btn btn-lg btn-primary mt-2" type="submit">
-                            Envoyer le mail !
-                        </button>
-
-                    </form>
+                    {# L'option novalidate permet de supprimer la validation html5#}
+                    {{ form(form,{attr:{novalidate: 'novalidate'}}) }}
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ use App\Entity\Article;
 use App\Entity\Photos;
 use App\Form\ContactFormType;
 use App\Repository\ArticleRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +43,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/galerie",name="front_galerie")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_ADHERANT')")
      */
     public function galerie()
     {
@@ -110,6 +112,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/adhesion")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_MEMBRE')")
      */
     public function adhesion()
     {
@@ -124,6 +127,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/evenements",name="front_categories")
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_MEMBRE')")
      */
     public function toutesCategories()
     {
@@ -148,6 +152,7 @@ class FrontController extends AbstractController
      * @param $categorie
      * @param Evenement|null $evenement
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Security("has_role('ROLE_MEMBRE')")
      */
     public function evenementsParCategorie($slug, Categorie $categories= null){
 
@@ -175,6 +180,7 @@ class FrontController extends AbstractController
      * @param $slug
      * @param Evenement|null $evenement
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_MEMBRE')")
      */
     public function evenement( $categorie, $slug, Evenement $evenement = null)
 
@@ -209,6 +215,7 @@ class FrontController extends AbstractController
     /**
      * Affiche LES articles
      * @Route("/articles",name="front_les_articles" )
+     * @Security("has_role('ROLE_ADHERANT')")
      */
     public function lesArticles()
     {
@@ -236,6 +243,7 @@ class FrontController extends AbstractController
      * @param Article|null $article
      * @return \Symfony\Component\HttpFoundation\Response
      * @return RedirectResponse
+     * @Security("has_role('ROLE_ADHERANT')")
      */
 //
     public function article($slug, Article $article = null) // par défaut vaut null
@@ -290,6 +298,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/profil/{id<\d+>}.html", name="front_profil")
      * @return Response
+     * @Security("has_role('ROLE_MEMBRE')")
      */
     public function profil()
     {

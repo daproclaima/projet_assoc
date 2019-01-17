@@ -195,6 +195,7 @@ img {
 
 .font-light {
   font-weight: 300; }
+
 .height-100-vh{
   height: 100vh;
 }
@@ -1652,13 +1653,15 @@ Page Evénement
 /* Bouton modifier et supprimer*/
 .sup{
   font-size: 2em;
+  color:Tomato;
 }
 .modif{
   font-size: 2rem;
+  color: #000;
 
 }
 .sup:hover{
-  color:Tomato;
+  color:#ff2700;
 
 }
 .modif:hover{
@@ -1776,9 +1779,6 @@ Page Evénement
   min-height:7rem;
 }
 
-
-
-
                             /*#### Seb, le 13-01-2019 ####*/
 /* ----------------------------- Styles sur Article(s)-- // FIN // -------------*/
 
@@ -1794,7 +1794,7 @@ Page Evénement
   color: darkred;
 }
 
-/* Profil*/
+/********** Profil **********/
 .card-body .btn-info{
   width: 100%;
 }
@@ -1808,35 +1808,19 @@ Page Evénement
   font-size: 1rem;
 }
 
-/**
-* The CSS shown here will not be introduced in the Quickstart guide, but shows
-* how you can use CSS to style your Element's container.
-*/
-.StripeElement {
-  background-color: white;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-  width: 30rem;
+/******* ICONS LISTE MEMBRE *********/
+.check{
+  font-size: 2rem;
 }
-
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
+.check .fa-check{
+  color:green;
 }
-
-.StripeElement--invalid {
-  border-color: #fa755a;
+.check .fa-sync{
+  color: #007bff;
 }
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+.check .fa-check:hover{
+  color:#28a745;
 }
-
-
-#confirm{
-  display: none;
+.check .fa-sync:hover{
+  color:#007bff;
 }

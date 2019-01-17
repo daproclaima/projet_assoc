@@ -64,7 +64,7 @@ class SecurityController extends AbstractController
 
         if ($request->isMethod('POST')) {
             /** @var Membre $membre */
-            // Récupération du membre par rapoort au mail
+            // Récupération du membre par rapport au mail
             $email = $request->request->get('email');
             $entityManager = $this->getDoctrine()->getManager();
             $membre = $entityManager->getRepository(Membre::class)->findOneByEmail($email);
