@@ -56,8 +56,7 @@
                                     <p>{{ evenements.contenu | summaryEvent }}</p>
                                     <!-- Post Meta -->
                                     <div class="post-meta">
-                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="#"
-                                                                                              class="post-date">le {{ evenements.dateEvenement | date('d/m/Y') }}
+                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}" class="post-date">le {{ evenements.dateEvenement | date('d/m/Y') }}
                                                 à {{ evenements.dateEvenement | date('h:m') }}</a></p>
                                     </div>
                                 </div>

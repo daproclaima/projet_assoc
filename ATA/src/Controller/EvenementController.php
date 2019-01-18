@@ -77,7 +77,7 @@ class EvenementController extends AbstractController
                 $em->flush();
 
                 # NOTIFICATION
-                $this->addFlash('notice',
+                $this->addFlash('notice-evenement',
                     'Félicitations, votre Evénement est en ligne !');
 
                 # REDIRECTION
@@ -118,13 +118,13 @@ class EvenementController extends AbstractController
          * pour l'edition de la featuredImage.
          */
         $evenement->setFeaturedImage(
-            new File($this->getParameter('articles_assets_dir')
+            new File($this->getParameter('evenement_assets_dir')
                 . '/' . $featuredImageName)
         );
 
         # Création du Formulaire + # Traitement des données POST
         $form = $this->createForm(EvenementFormType::class, $evenement,[
-            'image_url' => $packages->getUrl('/images/' . $featuredImageName),
+            'image_url' => $packages->getUrl('images/product/' . $featuredImageName),
             'validation_groups' => ['update']
         ])
             ->handleRequest($request);
@@ -168,7 +168,7 @@ class EvenementController extends AbstractController
             $em->flush();
 
             # NOTIFICATION
-            $this->addFlash('notice',
+            $this->addFlash('notice-evenement',
                 'Félicitations, l\'évenement a bien été édité !');
 
             # REDIRECTION

@@ -135,7 +135,7 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/adhesion")
+     * @Route("/adhesion", name="front_adhesion")
      * @return \Symfony\Component\HttpFoundation\Response
      * @Security("has_role('ROLE_MEMBRE')")
      */

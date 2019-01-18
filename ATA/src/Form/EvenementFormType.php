@@ -38,8 +38,7 @@ class EvenementFormType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'label' => false,
-                'data_class' => null,
-                'placeholder' => 'catégorie'
+                'data_class' => null
             ])
 
             ->add('titre', TextType::class, [

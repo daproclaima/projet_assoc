@@ -14,6 +14,11 @@
     <div class="main-content-wrapper section-padding-25-0">
         <div class="container">
             <div class="col-12">
+                {% for message in app.flashes('notice-evenement') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <h3>{{ evenement.categories.nom }}</h3>
             </div>
             <div class="row justify-content-center">
@@ -44,6 +49,12 @@
                         <div class="post-content">
                             <h4>{{ evenement.dateEvenement | date("d M Y") }}</h4>
                             <h5>{{ evenement.lieu }}</h5>
+                            <h5>Prix adulte : {{ evenement.prixAdulte }}€</h5>
+
+                            {% if ( evenement.prixEnfant is not empty) %}
+                                <h5>Prix enfant : {{ evenement.prixEnfant }}€</h5>
+                            {% endif %}
+
                             <!-- Post Meta -->
                             <div class="post-meta">
                                 <h5 class="text-affiche-evenement">{{ evenement.contenu | raw }}</h5>
