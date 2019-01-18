@@ -63,14 +63,14 @@
     </div>
 </div>
     {% else %}
-        <div class="hero-area height-100-vh bg-img background-overlay" style="background-image: url({{ asset('images/balade-familiale.jpeg') }});">
+        <div class="hero-area height-100-vh bg-img background-overlay" style="background-image: url({{ asset('images/village.jpg') }});">
             <div class="container h-80">
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-12">
                         {{ render(controller('App\\Controller\\FrontController::flashInfo')) }}
                     </div>
                     <div class="col-12 col-md-8 col-lg-6">
-                        <div class="single-blog-title text-center">
+                        <div class="single-blog-title text-center" style="background-color: rgba(0, 0, 0, 0.4)">
 
                             <div class="post-cta"><a class="btn btn-lg" href="{{ path('front_apropos') }}">Découvrir</a></div>
                             <h3>L'association</h3> <h3>ATA (Assirem Tagmatt u Amazoul) vous souhaite la bienvenue</h3><br>
