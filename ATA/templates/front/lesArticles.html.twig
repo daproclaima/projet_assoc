@@ -1,0 +1,75 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Les articles
+{% endblock %}
+{% set active = 'Les articles' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25 layout-article">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-8">
+                    <div class="post-content-area mb-100">
+                        <div class="world-catagory-area">
+                            <h3>Les Articles</h3>
+                        </div>
+                        <!-- Catagory Area -->
+                        <div class="world-catagory-area">
+                            <div class="tab-content" id="myTabContent">
+                            {% if articles is not empty %}
+                                <div class="tab-pane fade show active" id="world-tab-1" role="tabpanel" aria-labelledby="tab1">
+
+                                    {% for article in articles %}
+                                        <!-- Single Blog Post -->
+                                        <div class="single-blog-post collection-blog-post post-style-4 d-flex align-items-center mb-3">
+                                            <!-- Post Thumbnail -->
+                                            {% if article.featuredImage is not null  %}
+                                                <div class="post-thumbnail">
+                                                    <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}" class="article-lien"><img class="image-articles ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
+                                                </div>
+                                            {% else %}
+                                                <div class="post-thumbnail">
+                                                    <img class="image-articles" src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
+                                                </div>
+                                            {% endif %}
+                                            <!-- Post Content -->
+                                            <div class="post-content">
+                                                <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}" class="headline">
+                                                    <h5>{{ article.titre | summary }}</h5>
+                                                </a>
+                                                <p>{{ article.contenu | summary }}</p>
+                                                <!-- Post Meta -->
+                                                <div class="post-meta">
+                                                    <p><a href="#" class="post-author">
+                                                            {{article.membre.prenom ~' '~article.membre.nom}}
+                                                        </a>
+                                                        , publié le
+                                                        <a href="#" class="post-date">
+                                                            {{ article.dateCreation | date('d/m/Y') }}
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                            {% else %}
+
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                Aucun article pour le moment
+                                            </strong>
+                                        </div>
+
+                            {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ZONE SIDEBAR -->
+                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

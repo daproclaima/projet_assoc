@@ -1,0 +1,54 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Contact
+{% endblock %}
+{% set active = 'Contact' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+
+
+    <div class="main-content-wrapper section-padding-25-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8 mb-5 mb-lg-0">
+                    <section class="single-blog-content">
+                        <div class="post-meta mt-lg-2 mb-50">
+                            <h4>Nous contacter</h4>
+                        </div>
+
+                        <div class="post-content">
+                            {% for message in app.flashes('notice') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <h5>Formulaire de contact</h5>
+                            {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
+                        </div>
+
+                        <div class="post-content">
+                            <h5>Adresse</h5>
+                            <p class ="col-12 col-lg-8 item-text" id="adresse">
+                                {{ contacts.adresse }}<br>
+                                {{ contacts.ville }}, {{ contacts.codePostal }} - FRANCE
+                            </p>
+                            <h5>Coordonnées</h5>
+                            <p class ="col-12 col-lg-8 item-text" id="coordonnees">
+                                Tél: {{ contacts.telephone }}<br>
+                                Email: {{ contacts.email }}
+                            </p>
+                            {# l'include ci-desous implémente la map google.
+                             _test.html.twig est un copié collé de https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+                             _googleMap.html.twig est une version factorisée mais non oppérationelle#}
+                            {% include 'component/_googlemap.twig' %}
+                        </div>
+
+                        {{ form(form, {attr:{novalidate: 'novalidate' }}) }}
+
+                    </section>
+                </div>
+                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

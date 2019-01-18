@@ -1,0 +1,91 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Evenements
+{% endblock %}
+{% set active = 'Categorie' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" integrity="sha256-AWdeVMUYtwLH09F6ZHxNgvJI37p+te8hJuSMo44NVm0=" crossorigin="anonymous" />
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25-0">
+        <div class="container">
+            <div class="col-12">
+                {% for message in app.flashes('notice-evenement') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <h3>{{ evenement.categories.nom }}</h3>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="single-blog-post post-style-4 d-flex wow fadeInUpBig" data-wow-delay="0.2s">
+                        <!-- Post Thumbnail -->
+                        <div class="affiche-evenement">
+                            <img src="{{ asset('images/product/'~evenement.featuredImage) }}" alt="affiche evenement">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('evenement_edit', {
+                            id: evenement.id
+                        }) }}"><small>Editer cet Evénement</small></a><span></span>
+
+                        <a href="{{ path('evenement_delete', {
+                            id: evenement.id
+                        }) }}" data-toggle="modal" data-target="#Modal{{ evenement.id }}"><small>Supprimer cet Evénement</small><i class="far fa-trash-alt fa-sm"></i></a>
+
+                    {% endif %}
+                        <!-- Post Content -->
+                        <a href="#" class="headline">
+                            <h2>{{ evenement.titre }}</h2>
+                        </a>
+
+                        <div class="post-content">
+                            <h4>{{ evenement.dateEvenement | date("d M Y") }}</h4>
+                            <h5>{{ evenement.lieu }}</h5>
+                            <h5>Prix adulte : {{ evenement.prixAdulte }}€</h5>
+
+                            {% if ( evenement.prixEnfant is not empty) %}
+                                <h5>Prix enfant : {{ evenement.prixEnfant }}€</h5>
+                            {% endif %}
+
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <h5 class="text-affiche-evenement">{{ evenement.contenu | raw }}</h5>
+                            </div>
+                        </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Modal{{ evenement.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Suppression de l'événement</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Etes vous certains de vouloir supprimer cet événement ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                    <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('evenement_delete', {
+                                            id: evenement.id
+                                        }) }}">OUI</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

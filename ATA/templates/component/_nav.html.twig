@@ -1,0 +1,85 @@
+<!-- ***** Header ***** -->
+<header class="header-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="{{ path('index') }}"><img class="logo" src="{{ asset('images/logo.png') }}" alt="Logo"></a>
+
+                    <!-- Navbar Toggler -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#worldNav" aria-controls="worldNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <!-- Navbar -->
+                    <div class="collapse navbar-collapse" id="worldNav">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item {{ active == 'Accueil' ? 'active' }}">
+                                <a class="nav-link" href="{{ path('index') }}">Accueil</a>
+                            </li>
+                            {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
+                            <li class="nav-item dropdown {{ active == 'Les articles' or active == 'Categorie' ? 'active' }}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualités</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {% if is_granted('ROLE_ADHERANT') %}
+                                        <a class="dropdown-item" href="{{ path('front_les_articles') }}">Articles</a>
+                                    {% endif %}
+                                    <a class="dropdown-item" href="{{ path('front_categories')}}">Evénements</a>
+                                </div>
+                            </li>
+                                {% if is_granted('ROLE_ADHERANT') %}
+                                <li class="nav-item {{ active == 'Galerie' ? 'active' }}">
+                                    <a class="nav-link" href="{{ path('front_galerie') }}">Galerie</a>
+                                </li>
+                                {% endif %}
+                            {% endif %}
+                            <li class="nav-item {{ active == 'A propos' ? 'active' }}">
+                                <a class="nav-link" href="{{ path('front_apropos') }}">A propos</a>
+                            </li>
+                            <li class="nav-item {{ active == 'Contact' ? 'active' }}">
+                                <a class="nav-link" href="{{path ('front_contact')}}">Contact</a>
+                            </li>
+                            <li class="nav-item {{ active == 'Contact' ? 'active' }}">
+                                <a class="nav-link" href="{{path ('front_adhesion')}}">Adhésion</a>
+                            </li>
+                            {% if (is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN')) %}
+                            <li class="nav-item dropdown {{ active == 'Admin' ? 'active' }}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ path('article_creation') }}">Gestion Articles</a>
+                                    <a class="dropdown-item" href="{{ path('creation_evenement') }}">Gestion Evénements</a>
+                                    <a class="dropdown-item" href="{{ path('galerie_ajoutPhoto') }}">Ajouter une photo</a>
+                                    <a class="dropdown-item" href="{{ path('membre_liste') }}">Liste des membres</a>
+                                    <a class="dropdown-item" href="{{ path('edit_contact') }}">Edition contact</a>
+
+                                </div>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                        <div class="items-connexion">
+                            <ul class="navbar-nav justify-content-right mr-0">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ active == 'Profil' ? 'active' }}" href="{{ path('front_profil', {'id': app.user.id}) }}"><i class="fas fa-user"></i> Profil</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('security_deconnexion') }}">Déconnexion</a>
+                                    </li>
+
+                                {% else %}
+                                <li class="nav-item {{ active == 'Inscription' ? 'active' }}">
+                                    <a class="nav-link" href="{{ path('membre_inscription') }}">Inscription</a>
+                                </li>
+                                <span class="pipe align-self-center">|</span>
+                                <li class="nav-item {{ active == 'Connexion' ? 'active' }}">
+                                    <a class="nav-link" href="{{ path('security_connexion') }}">Connexion</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Fin ***** -->

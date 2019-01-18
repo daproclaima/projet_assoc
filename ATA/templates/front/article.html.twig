@@ -1,0 +1,122 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    {{article.titre}}
+{% endblock %}
+{% set active = 'Les articles' %}
+{% block content %}
+
+
+    {#{{ dump(article) }}#}
+    {#{{ dump(article.categorie.nom) }}#}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25 layout-article">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-9 col-lg-8">
+
+
+                    <div class="mx-lg-auto">
+
+                        <header class="row">
+                            <h1 class="col-12 article-titre">{{article.titre}}</h1>
+                        </header>
+                        {#<div class="row">#}
+                            {#<hr class="col-1 bg-primary ml-4 pt-1 mb-4">#}
+                        {#</div>#}
+                        {#Ici, l'image de l'article#}
+                        <div class="row border-photo">
+
+                            <aside class=" col-10 mx-auto mt-2 mb-2 " >
+                                {% if article.featuredImage is not null %}
+                                <a href="{{ asset('images/product/'~article.featuredImage) }}">
+                                    <img class="border rounded publication-image"  src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}">
+                                </a>
+                                {#{% else %}#}
+                                {#<div class="post-thumbnail">#}
+                                    {#<img class="border rounded" src="{{ asset('images/product/')}}image-defaut.jpg"  alt="Aucune image">#}
+                                {#</div>#}
+                                {% endif %}
+                            </aside>
+                        </div>
+                    </div>
+
+                        <!-- Post Meta -->
+                        <div class="post-meta col-12 mt-3">
+                            <p class="text-center">De <a href="#" class="post-author">
+                                     {{article.membre.prenom ~' '~article.membre.nom}}
+                                </a>, publié le
+                                <a href="#" class="post-date">
+                                    {{ article.dateCreation | date('d/m/Y') }}
+                                </a>
+                            </p>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="single-blog-post post-content single-blog-content ">
+
+                            <div class="col-12 pt-3">
+                                {{ article.contenu | raw }}
+                            </div>
+
+                            {# bouton delete et édition à afficher si admin et auteur #}
+                            {% if  is_granted('IS_AUTHENTICATED_FULLY') and article.isAuteur(app.user) %}
+
+                                <div class = "col-12 ">
+                                    <a class="lien-edition" href="{{ path('article_edition', {id: article.id}) }}">
+                                        <small>Editer cet Article</small>
+                                        <i class="fas fa-pencil-alt fa-sm"></i>
+
+                                    </a>
+                                    <a class="lien-suppression" href="{{ path('article_delete', {id: article.id}) }}" data-toggle="modal" data-target="#Modal{{ article.id }}">
+                                        <small class="ml-5" >Supprimer cet Article</small>
+                                        <i class="far fa-trash-alt fa-sm"></i>
+                                    </a>
+                                </div>
+
+
+                            {% endif %}
+
+
+                            <!-- Post Meta -->
+                            <div class="post-meta second-part col-12 ml-0">
+                                <p>De<a href="#" class="post-author">
+                                         {{article.membre.prenom ~' '~article.membre.nom}}
+                                    </a>
+                                    , publié le
+                                        <a href="#" class="post-date">
+                                        {{ article.dateCreation | date('d/m/Y') }}
+                                    </a>
+                                </p>
+                                {#{%  include 'component/socialmedia.html.twig' %}#}
+                            </div>
+                        </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade show" id="Modal{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Suppression Produit</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Etes vous certains de vouloir supprimer ce produit?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                                <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('article_delete', {
+                                        id: article.id
+                                    }) }}">OUI</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal -->
+                <!-- SIDEBAR -->
+
+                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

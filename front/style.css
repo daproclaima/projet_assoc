@@ -310,10 +310,27 @@ img {
     color: #ffffff; }
 
 .logo{
-  width:50px ;
+  width:60px ;
 }
 .logo-f{
   width: 100px;
+}
+.items-connexion{
+  margin-left: 3rem;
+}
+@media only screen and (max-width: 991px) {
+  .items-connexion{
+    margin: 0;
+  }
+  .logo{
+    width: 45px;
+  }
+  .pipe{
+    display: none;
+  }
+}
+.pipe{
+  color: #ffffff;
 }
 /* :: Header Area CSS */
 .header-area {
@@ -331,7 +348,7 @@ img {
     border-color: #ffffff;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
-    height: 55px; }
+    height: 70px; }
     .header-area .navbar .navbar-nav {
       margin-right: 50px; }
       .header-area .navbar .navbar-nav .nav-link {
@@ -350,7 +367,12 @@ img {
   .header-area.sticky {
     background-color: #000000;
     margin-top: 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+    height: 70px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+    .header-area.sticky .logo{
+      width: 60px;
+    }
     .header-area.sticky .navbar {
       border-color: #000000; }
 

@@ -1,0 +1,90 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Accueil
+{% endblock %}
+{% set active = 'Accueil' %}
+{% block content %}
+
+
+    {% if (is_granted("IS_AUTHENTICATED_FULLY")) %}
+        {{ render(controller('App\\Controller\\FrontController::sliderAccueil')) }}
+<div class="main-content-wrapper section-padding-25-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Contenu -->
+            <div class="col-12 col-lg-8">
+                <div class="post-content-area mb-50">
+                    <div class="title">
+                        <h2>A l'affiche</h2>
+                    </div>
+                <!-- Catagory Area -->
+                {% if evenement is not empty %}
+                    {% for evenements in evenement %}
+                        <div class="col-12 col-md-6">
+                            <!-- Single Blog Post -->
+                            <div class="block-affiche single-blog-post">
+                                <!-- Post Thumbnail -->
+                                <div class="block-image-evenement post-thumbnail">
+                                    <img class="image-affiche"
+                                         src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
+
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}"
+                                       class="headline">
+                                        <h5>{{ evenements.titre }}</h5>
+                                    </a>
+                                    <p>{{ evenements.contenu | summaryEvent }}</p>
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <p><a href="#" class="post-date">le {{ evenements.dateEvenement | date('d/m/Y') }}
+                                                à {{ evenements.dateEvenement | date('h:m') }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+
+                    <div class="alert alert-danger">
+                        <strong>
+                            Aucune publication pour le moment
+                        </strong>
+                    </div>
+
+                {% endif %}
+
+                </div>
+            </div>
+            <!-- SIDEBAR -->
+            {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
+        </div>
+    </div>
+</div>
+    {% else %}
+        <div class="hero-area height-100-vh bg-img background-overlay" style="background-image: url({{ asset('images/village.jpg') }});">
+            <div class="container h-80">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <div class="col-12">
+                        {{ render(controller('App\\Controller\\FrontController::flashInfo')) }}
+                    </div>
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="single-blog-title text-center" style="background-color: rgba(0, 0, 0, 0.4)">
+
+                            <div class="post-cta"><a class="btn btn-lg" href="{{ path('front_apropos') }}">Découvrir</a></div>
+                            <h3>L'association</h3> <h3>ATA (Assirem Tagmatt u Amazoul) vous souhaite la bienvenue</h3><br>
+                            <h5 style="color: white">Pour profiter pleinement du site et des services de l'association, nous vous inviton à bien vouloir vous inscrire ou vous connecter si vous l'êtes déja.</h5><br>
+                            <div class="row">
+                                <div class="post-cta col-3 offset-2 aline-item-center"><a class="btn" href="{{ path('membre_inscription') }}">Inscription</a></div>
+                                <div class="post-cta col-3 offset-2 aline-item-center"><a class="btn" href="{{ path('security_connexion') }}">Connexion</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+

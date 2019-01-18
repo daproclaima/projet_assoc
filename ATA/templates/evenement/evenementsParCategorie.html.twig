@@ -1,0 +1,81 @@
+{% extends "layout.html.twig" %}
+{% set current = categories.slug %}
+{% block page_title %}
+    Catégorie
+{% endblock %}
+{% set current = categories.slug %}
+{% set active = 'Categorie' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay"
+         style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="post-content-area mb-100">
+                        <div class="world-catagory-area">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="title">{{ categories.nom }}</li>
+                                <li class="nav-item">
+                                    <a class="nav-categorie" href="{{ path('front_categories') }}">Tous</a>
+                                </li>
+                                {% for categorie in cats %}
+                                    <li>
+                                        <a class="nav-link {{ current == categorie.slug ? 'active' }}"
+                                           href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ categorie.nom }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catagory Area -->
+                {% if evenement is not empty %}
+                    {% for evenements in evenement %}
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <!-- Single Blog Post -->
+                            <div class="block-affiche single-blog-post">
+                                <!-- Post Thumbnail -->
+                                <div class="block-image-evenement post-thumbnail">
+                                    <img class="image-affiche"
+                                         src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
+                                    <!-- Catagory -->
+                                    {% for categorie in categories %}
+                                        <div class="post-cta"><a
+                                                    href="{{ path('front_categorie_evenements', {'slug': categorie.slug}) }}">{{ evenements.categories.nom }}</a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}"
+                                       class="headline">
+                                        <h5>{{ evenements.titre }}</h5>
+                                    </a>
+                                    <p>{{ evenements.contenu | summaryEvent }}</p>
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <p><a href="#" class="post-author">Katy Liu</a> on <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}" class="post-date">le {{ evenements.dateEvenement | date('d/m/Y') }}
+                                                à {{ evenements.dateEvenement | date('h:m') }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+
+                    <div class="alert alert-danger">
+                        <strong>
+                            Aucune publication pour le moment
+                        </strong>
+                    </div>
+
+                {% endif %}
+
+            </div>
+            <!-- ZONE SIDEBAR -->
+        </div>
+    </div>
+    </div>
+{% endblock %}

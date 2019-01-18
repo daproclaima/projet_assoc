@@ -1,0 +1,38 @@
+<!-- ********** Zone Slider ********** -->
+<div class="hero-area">
+
+    <!-- Slide photo -->
+    <div class="hero-slides owl-carousel">
+        <!-- Slide -->
+        <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{ asset('images/montagne3.jpg') }});"></div>
+        <!-- Slide -->
+        <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{ asset('images/balade-familiale.jpeg') }});"></div>
+        <!-- Slide -->
+        <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{ asset('images/montagne.jpg') }});"></div>
+    </div>
+
+    <!-- Slide texte -->
+    <div class="hero-post-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="hero-post-slide">
+                        {% for unEvenement in evenements %}
+                        <!-- Slide -->
+                        <div class="single-slide d-flex align-items-center">
+                            <div class="post-number">
+                                <p>{{ loop.index }}</p>
+                            </div>
+                            <div class="post-title">
+                                <a href="{{ path('front_evenement',{'categorie':unEvenement.categories.slug, 'slug': unEvenement.slug, 'id': unEvenement.id}) }}">{{unEvenement.titre}} | {{ unEvenement.dateEvenement | date("d M Y") }}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ********** Fin Zone Slider ********** -->

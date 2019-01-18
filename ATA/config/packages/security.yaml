@@ -1,0 +1,52 @@
+security:
+    encoders:
+        App\Entity\Membre: bcrypt
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: { memory: ~ }
+        # Ensuite, nous devons dire à symfony quelle entité et quelle propriété
+        # interroger pour authentifier les utilisateurs. Autrement dit, quelle
+        # est notre entité utilisateur et quelle est la propriete username
+        membre_provider:
+            entity:
+                class: App\Entity\Membre
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+            # route en charge de l’authentification du site
+
+            form_login:
+                login_path: security_connexion
+                check_path: security_connexion
+                username_parameter: app_login[email]
+                password_parameter: app_login[password]
+                default_target_path: index
+            provider: membre_provider
+            logout:
+                path: /deconnexion.html
+                target: /
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+#        { path: ^/index$, roles: IS_AUTHENTICATED_FULLY }
+
+
+    role_hierarchy:
+          ROLE_ADHERANT: ROLE_MEMBRE
+          ROLE_ADMIN: ROLE_ADHERANT
+

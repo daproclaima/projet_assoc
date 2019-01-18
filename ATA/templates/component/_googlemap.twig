@@ -1,0 +1,39 @@
+
+<head>
+    <style>
+        /* Set the size of the div element that contains the map */
+        /*#map {*/
+            /*height: 400px;  !* The height is 400 pixels *!*/
+            /*width: 100%;  !* The width is the width of the web page *!*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <div class="mb-3" >
+        <h5>Où sommes-nous?</h5>
+    </div>
+<!--The div element for the map -->
+    <div id="map"></div>
+    <script async defer type="text/javascript"src="{{ asset('js/googleMap.js') }}">
+    </script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+//            Localisation GPS
+            var ata = {lat: 48.8835698, lng: 2.4836702999999716};
+//            Centrage de la map sur la localisation
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 14, center: ata});
+//            Marqueur positionné sur l'adresse
+            var marker = new google.maps.Marker({position: ata, map: map});
+        }
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxlOhbSXRNlHzzGuimHxARGpESVqFfQwM&callback=initMap">
+    </script>
+</body>

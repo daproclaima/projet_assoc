@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Apropos
+{% endblock %}
+{% set active = 'A propos' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay" style="background-image: url({{ asset('images/balade-familiale.jpeg') }});"></div>
+<div class="main-content-wrapper section-padding-25-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="single-blog-content">
+                    <div class="post-meta mb-50">
+                        <h2>Â propos...</h2>
+                    </div>
+                    <div class="post-content">
+                        <h6>
+                            ATA (Assirem Tagmatt u Amazoul) ou en français : Espoir et Fraternité d’Amazoul, est une toute jeune association Socioculturelle aux couleurs de la culture et traditions Kabyle crée par des jeunes originaires du village Amazoul situé en Kabylie.
+                            Le but de cette Association est de faire connaitre et reconnaitre les valeurs de toute une région à travers des interactions sociales (rencontre, débats, musique, danse, expositions etc…et bien plus encore).
+                            Afin d’assurer une bonne communication sur l’actualité, les objectifs et aussi dans le but de permettre l’adhésion et la gestion des adhérents en ligne, la création d’un site web semble le choix le plus approprié.
+
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <!-- SIDEBAR -->
+                {{ render(controller('App\\Controller\\FrontController::sidebar')) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

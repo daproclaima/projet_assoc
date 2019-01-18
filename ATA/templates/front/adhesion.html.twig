@@ -1,0 +1,264 @@
+{% extends "layout.html.twig" %}
+{% block page_title %}
+    Adhesion
+{% endblock %}
+{% set active = 'Adherer' %}
+{% block content %}
+    <div class="hero-area height-400 bg-img background-overlay"
+         style="background-image: url({{ asset('images/bg4.jpg') }});"></div>
+    <div class="main-content-wrapper section-padding-25-0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <section class="single-blog-content">
+                        <div class="post-meta mb-25">
+                            <h4>Modalités d'adhésion :</h4>
+                        </div>
+
+                        <div class="post-content">
+                            <h3>1) Par Bulletin :</h3><br>
+                            <p>Il vous suffit de telecharger notre bulletin d'adhésion et de l'envoyer dûment complété accompagné du réglement à l'adresse suivante</p>
+                            <h5>Adresse</h5>
+                            <p class ="col-12 col-lg-8 item-text" id="adresse">
+                                Association Assirem Tagmatt u Amazoul<br>
+                                {{ contacts.adresse }}<br>
+                                {{ contacts.ville }}, {{ contacts.codePostal }} - FRANCE
+                            </p>
+                            <a href="{{ asset('documents/bulletinAdhesion.pdf') }}" class="btn btn-primary">télécharger le bulletin</a>
+                        </div>
+
+                        <div class="post-content">
+                            <h3>2) Par Virement :</h3><br>
+                            <p>Merci d’effectuer votre virement sur le compte suivant : </p>
+
+
+                            <div class="row justify-content-center">
+
+                                <div class="col-12 col-lg-4 item-text text-center">
+                                    <h5>Titulaire du compte</h5>
+                                    <p>Association Assirem Tagmatt u Amazoul</p>
+                                    <h5>IBAN</h5>
+                                    <p>FR76 1027 8061 2900 0203 8200 170</p>
+                                    <h5>SWIFT / BIC</h5>
+                                    <p>CMCIFR2A</p>
+                                </div>
+
+                                <div class="col-12 col-lg-4 item-text text-center" id="adresse">
+                                <h5>Adresse de ATA </h5>
+                                    <p>
+                                        Association Assirem Tagmatt u Amazoul<br>
+                                        {{ contacts.adresse }}<br>
+                                        {{ contacts.ville }}, {{ contacts.codePostal }} - FRANCE
+                                    </p>
+                                </div>
+
+                                <div class="col-12 col-lg-4 item-text text-center" id="adresse">
+                                    <h5>Adresse de la banque</h5>
+                                    <p>
+                                        CREDIT MUTUEL
+                                        CCM Rosny Sous Bois
+                                        20 rue du Genérale Gallieni
+                                        93110 Rosny Sous Bois
+                                        01 43 62 18 55
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-content">
+                            <h3>3) Autres moyens de paiement :</h3><br>
+                            <p>Veuillez vous adresser à l'administration en nous contactant au : {{ contacts.telephone }}<br>
+                            ou bien via le formulaire de contact</p><br>
+                            <a href="{{ path('front_contact') }}" class="btn btn-primary">Nous contacter</a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block final_javascripts %}
+
+
+    <script>
+        // Create a Stripe client.
+        var stripe = Stripe('pk_test_yuDJ3SONraUonKqqifRw3Plb');
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                lineHeight: '18px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+
+
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+
+        // Render the PayPal button
+        paypal.Button.render({
+// Set your environment
+            env: 'sandbox', // sandbox | production
+
+// Specify the style of the button
+            style: {
+                layout: 'vertical',  // horizontal | vertical
+                size: 'medium',    // medium | large | responsive
+                shape: 'rect',      // pill | rect
+                color: 'gold'       // gold | blue | silver | white | black
+            },
+
+// Specify allowed and disallowed funding sources
+//
+// Options:
+// - paypal.FUNDING.CARD
+// - paypal.FUNDING.CREDIT
+// - paypal.FUNDING.ELV
+            funding: {
+                allowed: [
+                    paypal.FUNDING.CARD,
+                    paypal.FUNDING.CREDIT
+                ],
+                disallowed: []
+            },
+
+// Enable Pay Now checkout flow (optional)
+            commit: true,
+
+// PayPal Client IDs - replace with your own
+// Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox: 'AS9MxbIjL9tR1J9AYMYx3WYt8DRYxg6h8e7c9VzSDh6Uhdvu4yf6iHVqih3Cfk9aYfxsSNqAw24O_iCm',
+                production: '<insert production client id>'
+            },
+
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: {
+                                    total: '20',
+                                    currency: 'EUR'
+                                }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            onAuthorize: function (data, actions) {
+
+                // Get the payment details
+
+                return actions.payment.get().then(function (data) {
+
+                    // Display the payment details and a confirmation button
+
+                    var shipping = data.payer.payer_info.shipping_address;
+
+                    document.querySelector('#recipient').innerText = shipping.recipient_name;
+                    document.querySelector('#line1').innerText = shipping.line1;
+                    document.querySelector('#city').innerText = shipping.city;
+                    document.querySelector('#state').innerText = shipping.state;
+                    document.querySelector('#zip').innerText = shipping.postal_code;
+                    document.querySelector('#country').innerText = shipping.country_code;
+
+                    document.querySelector('#paypal-button-container').style.display = 'none';
+                    document.querySelector('#confirm').style.display = 'block';
+
+                    // Listen for click on confirm button
+
+                    document.querySelector('#confirmButton').addEventListener('click', function () {
+
+                        // Disable the button and show a loading message
+
+                        document.querySelector('#confirm').innerText = 'Loading...';
+                        document.querySelector('#confirm').disabled = true;
+
+                        // Execute the payment
+
+                        return actions.payment.execute().then(function () {
+
+                            // Show a thank-you note
+
+                            document.querySelector('#thanksname').innerText = shipping.recipient_name;
+
+                            document.querySelector('#confirm').style.display = 'none';
+                            document.querySelector('#thanks').style.display = 'block';
+                        });
+                    });
+                });
+            }
+        }, '#paypal-button-container');
+    </script>
+{% endblock %}
