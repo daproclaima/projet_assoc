@@ -20,7 +20,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualités</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     {% if is_granted('ROLE_ADHERANT') %}
-                                        <a class="dropdown-item" href="{{ path('front_les_articles') }}">Info</a>
+                                        <a class="dropdown-item" href="{{ path('front_les_articles') }}">Articles</a>
                                     {% endif %}
                                     <a class="dropdown-item" href="{{ path('front_categories')}}">Evénements</a>
                                 </div>
