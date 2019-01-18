@@ -15,46 +15,46 @@
             <div class="col-12 col-lg-8">
                 <div class="post-content-area mb-50">
                     <div class="title">
-                        <h2>Derniers événements</h2>
+                        <h2>A l'affiche</h2>
                     </div>
+                <!-- Catagory Area -->
+                {% if evenement is not empty %}
+                    {% for evenements in evenement %}
+                        <div class="col-12 col-md-6 offset-3">
+                            <!-- Single Blog Post -->
+                            <div class="block-affiche single-blog-post">
+                                <!-- Post Thumbnail -->
+                                <div class="block-image-evenement post-thumbnail">
+                                    <img class="image-affiche"
+                                         src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
 
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post post-style-4 d-flex wow fadeInUpBig" data-wow-delay="0.2s">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail post-affiche">
-                            <img src="{{ asset('images/affiche1.jpg') }}" alt="{{ asset('images/affiche1.jpg') }}">
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="#" class="headline">
-                                <h4>Fête de la nature</h4>
-                            </a>
-
-                            <!-- Post Meta -->
-                            <div class="post-meta ">
-                                <p><a href="#" class="post-date-affiche">23 - 27 mai 2018</a><br><a href="#" class="post-lieu">Lieu</a></p>
+                                </div>
+                                <!-- Post Content -->
+                                <div class="post-content">
+                                    <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}"
+                                       class="headline">
+                                        <h5>{{ evenements.titre }}</h5>
+                                    </a>
+                                    <p>{{ evenements.contenu | summaryEvent }}</p>
+                                    <!-- Post Meta -->
+                                    <div class="post-meta">
+                                        <p><a href="#" class="post-date">le {{ evenements.dateEvenement | date('d/m/Y') }}
+                                                à {{ evenements.dateEvenement | date('h:m') }}</a></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    {% endfor %}
+                {% else %}
+
+                    <div class="alert alert-danger">
+                        <strong>
+                            Aucune publication pour le moment
+                        </strong>
                     </div>
 
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post post-style-4 d-flex wow fadeInUpBig" data-wow-delay="0.2s">
-                        <!-- Post Thumbnail -->
-                        <div class="post-thumbnail post-affiche">
-                            <img src="{{ asset('images/affiche2.jpg') }}" alt="">
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            <a href="#" class="headline">
-                                <h4>Festival Paris Cinéma</h4>
-                            </a>
+                {% endif %}
 
-                            <!-- Post Meta -->
-                            <div class="post-meta ">
-                                <p><a href="#" class="post-date-affiche">3 - 9 juillet 2009</a><br><a href="#" class="post-lieu">Lieu</a></p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- SIDEBAR -->

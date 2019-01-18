@@ -86,7 +86,7 @@
                             <div class="row no-gutters">
                                 {% for unePhoto in photos %}
                                     <div class="col-md-6 col-lg-4 item zoom-on-hover">
-                                        <a class="lightbox" href="#">
+                                        <a class="lightbox" href="{{ path('front_galerie') }}">
                                             <img class="img-fluid image"
                                                  src="{{ asset('images/photos/'~unePhoto.featuredImage) }}">
                                         </a>

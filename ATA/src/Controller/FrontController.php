@@ -36,9 +36,16 @@ class FrontController extends AbstractController
      */
     public function index()
     {
+        #Récuperation du Repository
+        $repository = $this->getDoctrine()
+            ->getRepository(Evenement::class);
 
+        # Récupérer le derniers évènements
+        $evenement = $repository->findByFlashInfo();
 
-        return $this->render('front/index.html.twig');
+        return $this->render('front/index.html.twig',[
+            'evenement' => $evenement
+        ]);
     }
 
 
