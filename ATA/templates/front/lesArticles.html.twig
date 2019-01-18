@@ -27,15 +27,11 @@
                                                 <div class="post-thumbnail">
                                                     <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}" class="article-lien"><img class="image-articles ml-1" src="{{ asset('images/product/'~article.featuredImage) }}" alt="{{ article.titre }}"></a>
                                                 </div>
-                                            {% else %}
-                                                <div class="post-thumbnail">
-                                                    <img class="image-articles" src="{{ asset('images/product/')}}image-defaut.jpg" alt="Aucune image">
-                                                </div>
                                             {% endif %}
                                             <!-- Post Content -->
-                                            <div class="post-content">
+                                            <div class="post-content ml-15">
                                                 <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}" class="headline">
-                                                    <h5>{{ article.titre | summary }}</h5>
+                                                    <h4>{{ article.titre | summary }}</h4>
                                                 </a>
                                                 <p>{{ article.contenu | summary }}</p>
                                                 <!-- Post Meta -->

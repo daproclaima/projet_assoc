@@ -20,14 +20,12 @@
                 <!-- Catagory Area -->
                 {% if evenement is not empty %}
                     {% for evenements in evenement %}
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-8">
                             <!-- Single Blog Post -->
                             <div class="block-affiche single-blog-post">
                                 <!-- Post Thumbnail -->
                                 <div class="block-image-evenement post-thumbnail">
-                                    <img class="image-affiche"
-                                         src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="">
-
+                                    <a href="{{ path('front_evenement',{'categorie':evenements.categories.slug, 'slug': evenements.slug, 'id': evenements.id}) }}" ><img class="image-affiche" src="{{ asset('images/product/'~evenements.featuredImage) }}" alt="{{ evenements.titre }}"></a>
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">

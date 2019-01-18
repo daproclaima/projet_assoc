@@ -43,8 +43,6 @@
                                     <a href="{{ path('front_article',{'slug': article.slug, 'id': article.id}) }}"><img
                                                 class="ml-1" src="{{ asset('images/product/'~article.featuredImage) }}"
                                                 alt="{{ article.titre }}"></a>
-                                {% else %}
-                                    <img src="{{ asset('images/product/') }}image-defaut.jpg" alt="Aucune image">
                                 {% endif %}
                             </div>
                             <!-- Post Content -->

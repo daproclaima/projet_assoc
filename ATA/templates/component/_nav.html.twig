@@ -37,7 +37,7 @@
                             <li class="nav-item {{ active == 'Contact' ? 'active' }}">
                                 <a class="nav-link" href="{{path ('front_contact')}}">Contact</a>
                             </li>
-                            <li class="nav-item {{ active == 'Contact' ? 'active' }}">
+                            <li class="nav-item {{ active == 'Adherer' ? 'active' }}">
                                 <a class="nav-link" href="{{path ('front_adhesion')}}">Adhésion</a>
                             </li>
                             {% if (is_granted('IS_AUTHENTICATED_FULLY') and is_granted('ROLE_ADMIN')) %}

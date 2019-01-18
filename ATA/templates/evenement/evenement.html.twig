@@ -34,7 +34,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="{{ path('evenement_edit', {
                             id: evenement.id
-                        }) }}"><small>Editer cet Evénement</small></a><span></span>
+                        }) }}"><small>Editer cet Evénement</small><i class="fas fa-pencil-alt fa-sm"></i></a><br>
 
                         <a href="{{ path('evenement_delete', {
                             id: evenement.id
