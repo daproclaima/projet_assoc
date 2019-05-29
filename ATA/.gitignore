@@ -7,6 +7,7 @@
 /var/
 /vendor/
 /.idea
+/public/images
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
@@ -19,3 +20,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+

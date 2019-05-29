@@ -19,13 +19,23 @@ class Photos
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="N'oubliez pas le titre le photo")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 50,
+     *     minMessage = "Le titre de la photo doit contenir au moins  {{ limit }} caratères",
+     *     maxMessage = "Le titre de la photo doit contenir moins de {{ limit }} caratères"
+     * )
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="N'oubliez pas le titre le photo")
-     * @Assert\Length(max="25",maxMessage="Le nom de la photo doit contenir {{limit}} caratères")
+     * @Assert\NotBlank(message="Vous n'avez pas fourni d'image")
+     * @Assert\File(
+     *     mimeTypes={ "image/png", "image/jpeg" },
+     *     mimeTypesMessage =  "Votre image doit être au format png ou jpeg."
+     * )
      */
     private $featuredImage;
 
