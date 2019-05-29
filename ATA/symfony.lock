@@ -83,6 +83,9 @@
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
     "google/apiclient": {
         "version": "2.0",
         "recipe": {
@@ -286,6 +289,27 @@
             "version": "4.2",
             "ref": "5374e24d508ba8fd6ba9eb15170255fdb778316a"
         }
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
+        }
+    },
+    "symfony/security-core": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-guard": {
+        "version": "v4.2.2"
+    },
+    "symfony/security-http": {
+        "version": "v4.2.2"
     },
     "symfony/stopwatch": {
         "version": "v4.2.2"
